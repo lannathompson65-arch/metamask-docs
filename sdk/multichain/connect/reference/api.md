@@ -8,7 +8,6 @@ import TabItem from "@theme/TabItem";
 # Multichain API
 
 :::tip Notes
-- The Multichain API is an experimental feature.
 - MetaMask implements an older version of the [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/899779996e8c30ec9c189ff49737704150606f31/CAIPs/caip-25.md) Multichain API specification.
 :::
 
@@ -61,7 +60,6 @@ The scopes and properties of the created connection.
   "params": {
     "optionalScopes": {
       "eip155": {
-        "references": ["1", "137"],
         "methods": ["eth_sendTransaction", "eth_signTransaction", "eth_sign", "eth_subscribe", "get_balance", "personal_sign"],
         "notifications": ["eth_subscription"]
       },

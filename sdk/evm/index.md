@@ -14,7 +14,7 @@ or browser extension.
 
 The EVM client provides an [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193)-compatible
 provider with the same shape as `window.ethereum`, meaning existing `viem`, `ethers.js`, or `web3.js`
-code works with minimal changes.
+code works without changes.
 It also includes automatic platform detection, relay-based connections, session persistence, and
 convenience methods like [`connectAndSign`](connect/reference/methods.md#connectandsign) and
 [`connectWith`](connect/reference/methods.md#connectwith).
@@ -74,12 +74,6 @@ description: 'Set up Dynamic SDK in a Next.js dapp. Use MetaMask Connect EVM fea
 href: '/sdk/evm/connect/quickstart/web3auth',
 title: 'Embedded Wallet SDK (formerly Web3Auth)',
 description: 'Set up Web3Auth SDK in a Next.js dapp. Use MetaMask Connect EVM features with Web3Auth.',
-},
-{
-href: 'https://web3onboard.thirdweb.com/',
-title: 'Web3-Onboard',
-description: 'Use MetaMask Connect EVM features with Web3-Onboard.',
-buttonIcon: 'external-arrow',
 }
 ]}
 />
@@ -93,4 +87,3 @@ The EVM client works seamlessly with popular Ethereum libraries:
 | [viem](https://viem.sh/)              | Use with `custom()` transport                     |
 | [ethers.js](https://docs.ethers.org/) | Pass `client.getProvider()` to `BrowserProvider`  |
 | [web3.js](https://web3js.org/)        | Pass `client.getProvider()` to `Web3` constructor |
-
