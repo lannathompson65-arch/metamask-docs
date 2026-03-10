@@ -19,8 +19,8 @@ const sdkSidebar = {
           collapsible: true,
           collapsed: false,
           items: [
-            'multichain/reference/methods',
-            'multichain/reference/api',
+            'multichain/connect/reference/methods',
+            'multichain/connect/reference/api',
           ],
         },
         {
@@ -29,8 +29,8 @@ const sdkSidebar = {
           collapsible: true,
           collapsed: false,
           items: [
-            'evm/reference/methods',
-            'evm/reference/provider-api',
+            'evm/connect/reference/methods',
+            'evm/connect/reference/provider-api',
           ],
         },
         {
@@ -39,7 +39,7 @@ const sdkSidebar = {
           collapsible: true,
           collapsed: false,
           items: [
-            'solana/reference/methods',
+            'solana/connect/reference/methods',
           ],
         },
       ],
@@ -47,24 +47,15 @@ const sdkSidebar = {
   ],
   multichain: [
     'multichain/index',
-    'multichain/quickstart',
-    {
-      type: 'category',
-      label: 'Concepts',
-      collapsible: false,
-      collapsed: false,
-      items: [
-        'multichain/concepts/scopes',
-      ],
-    },
+    'multichain/connect/quickstart',
     {
       type: 'category',
       label: 'Guides',
       collapsible: false,
       collapsed: false,
       items: [
-        'multichain/guides/sign-transactions',
-        'multichain/guides/send-transactions',
+        'multichain/connect/guides/sign-transactions',
+        'multichain/connect/guides/send-transactions',
       ],
     },
     {
@@ -73,7 +64,7 @@ const sdkSidebar = {
       collapsible: false,
       collapsed: false,
       items: [
-        'multichain/tutorials/create-multichain-dapp',
+        'multichain/connect/tutorials/create-multichain-dapp',
       ],
     },
     {
@@ -82,8 +73,8 @@ const sdkSidebar = {
       collapsible: false,
       collapsed: false,
       items: [
-        'multichain/reference/methods',
-        'multichain/reference/api',
+        'multichain/connect/reference/methods',
+        'multichain/connect/reference/api',
       ],
     },
   ],
@@ -95,13 +86,13 @@ const sdkSidebar = {
       collapsible: false,
       collapsed: false,
       items: [
-        'evm/quickstart/javascript',
-        'evm/quickstart/wagmi',
-        'evm/quickstart/rainbowkit',
-        'evm/quickstart/connectkit',
-        'evm/quickstart/react-native',
-        'evm/quickstart/dynamic',
-        'evm/quickstart/web3auth',
+        'evm/connect/quickstart/javascript',
+        'evm/connect/quickstart/wagmi',
+        'evm/connect/quickstart/rainbowkit',
+        'evm/connect/quickstart/connectkit',
+        'evm/connect/quickstart/react-native',
+        'evm/connect/quickstart/dynamic',
+        'evm/connect/quickstart/web3auth',
       ],
     },
     {
@@ -110,17 +101,17 @@ const sdkSidebar = {
       collapsible: false,
       collapsed: false,
       items: [
-        'evm/migrate-from-sdk',
-        'evm/guides/manage-user-accounts',
-        'evm/guides/manage-networks',
+        'evm/connect/migrate-from-sdk',
+        'evm/connect/guides/manage-user-accounts',
+        'evm/connect/guides/manage-networks',
         {
           type: 'category',
           label: 'Send transactions',
           collapsible: true,
           collapsed: true,
-          link: { type: "doc", id: "evm/guides/send-transactions/index" },
+          link: { type: "doc", id: "evm/connect/guides/send-transactions/index" },
           items: [
-            'evm/guides/send-transactions/batch-transactions',
+            'evm/connect/guides/send-transactions/batch-transactions',
           ],
         },
         {
@@ -128,21 +119,21 @@ const sdkSidebar = {
           label: 'Sign data',
           collapsible: true,
           collapsed: true,
-          link: { type: "doc", id: "evm/guides/sign-data/index" },
+          link: { type: "doc", id: "evm/connect/guides/sign-data/index" },
           items: [
-            'evm/guides/sign-data/siwe',
+            'evm/connect/guides/sign-data/siwe',
           ],
         },
-        'evm/guides/interact-with-contracts',
+        'evm/connect/guides/interact-with-contracts',
         {
           type: 'category',
           label: 'MetaMask exclusive',
           collapsible: true,
           collapsed: true,
           items: [
-            'evm/guides/metamask-exclusive/batch-requests',
-            'evm/guides/metamask-exclusive/use-deeplinks',
-            'evm/guides/metamask-exclusive/display-tokens',
+            'evm/connect/guides/metamask-exclusive/batch-requests',
+            'evm/connect/guides/metamask-exclusive/use-deeplinks',
+            'evm/connect/guides/metamask-exclusive/display-tokens',
           ],
         },
         {
@@ -151,9 +142,9 @@ const sdkSidebar = {
           collapsible: true,
           collapsed: true,
           items: [
-            'evm/guides/best-practices/display',
-            'evm/guides/best-practices/run-devnet',
-            'evm/guides/best-practices/production-readiness',
+            'evm/connect/guides/best-practices/display',
+            'evm/connect/guides/best-practices/run-devnet',
+            'evm/connect/guides/best-practices/production-readiness',
           ],
         },
       ],
@@ -182,17 +173,17 @@ const sdkSidebar = {
       collapsible: false,
       collapsed: false,
       items: [
-        'evm/reference/methods',
-        'evm/reference/provider-api',
+        'evm/connect/reference/methods',
+        'evm/connect/reference/provider-api',
         {
           type: "category",
           label: "JSON-RPC API",
           collapsible: true,
           collapsed: true,
-          link: { type: "doc", id: "evm/reference/json-rpc-api/index" },
+          link: { type: "doc", id: "evm/connect/reference/json-rpc-api/index" },
           items: [
-            "evm/reference/json-rpc-api/wallet_sendCalls",
-            "evm/reference/json-rpc-api/eth_signTypedData_v4",
+            "evm/connect/reference/json-rpc-api/wallet_sendCalls",
+            "evm/connect/reference/json-rpc-api/eth_signTypedData_v4",
           ],
         },
       ],
@@ -206,9 +197,9 @@ const sdkSidebar = {
       collapsible: false,
       collapsed: false,
       items: [
-        'solana/quickstart/javascript',
-        'solana/quickstart/dynamic',
-        'solana/quickstart/web3auth',
+        'solana/connect/quickstart/javascript',
+        'solana/connect/quickstart/dynamic',
+        'solana/connect/quickstart/web3auth',
       ],
     },
     {
@@ -217,16 +208,16 @@ const sdkSidebar = {
       collapsible: false,
       collapsed: false,
       items: [
-        'solana/guides/use-framework-kit',
-        'solana/guides/use-wallet-adapter',
+        'solana/connect/guides/use-framework-kit',
+        'solana/connect/guides/use-wallet-adapter',
         {
           type: 'category',
           label: 'Send transactions',
           collapsible: true,
           collapsed: true,
           items: [
-            'solana/guides/send-legacy-transaction',
-            'solana/guides/send-versioned-transaction',
+            'solana/connect/guides/send-legacy-transaction',
+            'solana/connect/guides/send-versioned-transaction',
           ],
         },
         {
@@ -235,8 +226,8 @@ const sdkSidebar = {
           collapsible: true,
           collapsed: true,
           items: [
-            'solana/guides/sign-data/sign-message',
-            'solana/guides/sign-data/siws',
+            'solana/connect/guides/sign-data/sign-message',
+            'solana/connect/guides/sign-data/siws',
           ],
         },
       ],
@@ -265,7 +256,7 @@ const sdkSidebar = {
       collapsible: false,
       collapsed: false,
       items: [
-        'solana/reference/methods',
+        'solana/connect/reference/methods',
       ],
     },
   ],
