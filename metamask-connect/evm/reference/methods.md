@@ -2,7 +2,7 @@
 description: Methods reference for MetaMask Connect EVM.
 keywords: [evm, connect, method, methods, dapp]
 toc_max_heading_level: 2
-sidebar_label: EVM SDK methods
+sidebar_label: MetaMask Connect EVM methods
 ---
 
 # MetaMask Connect EVM SDK methods
@@ -60,6 +60,7 @@ eventHandlers: {
   },
 }
 ```
+
 :::
 
 ### Example
@@ -78,13 +79,13 @@ Connects to MetaMask and executes a specific [JSON-RPC method](json-rpc-api/inde
 
 ### Parameters
 
-| Name               | Type                | Required | Description                                                                                                      |
-| ------------------ | ------------------- | -------- | ---------------------------------------------------------------------------------------------------------------- |
-| `options.method`   | `string`            | Yes      | The JSON-RPC method name.                                                                                        |
+| Name                   | Type                                           | Required | Description                                                                                              |
+| ---------------------- | ---------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------- |
+| `options.method`       | `string`                                       | Yes      | The JSON-RPC method name.                                                                                |
 | `options.params`       | `unknown[] \| (account: Address) => unknown[]` | Yes      | The parameters for the method. Can be a function that receives the connected account and returns params. |
-| `options.chainIds`     | `Hex[]`   | No       | Array of hex chain IDs to request permission for (defaults to `['0x1']`).                                        |
-| `options.account`      | `string`  | No       | Specific account address to connect.                                                                              |
-| `options.forceRequest` | `boolean` | No       | Force a new connection request even if already connected.                                                         |
+| `options.chainIds`     | `Hex[]`                                        | No       | Array of hex chain IDs to request permission for (defaults to `['0x1']`).                                |
+| `options.account`      | `string`                                       | No       | Specific account address to connect.                                                                     |
+| `options.forceRequest` | `boolean`                                      | No       | Force a new connection request even if already connected.                                                |
 
 ### Returns
 
@@ -101,6 +102,7 @@ eventHandlers: {
   },
 }
 ```
+
 :::
 
 ### Example
@@ -108,7 +110,7 @@ eventHandlers: {
 ```javascript
 const txHash = await evmClient.connectWith({
   method: 'eth_sendTransaction',
-  params: (account) => [
+  params: account => [
     {
       from: account,
       to: '0xRecipientAddress',
@@ -205,7 +207,7 @@ Disconnects all EVM (`eip155`) scopes from MetaMask and cleans up local state.
 This only revokes the EVM-specific scopes currently held in the session; it does not terminate the broader multichain session if non-EVM scopes (such as Solana) are also active.
 
 :::tip Multichain partial disconnect
-If your dapp also uses Solana via the [multichain client](../../../multichain/index.md), calling
+If your dapp also uses Solana via the [multichain client](../../multichain/index.md), calling
 `disconnect()` on the EVM client only revokes EVM (`eip155`) scopes.
 Non-EVM scopes remain active, so the user stays connected to Solana.
 :::
@@ -220,12 +222,12 @@ await evmClient.disconnect()
 
 The EVM client exposes the following read-only properties:
 
-| Property        | Type                   | Description                                                                                              |
-| --------------- | ---------------------- | -------------------------------------------------------------------------------------------------------- |
-| `accounts`      | `Address[]`            | Currently permitted accounts.                                                                            |
-| `selectedAccount` | `Address \| undefined` | Currently selected account (first in `accounts`).                                                       |
-| `selectedChainId` | `Hex \| undefined`   | Currently selected chain ID as a hex string.                                                             |
-| `status`        | `ConnectionStatus`     | Connection status: `'loaded'`, `'pending'`, `'connecting'`, `'connected'`, or `'disconnected'`. |
+| Property          | Type                   | Description                                                                                     |
+| ----------------- | ---------------------- | ----------------------------------------------------------------------------------------------- |
+| `accounts`        | `Address[]`            | Currently permitted accounts.                                                                   |
+| `selectedAccount` | `Address \| undefined` | Currently selected account (first in `accounts`).                                               |
+| `selectedChainId` | `Hex \| undefined`     | Currently selected chain ID as a hex string.                                                    |
+| `status`          | `ConnectionStatus`     | Connection status: `'loaded'`, `'pending'`, `'connecting'`, `'connected'`, or `'disconnected'`. |
 
 ### Example
 
