@@ -2,7 +2,7 @@ dirs:
   - ./smart-accounts-kit
   - ./developer-tools
   - ./embedded-wallets
-  - ./sdk
+  - ./metamask-connect
   - ./services
   - ./snaps
 excludedDirs:
@@ -26,7 +26,7 @@ ignorePatterns:
 - pattern: '^/smart-accounts-kit/'
 - pattern: '^/developer-tools/'
 - pattern: '^/embedded-wallets/'
-- pattern: '^/sdk/'
+- pattern: '^/metamask-connect/'
 - pattern: '^/services/'
 - pattern: '^/snaps/'
 - pattern: '^/wallet/'
