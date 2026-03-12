@@ -1,0 +1,34 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+### Configure Web3Auth
+
+<Tabs
+  defaultValue="demo"
+  values={[
+    { label: 'Demo app', value: 'demo' },
+    { label: 'Set up your app', value: 'diy' },
+  ]}>
+  <TabItem value="demo">
+
+Create a `.env.local` file and add your Web3Auth Client ID from Step 1:
+
+```bash
+NEXT_PUBLIC_WEB3AUTH_CLIENT_ID=YOUR_WEB3AUTH_CLIENT_ID
+```
+
+  </TabItem>
+  <TabItem value="diy">
+
+Create a basic Web3Auth configuration and pass the client ID and network details from your project
+settings in the Web3Auth dashboard.
+
+  </TabItem>
+</Tabs>
+
+:::info
+
+Configure other major settings here as needed.
+See the [configuration section](/embedded-wallets/sdk/nextjs/advanced/) for available options.
+
+:::

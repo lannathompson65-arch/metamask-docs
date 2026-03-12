@@ -5,7 +5,7 @@ import * as wagmiCalls from '../../react/stepContent/wagmiCalls.mdx'
 import * as registerApp from '../../../../commonSteps/registerApp.mdx'
 import * as walletAggregatorOnly from '../../../../commonSteps/walletAggregatorOnly.mdx'
 import * as installation from './installation.mdx'
-import * as config from '../../react/stepContent/config.mdx'
+import * as config from './config.mdx'
 import * as setupWagmiProvider from '../../react/stepContent/setupWagmiProvider.mdx'
 import { toSteps } from '../../../../utils'
 
