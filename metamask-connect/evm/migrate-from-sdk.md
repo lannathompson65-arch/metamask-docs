@@ -20,7 +20,7 @@ async initialization, a singleton client, and built-in support for EVM, [Solana]
 
 Remove the old packages and install the new ones:
 
-```bash
+```bash npm2yarn
 # Remove old
 npm uninstall @metamask/sdk @metamask/sdk-react
 
