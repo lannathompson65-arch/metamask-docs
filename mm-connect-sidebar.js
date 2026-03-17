@@ -160,8 +160,8 @@ const metamaskConnectSidebar = {
         {
           type: 'category',
           label: 'MetaMask exclusive',
-          collapsible: true,
-          collapsed: true,
+          collapsible: false,
+          collapsed: false,
           items: [
             'evm/guides/metamask-exclusive/batch-requests',
             'evm/guides/metamask-exclusive/use-deeplinks',

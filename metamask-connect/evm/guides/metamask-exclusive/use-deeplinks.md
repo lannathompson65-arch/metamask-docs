@@ -1,8 +1,20 @@
 ---
-title: "Use Deeplinks to MetaMask Mobile"
+title: 'Use Deeplinks to MetaMask Mobile'
 sidebar_label: Use deeplinks
 description: Route users to specific MetaMask mobile app functions like payments and token sends using deeplinks and QR codes in your dapp.
-keywords: [SDK, deeplink, deeplinks, mobile, dapp, metamask deeplink, mobile wallet link, in-app browser, universal link, app link]
+keywords:
+  [
+    SDK,
+    deeplink,
+    deeplinks,
+    mobile,
+    dapp,
+    metamask deeplink,
+    mobile wallet link,
+    in-app browser,
+    universal link,
+    app link,
+  ]
 toc_max_heading_level: 2
 ---
 
@@ -17,9 +29,12 @@ Convert deeplinks to QR codes so users can scan them with a mobile device.
 
 If a user doesn't have the mobile app installed, deeplinks route the user to a landing page where they can download the app.
 
-This page highlights deeplinks available for the MetaMask mobile app.
+:::tip
+The [**Open a dapp in the in-app browser**](#open-a-dapp-inside-the-metamask-in-app-browser) deeplink works for any dapp regardless of ecosystem (EVM, Solana, or multichain) — it simply opens a URL inside MetaMask Mobile's built-in browser.
+The remaining deeplinks on this page (send, buy, sell) are EVM-specific.
+:::
 
-## Open a dapp inside the in-app browser
+## Open a dapp inside the MetaMask in-app browser
 
 <Tabs>
 <TabItem value="Deeplink">
@@ -37,7 +52,6 @@ https://link.metamask.io/dapp/app.uniswap.org
 
 </TabItem>
 </Tabs>
-
 
 This deeplink takes the user directly to the dapp URL in the MetaMask mobile in-app browser.
 

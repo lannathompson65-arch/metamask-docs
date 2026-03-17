@@ -50,13 +50,17 @@ Here's how each connection method compares across dapp locations:
 | Desktop web browser   | 🧩 [Browser extension](https://metamask.io/download/) | Direct connection via extension |   ✅ Supported   | ✅ Supported |
 | Desktop web browser   | 📱 [Mobile app](https://metamask.io/download/)        | QR code scan                    |   ✅ Supported   | ⚠️ Limited\* |
 | Mobile browser        | 📱 [Mobile app](https://metamask.io/download/)        | Deeplink                        |   ✅ Supported   | ⚠️ Limited\* |
-| Mobile in-app browser | 📱 [Mobile app](https://metamask.io/download/)        | Deeplink                        | ✅ Supported\*\* | ⚠️ Limited\* |
+| MetaMask in-app browser | 📱 [Mobile app](https://metamask.io/download/)      | [Deeplink](./evm/guides/metamask-exclusive/use-deeplinks.md) | ✅ Supported\*\* | ⚠️ Limited\* |
 | Native mobile app     | 📱 [Mobile app](https://metamask.io/download/)        | Deeplink                        |   ✅ Supported   | ⚠️ Limited\* |
 | Node.js               | 📱 [Mobile app](https://metamask.io/download/)        | QR code in terminal             |   ✅ Supported   | ⚠️ Limited\* |
 
 \* **Limited**: Most other SDKs don't include built-in QR code or deeplink support for connecting to MetaMask Mobile, and typically require additional configuration or third-party relay services.
 
-\*\* **In-app browsers**: WebViews inside apps like Twitter, Discord, or Reddit have inconsistent deeplink support. Some block external deeplinks or handle them incorrectly. Test in your target environments, or guide users to open your dapp in a full mobile browser.
+\*\* **MetaMask in-app browser**: Dapps can use the `https://link.metamask.io/dapp/{url}` [deeplink](./evm/guides/metamask-exclusive/use-deeplinks.md) to open directly inside MetaMask Mobile's built-in browser, giving full wallet access without relay overhead. This works for any dapp regardless of ecosystem (EVM, Solana, or multichain).
+
+:::caution Third-party in-app browsers
+WebViews inside apps like Twitter, Discord, or Reddit have inconsistent deeplink support. Some block external deeplinks or handle them incorrectly. Test in your target environments, or guide users to open your dapp in a full mobile browser.
+:::
 
 :::tip
 For relay-based connections (QR code and deeplink), use a reliable RPC provider instead of public nodes.
@@ -85,5 +89,6 @@ See the [Node.js playground](https://github.com/MetaMask/connect-monorepo/tree/m
 ## Next steps
 
 - [Choose an integration option](./integration-options.md)
+- [Use deeplinks to route users to MetaMask Mobile](./evm/guides/metamask-exclusive/use-deeplinks.md)
 - [EVM JavaScript quickstart](./evm/quickstart/javascript.md)
 - [Solana JavaScript quickstart](./solana/quickstart/javascript.md)
