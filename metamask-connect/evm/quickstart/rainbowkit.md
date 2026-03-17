@@ -1,18 +1,26 @@
 ---
-description: Quickstart guide for using MetaMask Connect EVM with a JavaScript and RainbowKit dapp.
+title: "RainbowKit Integration - MetaMask Connect EVM"
+description: Add MetaMask wallet support to your React dapp using RainbowKit's ConnectButton component, wagmi hooks, and pre-built wallet modals.
 toc_max_heading_level: 3
 sidebar_label: RainbowKit
-keywords: [connect, MetaMask, JavaScript, RainbowKit, SDK, dapp, Wallet SDK]
+keywords: [connect, MetaMask, JavaScript, RainbowKit, SDK, dapp, Wallet SDK, rainbowkit connector, wallet modal, connect button, react wallet UI]
 ---
+
+:::info Heads up
+Looks like you've landed on a guide that still uses the MetaMask legacy SDK (`@metamask/sdk`).
+The MetaMask Connect integration for this library is on its way -- once ready, it will be linked
+from the sidebar navigation. In the meantime, this guide is still perfectly valid if you're using
+MetaMask SDK.
+:::
 
 # Connect to MetaMask using JavaScript + RainbowKit
 
-Get started with MetaMask Connect EVM in a JavaScript and RainbowKit dapp.
-[Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect EVM](#set-up-manually) in an existing dapp.
+Get started with MetaMask SDK in a JavaScript and RainbowKit dapp.
+[Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask SDK](#set-up-manually) in an existing dapp.
 
 <p align="center">
   <a href="https://metamask-rainbowkit-demo.vercel.app/" target="_blank">
-    <img src={require("../_assets/quickstart-rainbowkit.png").default} alt="Quickstart" width="600px" class="appScreen" />
+    <img src={require("../_assets/quickstart-rainbowkit.png").default} alt="MetaMask Connect EVM with RainbowKit wallet selector interface" width="600px" class="appScreen" />
   </a>
 </p>
 
@@ -25,7 +33,7 @@ Get started with MetaMask Connect EVM in a JavaScript and RainbowKit dapp.
 
 ## Set up using a template
 
-1. Download the [MetaMask Connect RainbowKit template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstarts/rainbowkit):
+1. Download the [MetaMask SDK RainbowKit template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstarts/rainbowkit):
 
    ```bash
    npx degit MetaMask/metamask-sdk-examples/quickstarts/rainbowkit metamask-rainbowkit
@@ -44,7 +52,7 @@ Get started with MetaMask Connect EVM in a JavaScript and RainbowKit dapp.
    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
 
    Alternatively, use `git clone` to download the entire repository.
-   Clone the MetaMask Connect examples repository and navigate into the `quickstarts/rainbowkit` directory:
+   Clone the MetaMask SDK examples repository and navigate into the `quickstarts/rainbowkit` directory:
 
    ```bash
    git clone https://github.com/MetaMask/metamask-sdk-examples
@@ -80,9 +88,9 @@ Get started with MetaMask Connect EVM in a JavaScript and RainbowKit dapp.
 
 ## Set up manually
 
-### 1. Install MetaMask Connect EVM
+### 1. Install the SDK
 
-Install MetaMask Connect EVM along with its peer dependencies to an existing React project:
+Install MetaMask SDK along with its peer dependencies to an existing React project:
 
 ```bash npm2yarn
 npm install @rainbow-me/rainbowkit wagmi viem@2.x @tanstack/react-query
@@ -108,7 +116,7 @@ In the following example, replace `<YOUR-PROJECT-ID>` with your WalletConnect pr
 
 ```jsx
 const config = getDefaultConfig({
-  appName: 'MetaMask Connect RainbowKit Quickstart',
+  appName: 'MetaMask SDK RainbowKit Quickstart',
   projectId: '<YOUR-PROJECT-ID>',
   chains: [mainnet, linea, sepolia, lineaSepolia],
   wallets: [
@@ -156,6 +164,13 @@ export default App
 ```
 
 Test your dapp by running `pnpm run dev`.
+
+## Next steps
+
+- [Manage user accounts](../guides/manage-user-accounts.md)
+- [Send transactions](../guides/send-transactions/index.md)
+- [Sign data](../guides/sign-data/index.md)
+- [Interact with smart contracts](../guides/interact-with-contracts.md)
 
 ## Live example
 

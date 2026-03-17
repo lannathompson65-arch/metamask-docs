@@ -1,6 +1,8 @@
 ---
-description: Use deeplinks to connect to users' MetaMask mobile wallets.
-keywords: [SDK, deeplink, deeplinks, mobile, dapp]
+title: "Use Deeplinks to MetaMask Mobile"
+sidebar_label: Use deeplinks
+description: Route users to specific MetaMask mobile app functions like payments and token sends using deeplinks and QR codes in your dapp.
+keywords: [SDK, deeplink, deeplinks, mobile, dapp, metamask deeplink, mobile wallet link, in-app browser, universal link, app link]
 toc_max_heading_level: 2
 ---
 
@@ -180,3 +182,9 @@ You can use the `/sell` or `/sell-crypto` path for this deeplink.
 
 - `chainId` - (Optional) Chain ID of the network to use.
 - `amount` - (Optional) Amount to sell, in the native currency.
+
+## Next steps
+
+- [Send transactions](../send-transactions/index.md)
+- [Display tokens in MetaMask](./display-tokens.md)
+- [Supported platforms and connection methods](../../../supported-platforms.md)

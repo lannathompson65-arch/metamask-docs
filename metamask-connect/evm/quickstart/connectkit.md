@@ -1,18 +1,26 @@
 ---
-description: Quickstart guide for using MetaMask Connect EVM with a JavaScript and ConnectKit dapp.
+title: "ConnectKit Integration - MetaMask Connect EVM"
+description: Integrate MetaMask into your React dapp using ConnectKit's wallet modal, wagmi connectors, and the Family wallet configuration.
 toc_max_heading_level: 3
 sidebar_label: ConnectKit
-keywords: [connect, MetaMask, JavaScript, ConnectKit, SDK, dapp, Wallet SDK]
+keywords: [connect, MetaMask, JavaScript, ConnectKit, SDK, dapp, Wallet SDK, connectkit integration, wallet modal, family wallet connector, react wallet]
 ---
+
+:::info Heads up
+Looks like you've landed on a guide that still uses the MetaMask legacy SDK (`@metamask/sdk`).
+The MetaMask Connect integration for this library is on its way -- once ready, it will be linked
+from the sidebar navigation. In the meantime, this guide is still perfectly valid if you're using
+MetaMask SDK.
+:::
 
 # Connect to MetaMask using JavaScript + ConnectKit
 
-Get started with MetaMask Connect EVM in a JavaScript and ConnectKit dapp.
-[Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect EVM](#set-up-manually) in an existing dapp.
+Get started with MetaMask SDK in a JavaScript and ConnectKit dapp.
+[Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask SDK](#set-up-manually) in an existing dapp.
 
 <p align="center">
   <a href="https://metamask-connectkit-demo.vercel.app/" target="_blank">
-    <img src={require("../_assets/quickstart-connectkit.png").default} alt="Quickstart" width="600px" class="appScreen" />
+    <img src={require("../_assets/quickstart-connectkit.png").default} alt="MetaMask Connect EVM with ConnectKit wallet modal interface" width="600px" class="appScreen" />
   </a>
 </p>
 
@@ -25,7 +33,7 @@ Get started with MetaMask Connect EVM in a JavaScript and ConnectKit dapp.
 
 ## Set up using a template
 
-1. Download the [MetaMask Connect ConnectKit template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstarts/connectkit):
+1. Download the [MetaMask SDK ConnectKit template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstarts/connectkit):
 
    ```bash
    npx degit MetaMask/metamask-sdk-examples/quickstarts/connectkit metamask-connectkit
@@ -80,9 +88,9 @@ Get started with MetaMask Connect EVM in a JavaScript and ConnectKit dapp.
 
 ## Set up manually
 
-### 1. Install MetaMask Connect EVM
+### 1. Install the SDK
 
-Install MetaMask Connect EVM along with its peer dependencies to an existing React project:
+Install MetaMask SDK along with its peer dependencies to an existing React project:
 
 ```bash npm2yarn
 npm install connectkit wagmi viem@2.x @tanstack/react-query
@@ -107,7 +115,7 @@ In the following example, add your WalletConnect project ID:
 ```jsx
 const config = createConfig(
   getDefaultConfig({
-    // Your dApps chains
+    // Your dapp's chains
     chains: [mainnet, linea, sepolia, lineaSepolia],
     transports: {
       // RPC URL for each chain
@@ -158,6 +166,13 @@ export default App
 ```
 
 Test your dapp by running `pnpm run dev`.
+
+## Next steps
+
+- [Manage user accounts](../guides/manage-user-accounts.md)
+- [Send transactions](../guides/send-transactions/index.md)
+- [Sign data](../guides/sign-data/index.md)
+- [Interact with smart contracts](../guides/interact-with-contracts.md)
 
 ## Live example
 

@@ -1,12 +1,29 @@
 ---
+title: 'MetaMask Connect Integration Options - Multichain, EVM, and Solana'
 sidebar_label: Integration options
-description: Choose the right MetaMask Connect integration for your dapp.
-keywords: [connect, sdk, integration, evm, solana, multichain, packages]
+description: Compare MetaMask Connect integration options including multichain, single-ecosystem EVM, and Solana clients to find the right fit for your dapp.
+keywords:
+  [
+    connect,
+    sdk,
+    integration,
+    evm,
+    solana,
+    multichain,
+    packages,
+    connect-evm,
+    connect-solana,
+    connect-multichain,
+    single ecosystem,
+    npm package,
+    wallet integration guide,
+  ]
 ---
 
 # Integration options
 
-MetaMask Connect lets you add wallet connectivity to your dapp.
+MetaMask Connect offers three integration paths: **Multichain** (`@metamask/connect-multichain`) for connecting to EVM and Solana in a single session, **single-ecosystem** (`@metamask/connect-evm` or `@metamask/connect-solana`) for drop-in per-chain providers, and **multi-ecosystem** (both single-ecosystem packages together) for dapps supporting both chains with familiar interfaces. All three share the same transport and session infrastructure.
+
 The recommended approach is the Multichain client, which provides a single connection prompt across
 all ecosystems. If your dapp targets a single chain or you prefer per-chain provider interfaces,
 single-ecosystem and multi-ecosystem options are also available.
@@ -48,7 +65,7 @@ support both ecosystems while keeping familiar provider interfaces for each.
 | **Sessions**       | Full control                                         | Automatic                                                                              | Automatic per-client                    |
 | **Best for**       | Multichain-native dapps                              | Existing single-chain dapps                                                            | Dapps supporting EVM and Solana         |
 
-## Wallet connector libraries
+<!-- ## Wallet connector libraries
 
 If your dapp already uses a wallet connector library, adopting MetaMask Connect is straightforward.
 In most cases, update a dependency or add a connector with no changes to your application code.
@@ -61,4 +78,18 @@ In most cases, update a dependency or add a connector with no changes to your ap
 | [Web3Auth](https://web3auth.io) | EVM, Solana | [EVM Quickstart](/metamask-connect/evm/quickstart/web3auth), [Solana Quickstart](/metamask-connect/solana/quickstart/web3auth) |
 | [Dynamic](https://www.dynamic.xyz) | EVM, Solana | [EVM Quickstart](/metamask-connect/evm/quickstart/dynamic), [Solana Quickstart](/metamask-connect/solana/quickstart/dynamic) |
 | [Wallet Adapter](https://github.com/solana-labs/wallet-adapter) | Solana | [Guide](/metamask-connect/solana/guides/use-wallet-adapter) |
-| [Framework Kit](https://www.framework-kit.com/) | Solana | [Guide](/metamask-connect/solana/guides/use-framework-kit) |
+| [Framework Kit](https://www.framework-kit.com/) | Solana | [Guide](/metamask-connect/solana/guides/use-framework-kit) | -->
+
+### Frequently asked questions
+
+#### Which integration option should I choose?
+
+Choose **Multichain** (`@metamask/connect-multichain`) if your dapp needs to connect to both EVM and Solana in a single session with one approval prompt. Choose **single-ecosystem** (`@metamask/connect-evm` or `@metamask/connect-solana`) if your dapp targets one chain and you want a drop-in provider compatible with existing libraries. Choose **multi-ecosystem** (both single-ecosystem packages) if you want per-chain providers for both EVM and Solana.
+
+#### Can I migrate between integration options later?
+
+Yes. All three options share the same underlying transport and session infrastructure, so you can start with a single-ecosystem client and migrate to multichain later without changing your backend or connection logic. The migration mainly involves updating your client initialization code and adopting scope-based RPC routing.
+
+#### Does MetaMask Connect work with wagmi, ethers.js, and viem?
+
+Yes. The EVM client (`@metamask/connect-evm`) provides an EIP-1193 compatible provider that works directly with viem's `custom()` transport, ethers.js `BrowserProvider`, and web3.js `Web3` constructor. The Solana client provides a Wallet Standard compatible wallet that works with the Solana Wallet Adapter ecosystem.

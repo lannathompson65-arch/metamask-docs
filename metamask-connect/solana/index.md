@@ -1,7 +1,8 @@
 ---
+title: "MetaMask Connect Solana - Solana Dapp Integration"
 sidebar_label: Introduction
-description: Connect to Solana using MetaMask Connect Solana.
-keywords: [solana, connect, wallet-standard, wallet-adapter]
+description: Connect your dapp to Solana using MetaMask Connect Solana. Use wallet-standard features, Wallet Adapter, or Framework Kit for React and vanilla JS apps.
+keywords: [solana, connect, wallet-standard, wallet-adapter, metamask connect solana, createSolanaClient, solana dapp, SPL token, solana wallet]
 ---
 
 import CardList from '@site/src/components/CardList'
@@ -29,7 +30,7 @@ If your dapp targets both EVM and Solana from a single codebase, consider using
 [`@metamask/connect-multichain`](../multichain/index.md) directly.
 The multichain client provides a unified `invokeMethod` interface for both ecosystems and manages
 scopes, sessions, and selective disconnect in one place.
-See the [multichain quickstart](../multichain/quickstart.md) to get started.
+See the [multichain quickstart](../multichain/quickstart/javascript.md) to get started.
 :::
 
 ## Get started
@@ -42,24 +43,14 @@ title: 'Wallet Adapter',
 description: 'Use Solana\'s Wallet Adapter to connect a React dapp to MetaMask.',
 },
 {
-href: '/metamask-connect/solana/guides/use-framework-kit',
-title: 'Framework Kit',
-description: 'Use Framework Kit for a hooks-based React workflow with MetaMask.',
-},
-{
 href: '/metamask-connect/solana/quickstart/javascript',
 title: 'JavaScript',
 description: 'Use wallet-standard features directly in a JavaScript dapp.',
 },
 {
-href: '/metamask-connect/solana/quickstart/web3auth',
-title: 'MetaMask Embedded Wallets',
-description: 'Set up Embedded Wallets SDK (previously Web3Auth) for Solana.',
-},
-{
-href: '/metamask-connect/solana/quickstart/dynamic',
-title: 'Dynamic',
-description: 'Set up Dynamic SDK for Solana in a Next.js dapp.',
+href: '/metamask-connect/solana/guides/use-framework-kit',
+title: 'Framework Kit',
+description: 'Use Framework Kit for a hooks-based React workflow with MetaMask.',
 },
 {
 href: '/metamask-connect/solana/reference/methods',
@@ -77,3 +68,17 @@ Several third-party libraries for Solana dapps detect and handle MetaMask out-of
 - [Privy](https://docs.privy.io/welcome)
 - [Reown](https://docs.reown.com/appkit/overview)
 - [Embedded Wallets](/embedded-wallets)
+
+### Frequently asked questions
+
+#### What is wallet-standard and why does MetaMask Connect Solana use it?
+
+[Wallet Standard](https://github.com/wallet-standard/wallet-standard) is a cross-wallet interface specification for the Solana ecosystem. `@metamask/connect-solana` implements this standard so that MetaMask is automatically discoverable by any Solana dapp or library that supports wallet-standard, including Solana Wallet Adapter. This means you get consistent connect, sign, and send APIs without writing MetaMask-specific code.
+
+#### Can I use Solana Wallet Adapter with MetaMask Connect?
+
+Yes. When you call `createSolanaClient`, MetaMask is automatically registered with the wallet-standard registry, so Solana Wallet Adapter detects it alongside other installed wallets. No extra configuration is needed. See the [Wallet Adapter guide](./guides/use-wallet-adapter.md) for a full React setup walkthrough.
+
+#### Which Solana networks does MetaMask Connect support?
+
+MetaMask Connect Solana supports mainnet, devnet, and testnet. You can configure custom RPC URLs for each network using the `api.supportedNetworks` option in `createSolanaClient`. If your dapp also targets EVM networks, consider using [`@metamask/connect-multichain`](../multichain/index.md) to manage both ecosystems in a single session.

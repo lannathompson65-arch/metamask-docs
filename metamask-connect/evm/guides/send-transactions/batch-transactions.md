@@ -1,11 +1,16 @@
 ---
-description: Send atomic batch transactions using `wallet_sendCalls`.
+title: "Batch Transactions with EIP-5792 - MetaMask Connect EVM"
+sidebar_label: Batch transactions
+description: Send multiple transactions atomically using wallet_sendCalls (EIP-5792), check capabilities, and track batch status in MetaMask.
+keywords: [EIP-5792, atomic batch, wallet_sendCalls, wallet_getCapabilities, wallet_getCallsStatus, bundle transactions, batch transactions, metamask]
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 # Send batch transactions
+
+MetaMask Connect EVM supports atomic batch transactions through EIP-5792, allowing your dapp to submit multiple calls as a single atomic operation. Use `wallet_getCapabilities` to check support, `wallet_sendCalls` to submit the batch, and `wallet_getCallsStatus` to track execution.
 
 Send and manage batch transactions in MetaMask, using the methods specified by
 [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792):
@@ -53,7 +58,7 @@ import { createEVMClient } from '@metamask/connect-evm'
 
 const evmClient = await createEVMClient({
   dapp: {
-    name: 'Metamask Connect EVM Example',
+    name: 'MetaMask Connect EVM Example',
     url: window.location.href,
     iconUrl: 'https://mydapp.com/icon.png', // Optional
   },
@@ -86,7 +91,7 @@ import { mainnet } from 'viem/chains'
 
 const evmClient = await createEVMClient({
   dapp: {
-    name: 'Metamask Connect EVM Example',
+    name: 'MetaMask Connect EVM Example',
     url: window.location.href,
     iconUrl: 'https://mydapp.com/icon.png', // Optional
   },
@@ -118,7 +123,7 @@ import { useCapabilities } from 'wagmi'
 
 const evmClient = await createEVMClient({
   dapp: {
-    name: 'Metamask Connect EVM Example',
+    name: 'MetaMask Connect EVM Example',
     url: window.location.href,
     iconUrl: 'https://mydapp.com/icon.png', // Optional
   },

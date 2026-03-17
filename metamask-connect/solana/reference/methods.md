@@ -1,16 +1,25 @@
 ---
-description: Methods reference for MetaMask Connect Solana.
-keywords: [solana, connect, method, methods, dapp]
+title: 'MetaMask Connect Solana Methods Reference'
+description: Complete methods reference for MetaMask Connect Solana, including createSolanaClient configuration and wallet-standard features.
+keywords:
+  [
+    solana,
+    connect,
+    method,
+    methods,
+    dapp,
+    createSolanaClient,
+    wallet-standard features,
+    signTransaction,
+    signMessage,
+    API reference,
+  ]
 toc_max_heading_level: 2
-sidebar_label: MetaMask Connect Solana methods
 ---
 
 # MetaMask Connect Solana SDK methods
 
-MetaMask Connect Solana (`@metamask/connect-solana`) provides a wallet-standard integration for
-connecting to MetaMask as a Solana wallet.
-It wraps `@metamask/connect-multichain` and handles wallet discovery and session management
-automatically.
+MetaMask Connect Solana (`@metamask/connect-solana`) provides `createSolanaClient()` to initialize the client, `getWallet()` to access wallet-standard features (signTransaction, signAndSendTransaction, signMessage), and automatic wallet-standard registration for compatibility with the Solana Wallet Adapter ecosystem. The client wraps `@metamask/connect-multichain` and handles wallet discovery and session management automatically.
 
 ## `createSolanaClient`
 
@@ -25,9 +34,9 @@ Calling `createSolanaClient` multiple times returns the same underlying multicha
 
 | Name                    | Type                      | Required | Description                                                                |
 | ----------------------- | ------------------------- | -------- | -------------------------------------------------------------------------- |
-| `dapp.name`             | `string`                  | Yes      | Name of your dApp.                                                         |
-| `dapp.url`              | `string`                  | No       | URL of your dApp.                                                          |
-| `dapp.iconUrl`          | `string`                  | No       | Icon URL for your dApp.                                                    |
+| `dapp.name`             | `string`                  | Yes      | Name of your dapp.                                                         |
+| `dapp.url`              | `string`                  | No       | URL of your dapp.                                                          |
+| `dapp.iconUrl`          | `string`                  | No       | Icon URL for your dapp.                                                    |
 | `api.supportedNetworks` | `SolanaSupportedNetworks` | No       | Map of network names (`mainnet`, `devnet`, `testnet`) to RPC URLs.         |
 | `debug`                 | `boolean`                 | No       | Reserved for future use; not currently forwarded to the underlying client. |
 | `skipAutoRegister`      | `boolean`                 | No       | Skip auto-registering the wallet during creation (defaults to `false`).    |
@@ -195,9 +204,9 @@ Configuration options passed to [`createSolanaClient`](#createsolanaclient).
 | Field                   | Type                      | Required | Description                                                                |
 | ----------------------- | ------------------------- | -------- | -------------------------------------------------------------------------- |
 | `dapp`                  | `object`                  | Yes      | Dapp identification and branding settings.                                 |
-| `dapp.name`             | `string`                  | Yes      | Name of your dApp.                                                         |
-| `dapp.url`              | `string`                  | No       | URL of your dApp.                                                          |
-| `dapp.iconUrl`          | `string`                  | No       | Icon URL for your dApp.                                                    |
+| `dapp.name`             | `string`                  | Yes      | Name of your dapp.                                                         |
+| `dapp.url`              | `string`                  | No       | URL of your dapp.                                                          |
+| `dapp.iconUrl`          | `string`                  | No       | Icon URL for your dapp.                                                    |
 | `api`                   | `object`                  | No       | Optional API configuration.                                                |
 | `api.supportedNetworks` | `SolanaSupportedNetworks` | No       | Map of network names (`mainnet`, `devnet`, `testnet`) to RPC URLs.         |
 | `debug`                 | `boolean`                 | No       | Reserved for future use; not currently forwarded to the underlying client. |
@@ -213,3 +222,10 @@ The object returned by [`createSolanaClient`](#createsolanaclient).
 | `getWallet()`      | `() => Wallet`        | Returns a wallet-standard compatible MetaMask wallet instance. |
 | `registerWallet()` | `() => Promise<void>` | Registers MetaMask with the wallet-standard registry.          |
 | `disconnect()`     | `() => Promise<void>` | Disconnects all Solana scopes from MetaMask.                   |
+
+## Next steps
+
+- [JavaScript quickstart](../quickstart/javascript.md) to set up MetaMask Connect Solana in a dapp.
+- [Send a legacy transaction](../guides/send-legacy-transaction.md) using the `signAndSendTransaction` wallet-standard feature.
+- [Sign messages](../guides/sign-data/sign-message.md) using the `signMessage` wallet-standard feature.
+- [Multichain SDK methods](../../multichain/reference/methods.md) for the lower-level multichain client API.

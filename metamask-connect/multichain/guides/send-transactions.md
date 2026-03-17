@@ -1,7 +1,8 @@
 ---
+title: "Send Cross-Chain Transactions - MetaMask Connect Multichain"
 sidebar_label: Send transactions
-description: Send EVM and Solana transactions from a single multichain session.
-keywords: [multichain, evm, solana, transaction, send, invokeMethod, signAndSendTransaction]
+description: Send EVM and Solana transactions from a single MetaMask Connect Multichain session using invokeMethod, with no network switching required.
+keywords: [multichain, evm, solana, transaction, send, invokeMethod, signAndSendTransaction, multichain transaction, eth_sendTransaction, RPC routing]
 ---
 
 # Send EVM and Solana transactions
@@ -10,7 +11,7 @@ This guide shows you how to send transactions on both EVM networks and Solana fr
 
 ## Prerequisites
 
-- A multichain client initialized and connected as shown in the [quickstart](../quickstart.md).
+- A multichain client initialized and connected as shown in the [quickstart](../quickstart/javascript.md).
 - For building Solana transactions, install `@solana/web3.js`:
 
 ```bash npm2yarn

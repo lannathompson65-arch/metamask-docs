@@ -1,7 +1,8 @@
 ---
+title: "Sign Messages Across Chains - MetaMask Connect Multichain"
 sidebar_label: Sign messages
-description: Sign messages on EVM and Solana from a single multichain session.
-keywords: [multichain, evm, solana, sign, personal_sign, signTypedData, signMessage, invokeMethod]
+description: Sign messages and typed data on both EVM and Solana chains from a single MetaMask Connect Multichain session using invokeMethod.
+keywords: [multichain, evm, solana, sign, personal_sign, signTypedData, signMessage, invokeMethod, multichain signing, cross-chain signature]
 ---
 
 # Sign messages on EVM and Solana
@@ -12,7 +13,7 @@ All signing methods route to the MetaMask wallet and require user approval.
 
 ## Prerequisites
 
-- A multichain client initialized and connected as shown in the [quickstart](../quickstart.md).
+- A multichain client initialized and connected as shown in the [quickstart](../quickstart/javascript.md).
 
 ## Initialize and connect
 

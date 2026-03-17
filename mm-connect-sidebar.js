@@ -17,7 +17,7 @@ const metamaskConnectSidebar = {
           type: 'category',
           label: '@metamask/connect-multichain',
           collapsible: true,
-          collapsed: false,
+          collapsed: true,
           items: [
             'multichain/reference/methods',
             'multichain/reference/api',
@@ -27,7 +27,7 @@ const metamaskConnectSidebar = {
           type: 'category',
           label: '@metamask/connect-evm',
           collapsible: true,
-          collapsed: false,
+          collapsed: true,
           items: [
             'evm/reference/methods',
             'evm/reference/provider-api',
@@ -37,17 +37,39 @@ const metamaskConnectSidebar = {
           type: 'category',
           label: '@metamask/connect-solana',
           collapsible: true,
-          collapsed: false,
+          collapsed: true,
           items: [
             'solana/reference/methods',
           ],
         },
       ],
     },
+    {
+      type: 'category',
+      label: 'Troubleshooting',
+      collapsible: true,
+      collapsed: true,
+      link: { type: 'doc', id: 'troubleshooting/index' },
+      items: [
+        'troubleshooting/vite-polyfill-issues',
+        'troubleshooting/metro-polyfill-issues',
+        'troubleshooting/webpack-polyfill-issues',
+      ],
+    },
   ],
   multichain: [
     'multichain/index',
-    'multichain/quickstart',
+    {
+      type: 'category',
+      label: 'Quickstart',
+      collapsible: false,
+      collapsed: false,
+      items: [
+        'multichain/quickstart/javascript',
+        'multichain/quickstart/nodejs',
+        'multichain/quickstart/react-native',
+      ],
+    },
     {
       type: 'category',
       label: 'Concepts',
@@ -96,12 +118,13 @@ const metamaskConnectSidebar = {
       collapsed: false,
       items: [
         'evm/quickstart/javascript',
-        'evm/quickstart/wagmi',
-        'evm/quickstart/rainbowkit',
-        'evm/quickstart/connectkit',
+        'evm/quickstart/nodejs',
+        // 'evm/quickstart/wagmi',
+        // 'evm/quickstart/rainbowkit',
+        // 'evm/quickstart/connectkit',
         'evm/quickstart/react-native',
-        'evm/quickstart/dynamic',
-        'evm/quickstart/web3auth',
+        // 'evm/quickstart/dynamic',
+        // 'evm/quickstart/web3auth',
       ],
     },
     {
@@ -164,11 +187,11 @@ const metamaskConnectSidebar = {
       collapsible: false,
       collapsed: false,
       items: [
-        {
-          type: "link",
-          label: "Create a wallet AI agent",
-          href: "/tutorials/create-wallet-ai-agent"
-        },
+        // {
+        //   type: "link",
+        //   label: "Create a wallet AI agent",
+        //   href: "/tutorials/create-wallet-ai-agent"
+        // },
         {
           type: "link",
           label: "Upgrade an EOA to a smart account",
@@ -207,8 +230,10 @@ const metamaskConnectSidebar = {
       collapsed: false,
       items: [
         'solana/quickstart/javascript',
-        'solana/quickstart/dynamic',
-        'solana/quickstart/web3auth',
+        'solana/quickstart/nodejs',
+        'solana/quickstart/react-native',
+        // 'solana/quickstart/dynamic',
+        // 'solana/quickstart/web3auth',
       ],
     },
     {

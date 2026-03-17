@@ -1,18 +1,26 @@
 ---
+title: "Web3Auth Embedded Wallets - MetaMask Connect Solana"
 sidebar_label: Embedded Wallets SDK
-description: Quickstart guide for using MetaMask Connect Solana and Embedded Wallets SDK.
+description: Integrate MetaMask with Web3Auth Embedded Wallets SDK for Solana, enabling email and social login alongside MetaMask wallet support.
 toc_max_heading_level: 3
-keywords: [connect, MetaMask, Embedded Wallets, SDK, dapp, Wallet SDK]
+keywords: [connect, MetaMask, Embedded Wallets, SDK, dapp, Wallet SDK, web3auth solana, embedded wallet, seedless, social login]
 ---
+
+:::info Heads up
+Looks like you've landed on a guide that still uses the MetaMask legacy SDK (`@metamask/sdk`).
+The MetaMask Connect integration for this library is on its way -- once ready, it will be linked
+from the sidebar navigation. In the meantime, this guide is still perfectly valid if you're using
+MetaMask SDK.
+:::
 
 # Connect to Solana using Embedded Wallets SDK
 
-This quickstart gets you up and running with MetaMask Connect Solana inside [Embedded Wallets SDK (previously Web3Auth)](/embedded-wallets), enabling users to sign in with an email or social media account.
+This quickstart gets you up and running with MetaMask SDK inside [Embedded Wallets SDK (previously Web3Auth)](/embedded-wallets), enabling users to sign in with an email or social media account.
 [Download the template](#set-up-using-a-template) to start quickly, or [set up the SDKs manually](#set-up-manually) in an existing project.
 
 <!-- <p align="center">
   <a href="https://metamask-web3auth-demo.vercel.app/" target="_blank">
-    <img src={require("../_assets/quickstart-web3auth.png").default} alt="Web3Auth SDK Quickstart" width="600px" class="appScreen" />
+    <img src={require("../_assets/quickstart-web3auth.png").default} alt="MetaMask Connect Solana with Web3Auth embedded wallet login interface" width="600px" class="appScreen" />
   </a>
 </p> -->
 
@@ -25,7 +33,7 @@ This quickstart gets you up and running with MetaMask Connect Solana inside [Emb
 
 ## Set up using a template
 
-1. Download the [MetaMask Connect + Web3Auth SDK template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/partners/web3auth):
+1. Download the [MetaMask SDK + Web3Auth SDK template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/partners/web3auth):
 
    ```bash
    npx degit MetaMask/metamask-sdk-examples/partners/web3auth metamask-web3auth
@@ -44,7 +52,7 @@ This quickstart gets you up and running with MetaMask Connect Solana inside [Emb
    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
 
    Alternatively, use `git clone` to download the entire repository.
-   Clone the MetaMask Connect examples repository and navigate into the `partners/web3auth` directory:
+   Clone the MetaMask SDK examples repository and navigate into the `partners/web3auth` directory:
 
    ```bash
    git clone https://github.com/MetaMask/metamask-sdk-examples
@@ -78,7 +86,7 @@ This quickstart gets you up and running with MetaMask Connect Solana inside [Emb
    pnpm dev
    ```
 
-You've successfully set up MetaMask Connect Solana and MetaMask Embedded Wallets.
+You've successfully set up MetaMask SDK and MetaMask Embedded Wallets.
 See how to [use Embedded Wallets](#usage).
 
 ## Set up manually
@@ -255,3 +263,9 @@ export const SendTransaction = () => {
 ## Live example
 
 <iframe className="mt-6" width="100%" height="600px" frameBorder="0" src="https://stackblitz.com/github/MetaMask/metamask-sdk-examples/tree/main/partners/web3auth?ctl=1&embed=1&file=app%2Fproviders.tsx&hideNavigation=1"></iframe>
+
+## Next steps
+
+- [Send a legacy transaction](../guides/send-legacy-transaction.md) to transfer SOL using MetaMask Connect.
+- [Sign in with Solana (SIWS)](../guides/sign-data/siws.md) to authenticate users with their wallet instead of a username and password.
+- [MetaMask Connect Solana methods](../reference/methods.md) for the full API reference.

@@ -1,7 +1,21 @@
 ---
+title: 'MetaMask Connect Multichain - Cross-Chain Wallet API'
 sidebar_label: Introduction
-description: Connect to multiple blockchain ecosystems using the Multichain API.
-keywords: [multichain, caip-25, evm, solana, session, scope]
+description: Connect to Ethereum, Solana, and other blockchain ecosystems from a single session using the MetaMask Connect Multichain API built on CAIP-25.
+keywords:
+  [
+    multichain,
+    caip-25,
+    evm,
+    solana,
+    session,
+    scope,
+    metamask connect multichain,
+    createMultichainClient,
+    cross-chain,
+    unified wallet session,
+    blockchain interoperability,
+  ]
 ---
 
 import CardList from '@site/src/components/CardList'
@@ -14,7 +28,7 @@ With the multichain client, your dapp can request access to EVM networks, Solana
 This gives you more control than the [ecosystem-specific clients](/metamask-connect/integration-options), but requires adapting your dapp to work with the Multichain API rather than traditional per-chain RPC.
 
 :::tip Ready to code?
-Jump to the [Quickstart](/metamask-connect/multichain/quickstart) to set up MetaMask Connect Multichain in minutes.
+Jump to the [Quickstart](/metamask-connect/multichain/quickstart/javascript) to set up MetaMask Connect Multichain in minutes.
 :::
 
 ## How the Multichain API works
@@ -50,7 +64,7 @@ If you're adding MetaMask Connect Multichain to an existing dapp and want minima
 <CardList
 items={[
 {
-href: '/metamask-connect/multichain/quickstart',
+href: '/metamask-connect/multichain/quickstart/javascript',
 title: 'Quickstart',
 description: 'Get started with MetaMask Connect Multichain in minutes.',
 },
@@ -81,3 +95,17 @@ description: 'Full Multichain API method and event reference.',
 }
 ]}
 />
+
+### Frequently asked questions
+
+#### What chains does the multichain client support?
+
+MetaMask Connect Multichain supports all EVM-compatible networks (Ethereum, Polygon, Arbitrum, Optimism, Linea, Base, and any chain with a CAIP-2 scope) and Solana (mainnet and devnet). Future ecosystems will be supported as they are added to MetaMask. You specify which chains to connect to using CAIP-2 scopes like `eip155:1` for Ethereum Mainnet or `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp` for Solana Mainnet.
+
+#### How does CAIP-25 work in MetaMask Connect?
+
+CAIP-25 is a chain-agnostic standard for wallet-dapp communication. When your dapp calls `connect()` with a list of CAIP-2 scopes, MetaMask creates a session that authorizes your dapp to send requests to those chains. You then use `invokeMethod()` to send JSON-RPC requests to any authorized chain by specifying its scope. The user sees a single approval prompt for all requested chains.
+
+#### Can I use the multichain client alongside ecosystem-specific clients?
+
+The multichain client and ecosystem-specific clients share the same underlying session infrastructure. While you could technically use both, it is recommended to choose one approach. The multichain client gives you full control over sessions and cross-chain RPC, while the ecosystem-specific clients provide familiar per-chain provider interfaces. See [integration options](/metamask-connect/integration-options) for a detailed comparison.

@@ -1,7 +1,8 @@
 ---
-sidebar_label: Quickstart
-description: Connect to multiple blockchain ecosystems simultaneously using MetaMask Connect Multichain.
-keywords: [multichain, evm, solana, connect, caip-25, scope]
+title: "JavaScript Quickstart - MetaMask Connect Multichain"
+sidebar_label: JavaScript
+description: Set up MetaMask Connect Multichain in a Vite JavaScript dapp to connect to EVM and Solana ecosystems from a single session using CAIP-25.
+keywords: [multichain, evm, solana, connect, caip-25, scope, vite template, createMultichainClient, multichain setup, EVM Solana dapp]
 ---
 
 import Tabs from "@theme/Tabs";
@@ -15,7 +16,7 @@ Get started with MetaMask Connect Multichain in your JavaScript(Vite) dapp.
 
 <!-- <p align="center">
   <a href="" target="_blank">
-    <img src={require("../_assets/quickstart-multichain.png").default} alt="Multichain Quickstart" width="600px" class="appScreen" />
+    <img src={require("../_assets/quickstart-multichain.png").default} alt="MetaMask Connect Multichain JavaScript quickstart dapp showing EVM and Solana connections" width="600px" class="appScreen" />
   </a>
 </p> -->
 
@@ -98,6 +99,13 @@ Install the multichain client in an existing JavaScript(Vite) project:
 npm install @metamask/connect-multichain
 ```
 
+:::tip Bundler polyfill issues?
+Some bundlers (Vite, Webpack 5) may need extra configuration for Node.js globals used by
+transitive dependencies. See [Vite polyfill issues](../../troubleshooting/vite-polyfill-issues.md)
+or [Webpack 5 polyfill issues](../../troubleshooting/webpack-polyfill-issues.md) if you run into
+errors like `Buffer is not defined` or `process is not defined`.
+:::
+
 ### 2. Initialize MetaMask Connect Multichain
 
 The following is an example of using MetaMask Connect Multichain for a multichain dapp in a JavaScript(Vite) project:
@@ -132,10 +140,7 @@ This example configures MetaMask Connect Multichain with the following options:
 Connect to MetaMask, get accounts from the session, and invoke RPC methods on chain of your choice:
 
 ```javascript
-await client.connect(
-  ['eip155:1', 'eip155:137', 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'],
-  []
-)
+await client.connect(['eip155:1', 'eip155:137', 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'], [])
 
 const session = await client.getSession()
 const ethAccounts = session.sessionScopes['eip155:1']?.accounts || []
@@ -157,17 +162,25 @@ if (ethAccounts.length > 0) {
 ```
 
 The user sees a single approval prompt for all requested chains.
-Use [`invokeMethod()`](reference/methods.md#invokemethod) to call RPC methods on any chain in the session by specifying a [scope](concepts/scopes.md).
+Use [`invokeMethod()`](../reference/methods.md#invokemethod) to call RPC methods on any chain in the session by specifying a [scope](../concepts/scopes.md).
 
 ## Multichain client methods at a glance
 
-| Method                                                                  | Description                                            |
-| ----------------------------------------------------------------------- | ------------------------------------------------------ |
-| [`connect(scopes, caipAccountIds)`](reference/methods.md#connect)       | Connects to MetaMask with multichain [scopes](concepts/scopes.md)            |
-| [`getSession()`](reference/methods.md#getsession)                       | Returns the current [session](concepts/scopes.md#sessions-caip-25) with approved accounts     |
-| [`invokeMethod({ scope, request })`](reference/methods.md#invokemethod) | Calls an RPC method on a specific chain using a [scope](concepts/scopes.md)                |
-| [`disconnect()`](reference/methods.md#disconnect)                       | Disconnects all [scopes](concepts/scopes.md) and ends the session            |
-| [`disconnect(scopes)`](reference/methods.md#disconnect)                 | Disconnects specific [scopes](concepts/scopes.md) without ending the session |
-| [`on(event, handler)`](reference/methods.md#on)                         | Registers an event handler                             |
-| [`off(event, handler)`](reference/methods.md#off)                       | Removes an event handler                               |
-| [`getInfuraRpcUrls(apiKey)`](reference/methods.md#getinfurarpcurls)     | Generates Infura RPC URLs keyed by CAIP-2 chain ID     |
+| Method                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| [`connect(scopes, caipAccountIds)`](../reference/methods.md#connect)       | Connects to MetaMask with multichain [scopes](../concepts/scopes.md)                         |
+| [`getSession()`](../reference/methods.md#getsession)                       | Returns the current [session](../concepts/scopes.md#sessions-caip-25) with approved accounts |
+| [`invokeMethod({ scope, request })`](../reference/methods.md#invokemethod) | Calls an RPC method on a specific chain using a [scope](../concepts/scopes.md)               |
+| [`disconnect()`](../reference/methods.md#disconnect)                       | Disconnects all [scopes](../concepts/scopes.md) and ends the session                         |
+| [`disconnect(scopes)`](../reference/methods.md#disconnect)                 | Disconnects specific [scopes](../concepts/scopes.md) without ending the session              |
+| [`on(event, handler)`](../reference/methods.md#on)                         | Registers an event handler                                                                   |
+| [`off(event, handler)`](../reference/methods.md#off)                       | Removes an event handler                                                                     |
+| [`getInfuraRpcUrls(apiKey)`](../reference/methods.md#getinfurarpcurls)     | Generates Infura RPC URLs keyed by CAIP-2 chain ID                                           |
+
+## Next steps
+
+- [Scopes, accounts, and sessions](../concepts/scopes.md) to understand CAIP-2 chain identifiers and CAIP-25 sessions.
+- [Send transactions on EVM and Solana](../guides/send-transactions.md) from a single multichain session.
+- [Sign messages on EVM and Solana](../guides/sign-transactions.md) using `invokeMethod`.
+- [Create a multichain dapp](../tutorials/create-multichain-dapp.md) for a full step-by-step tutorial with React.
+- [Troubleshoot bundler polyfill issues](../../troubleshooting/index.md)

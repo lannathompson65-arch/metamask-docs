@@ -1,11 +1,16 @@
 ---
-description: Use RPC methods to request cryptographic signatures from users.
+title: "Sign Data with MetaMask Connect EVM"
+sidebar_label: Sign data
+description: Request cryptographic signatures from users using eth_signTypedData_v4 for structured EIP-712 data or personal_sign for simple messages.
+keywords: [eth_signTypedData_v4, personal_sign, EIP-712, message signing, cryptographic signature, sign data, metamask, ethereum]
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 # Sign data
+
+MetaMask Connect EVM supports two signing methods: `eth_signTypedData_v4` for structured, human-readable EIP-712 signatures that can be verified onchain, and `personal_sign` for simple message signing commonly used in authentication flows like Sign-In with Ethereum (SIWE). Both methods work with viem, ethers.js, web3.js, and the raw Ethereum API.
 
 Use the following RPC methods to request cryptographic signatures from users:
 
@@ -38,7 +43,7 @@ account names in place of addresses).
 
 <p align="center">
 
-![eth_signTypedData_v4](../../_assets/signTypedData.png)
+![MetaMask confirmation dialog showing an eth_signTypedData_v4 structured data signing request](../../_assets/signTypedData.png)
 
 </p>
 
@@ -78,7 +83,7 @@ import { createEVMClient } from '@metamask/connect-evm'
 
 const evmClient = await createEVMClient({
   dapp: {
-    name: 'Metamask Connect EVM Example',
+    name: 'MetaMask Connect EVM Example',
     url: window.location.href,
     iconUrl: 'https://mydapp.com/icon.png', // Optional
   },
@@ -459,7 +464,7 @@ It's often used for signature challenges that are authenticated on a web server,
 
 <p align="center">
 
-![Personal sign](../../_assets/personal_sign.png)
+![MetaMask personal_sign message signing confirmation dialog](../../_assets/personal_sign.png)
 
 </p>
 
@@ -490,7 +495,7 @@ import { createEVMClient } from '@metamask/connect-evm'
 
 const evmClient = await createEVMClient({
   dapp: {
-    name: 'Metamask Connect EVM Example',
+    name: 'MetaMask Connect EVM Example',
     url: window.location.href,
     iconUrl: 'https://mydapp.com/icon.png', // Optional
   },
@@ -608,3 +613,9 @@ const signature = await web3.eth.sign(fromAddress, exampleMessage)
 
 `personal_sign` prepends the message with `\x19Ethereum Signed Message:\n<length of message>` before
 hashing and signing it.
+
+## Next steps
+
+- [Sign in with Ethereum (SIWE)](siwe.md)
+- [Send transactions](../send-transactions/index.md)
+- [Interact with smart contracts](../interact-with-contracts.md)
