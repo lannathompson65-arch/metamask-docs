@@ -11,8 +11,8 @@ This guide shows you how to send transactions on both EVM networks and Solana fr
 
 ## Prerequisites
 
-- A multichain client initialized and connected as shown in the [quickstart](../quickstart/javascript.md).
-- For building Solana transactions, install `@solana/web3.js`:
+- Follow the [quickstart](../quickstart/javascript.md) to initialize and connect a multichain client.
+- To build Solana transactions, install `@solana/web3.js`:
 
 ```bash npm2yarn
 npm install @solana/web3.js
@@ -217,5 +217,5 @@ try {
 
 ## Next steps
 
-- [Sign messages on EVM and Solana](sign-transactions.md)
-- [Multichain SDK methods reference](../reference/methods.md)
+- [Sign messages on EVM and Solana.](sign-transactions.md)
+- See the [Multichain SDK methods reference](../reference/methods.md).

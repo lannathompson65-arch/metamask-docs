@@ -13,7 +13,7 @@ All signing methods route to the MetaMask wallet and require user approval.
 
 ## Prerequisites
 
-- A multichain client initialized and connected as shown in the [quickstart](../quickstart/javascript.md).
+Follow the [quickstart](../quickstart/javascript.md) to initialize and connect a multichain client.
 
 ## Initialize and connect
 
@@ -166,5 +166,5 @@ try {
 
 ## Next steps
 
-- [Send EVM and Solana transactions](send-transactions.md)
-- [Multichain SDK methods reference](../reference/methods.md)
+- [Send EVM and Solana transactions.](send-transactions.md)
+- See the [Multichain SDK methods reference](../reference/methods.md).

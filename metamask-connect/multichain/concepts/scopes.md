@@ -7,7 +7,13 @@ keywords: [multichain, caip, scope, caip-2, caip-10, caip-25, session, chain id,
 
 # Scopes, accounts, and sessions
 
-MetaMask Connect Multichain uses three CAIP standards: **CAIP-2 scopes** (like `eip155:1` for Ethereum Mainnet or `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp` for Solana Mainnet) to identify chains, **CAIP-10 account IDs** to identify accounts across chains, and **CAIP-25 sessions** to group authorized scopes and accounts into a single connection. Understanding these concepts helps you work with the multichain client.
+MetaMask Connect Multichain uses three CAIP standards:
+
+- **CAIP-2 scopes** (for example, `eip155:1` for Ethereum Mainnet or `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp` for Solana Mainnet) to identify chains.
+- **CAIP-10 account IDs** to identify accounts across chains.
+- **CAIP-25 sessions** to group authorized scopes and accounts into a single connection.
+
+Understanding these concepts helps you work with the multichain client.
 
 ## Scopes (CAIP-2)
 

@@ -1,5 +1,5 @@
 ---
-title: 'MetaMask Connect Multichain Methods Reference'
+title: 'MetaMask Connect Multichain methods'
 description: Complete methods reference for MetaMask Connect Multichain, including connect, getSession, invokeMethod, disconnect, and session event handlers.
 keywords:
   [
@@ -235,7 +235,7 @@ client.on('stateChanged', status => {
 
 ## Next steps
 
-- [JavaScript quickstart](../quickstart/javascript.md) to set up MetaMask Connect Multichain in a dapp.
+- Follow the [JavaScript quickstart](../quickstart/javascript.md) to set up MetaMask Connect Multichain in a dapp.
 - [Send transactions on EVM and Solana](../guides/send-transactions.md) using `invokeMethod`.
 - [Sign messages on EVM and Solana](../guides/sign-transactions.md) using `invokeMethod`.
-- [Multichain API reference](api.md) for the underlying CAIP-25 protocol methods.
+- See the [Multichain API reference](api.md) for the underlying CAIP-25 protocol methods.

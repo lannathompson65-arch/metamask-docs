@@ -7,8 +7,8 @@ keywords: [tutorial, multichain, react, vite, evm, solana, caip, metamask, conne
 
 # Create a multichain dapp
 
-In this tutorial, you’ll build a React dapp that connects to four networks (Ethereum, Linea, Base, and Solana) by using the MetaMask Connect Multichain SDK.
-By the end, your dapp will handle wallet login and logout, read balances across all four chains, sign messages, and send transactions on all four chains. You'll learn how to do the following:
+In this tutorial, you'll build a React dapp that connects to four networks (Ethereum, Linea, Base, and Solana) using MetaMask Connect Multichain.
+Your dapp will handle wallet login and logout, read balances across all four chains, sign messages, and send transactions on all four chains. You'll learn how to do the following:
 
 - Set up a multichain session with a single connection prompt.
 - Read account balances across EVM networks and Solana.
@@ -318,8 +318,6 @@ Below is the complete source for the two main files.
 After scaffolding the project (Step 1), replace the contents of these files, run `npm run dev`, and
 open the app in your browser.
 
-### `src/multichain.ts`
-
 ```typescript title="src/multichain.ts"
 import { createMultichainClient } from '@metamask/connect-multichain'
 
@@ -369,8 +367,6 @@ export function toHex(str: string): string {
   )
 }
 ```
-
-### `src/App.tsx`
 
 ```tsx title="src/App.tsx"
 import { useState } from 'react'
@@ -600,9 +596,9 @@ export default function App() {
 
 ## Next steps
 
-- [Multichain SDK methods](../reference/methods.md) for all available methods and events.
-- [Multichain API reference](../reference/api.md) for all available methods and events.
-- [Sign transactions](../guides/sign-transactions.md) for more signing patterns
+- See the [Multichain SDK methods](../reference/methods.md) for all available methods and events.
+- See the [Multichain API reference](../reference/api.md) for all available methods and events.
+- See [Sign transactions](../guides/sign-transactions.md) for more signing patterns
   including Solana signing construction.
-- [Send transactions](../guides/send-transactions.md) for more transaction patterns
+- See [Send transactions](../guides/send-transactions.md) for more transaction patterns
   including Solana transfer construction.

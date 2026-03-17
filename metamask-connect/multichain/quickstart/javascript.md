@@ -8,9 +8,9 @@ keywords: [multichain, evm, solana, connect, caip-25, scope, vite template, crea
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Connect to multichain using MetaMask Connect Multichain
+# Multichain quickstart
 
-Get started with MetaMask Connect Multichain in your JavaScript(Vite) dapp.
+Get started with MetaMask Connect Multichain in your JavaScript (Vite) dapp.
 
 [Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect Multichain](#set-up-manually) in an existing dapp.
 
@@ -34,7 +34,7 @@ This quickstart uses [Vite](https://vite.dev/) as the build tool for convenience
 
 ## Set up using a template
 
-1. Download the [MetaMask Connect JavaScript(Vite) template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstarts/javascript):
+1. Download the [MetaMask Connect JavaScript (Vite) template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstarts/javascript):
 
    ```bash
    npx degit MetaMask/metamask-connect-examples/multichain/quickstart/javascript metamask-multichain-quickstart
@@ -93,7 +93,7 @@ You've successfully set up MetaMask Connect Multichain SDK.
 
 ### 1. Install MetaMask Connect Multichain
 
-Install the multichain client in an existing JavaScript(Vite) project:
+Install the multichain client in an existing JavaScript (Vite) project:
 
 ```bash npm2yarn
 npm install @metamask/connect-multichain
@@ -101,7 +101,7 @@ npm install @metamask/connect-multichain
 
 ### 2. Initialize MetaMask Connect Multichain
 
-The following is an example of using MetaMask Connect Multichain for a multichain dapp in a JavaScript(Vite) project:
+The following is an example of using MetaMask Connect Multichain for a multichain dapp in a JavaScript (Vite) project:
 
 ```javascript
 import { createMultichainClient } from '@metamask/connect-multichain'
@@ -172,7 +172,7 @@ Use [`invokeMethod()`](../reference/methods.md#invokemethod) to call RPC methods
 
 ## Next steps
 
-- [Scopes, accounts, and sessions](../concepts/scopes.md) to understand CAIP-2 chain identifiers and CAIP-25 sessions.
+- See [Scopes, accounts, and sessions](../concepts/scopes.md) to understand CAIP-2 chain identifiers and CAIP-25 sessions.
 - [Send transactions on EVM and Solana](../guides/send-transactions.md) from a single multichain session.
 - [Sign messages on EVM and Solana](../guides/sign-transactions.md) using `invokeMethod`.
-- [Create a multichain dapp](../tutorials/create-multichain-dapp.md) for a full step-by-step tutorial with React.
+- See [Create a multichain dapp](../tutorials/create-multichain-dapp.md) for a full step-by-step tutorial with React.
