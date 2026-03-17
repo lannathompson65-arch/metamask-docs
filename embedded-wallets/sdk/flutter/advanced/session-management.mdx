@@ -1,0 +1,49 @@
+---
+title: Session management
+sidebar_label: Session management
+description: 'Configure session persistence and duration for your Flutter app | Embedded Wallets'
+---
+
+The SDK maintains login state between app launches so users don't have to re-authenticate on every open. Session restoration is fast (milliseconds) and works transparently.
+
+## How sessions work
+
+Upon login, a unique session key is generated. The user state is encrypted with this session key and stored on the Web3Auth metadata server. The session key is stored securely using the platform's secure storage (Android Keystore / iOS Keychain).
+
+On app launch the SDK:
+
+1. Retrieves the session key from secure storage.
+2. Requests user state restoration from the metadata server.
+3. Decrypts the user state with the session key.
+4. Falls back to standard login if no active session is found.
+
+## Configuration
+
+Control session duration via `Web3AuthOptions`:
+
+```dart
+await Web3AuthFlutter.init(
+  Web3AuthOptions(
+    clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+    network: Network.sapphire_mainnet,
+    redirectUrl: redirectUrl,
+
+    // Session configuration
+    sessionTime: 86400 * 7, // 7 days (in seconds) — default
+  ),
+);
+```
+
+### `sessionTime`
+
+Session duration in seconds.
+
+| Bound   | Value          |
+| ------- | -------------- |
+| Minimum | `1` second     |
+| Maximum | `86400 * 30` (30 days) |
+| Default | `86400 * 7` (7 days)   |
+
+## Dashboard configuration
+
+Session duration can also be managed from the [Embedded Wallets dashboard](https://dashboard.web3auth.io) under **Advanced Settings → Session Management**, which lets you set the default session duration for all users without changing code.

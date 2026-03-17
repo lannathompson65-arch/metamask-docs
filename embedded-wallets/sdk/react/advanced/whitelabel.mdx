@@ -249,3 +249,24 @@ export default web3AuthContextConfig
 For complete control over the authentication interface, you can bypass the Web3Auth modal entirely and use the `connectTo` function. This allows you to create custom buttons that connect directly to specific auth providers.
 
 See the [custom authentication](./custom-authentication.mdx) section for detailed implementation instructions.
+
+## Embedded Wallet UI
+
+The SDK includes a ready-to-use wallet interface (Wallet Services) that you can embed directly in your app. It gives users familiar wallet capabilities out of the box:
+
+- Fiat on-ramps for buying crypto
+- Asset display: balances, tokens, NFTs
+- Transaction signing
+- Send, receive, and swap
+
+The wallet UI inherits your branding settings (`uiConfig`) automatically. Use `walletServicesConfig.whiteLabel` to further customize which features are visible. See [Wallet Services](./wallet-services.mdx) for configuration details.
+
+:::note
+
+Access to the Embedded Wallet UI requires the **Scale Plan** in production. All features are available for free on `sapphire_devnet`.
+
+:::
+
+## Headless mode (no UI)
+
+Prefer to keep the MetaMask/Embedded Wallets UI invisible? You can implement your own screens and flows while using the same Embedded Wallets SDK under the hood. Use the `connectTo` method (see [custom authentication](./custom-authentication.mdx)) and build your own login buttons — the SDK handles all key management and wallet functionality behind the scenes.

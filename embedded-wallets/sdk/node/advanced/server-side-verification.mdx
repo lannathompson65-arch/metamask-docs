@@ -1,0 +1,48 @@
+---
+title: Server-side verification
+sidebar_label: Server-side verification
+description: 'Authenticate users on your backend using the Web3Auth identity token | Embedded Wallets'
+---
+
+Server-side verification enables you to securely authenticate users on your backend by validating the ownership of a wallet address. When a user logs in via the Node.js SDK, Web3Auth issues a `JWT` (identity token) signed with the `ES256` algorithm that is unique to your application.
+
+## How it works
+
+1. **User authenticates** — The Node.js SDK reconstructs the user's key from a custom JWT on every request.
+2. **Retrieve the identity token** — Call `getIdentityToken()` to get a Web3Auth-issued JWT.
+3. **Verify the token** — Validate the JWT on the same or another backend using Web3Auth's public key.
+4. **Authenticate the user** — Based on verified claims (wallet address, public key, etc.), issue your own session or token.
+
+:::note
+
+The Node.js SDK requires **custom authentication** (a JWT from your own auth provider). Social login is not supported in backend mode. See the [Node SDK overview](../README.mdx) for setup.
+
+:::
+
+## Retrieve the identity token
+
+```ts
+import { Web3Auth } from '@web3auth/node-sdk'
+import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider'
+
+const web3auth = new Web3Auth({
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID',
+  web3AuthNetwork: 'sapphire_mainnet',
+  usePnPKey: false,
+})
+
+// Connect with the user's JWT
+const provider = await web3auth.connect({
+  verifier: 'your-verifier-name',
+  verifierId: 'user-unique-id',
+  idToken: 'user-jwt-from-your-auth-provider',
+})
+
+// Get the Web3Auth identity token
+const { idToken } = await web3auth.authenticateUser()
+console.log('Web3Auth identity token:', idToken)
+```
+
+## Next steps
+
+See the [Identity Token](/embedded-wallets/authentication/id-token) documentation to learn the full JWT structure, how to verify signatures, and implementation examples.

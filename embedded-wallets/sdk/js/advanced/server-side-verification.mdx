@@ -1,0 +1,52 @@
+---
+title: Server-side verification
+sidebar_label: Server-side verification
+description: 'Authenticate users on your backend using the Web3Auth identity token | Embedded Wallets'
+---
+
+Server-side verification enables you to securely authenticate users on your backend by validating the ownership of a wallet address. When a user logs in, Web3Auth issues a `JWT` (identity token) signed with the `ES256` algorithm that is unique to your application. Your backend verifies this token to confirm the user's identity.
+
+## How it works
+
+1. **User logs in** — Web3Auth generates a signed `idToken` (JWT) upon successful authentication.
+2. **Send token to backend** — Your frontend sends the `idToken` to your server.
+3. **Verify on backend** — Your server validates the JWT using Web3Auth's public key.
+4. **Authenticate the user** — Based on verified claims (wallet address, email, etc.), create a session or issue your own token.
+
+**Different flows for different wallets:**
+
+- **Social logins:** The token includes the user's public key linked to their wallet.
+- **External wallets:** The token includes the wallet address instead of the public key.
+
+## Retrieve the identity token
+
+Use `getIdentityToken()` to retrieve the `idToken` after login:
+
+```ts
+import { Web3Auth, WEB3AUTH_NETWORK } from '@web3auth/modal'
+
+const web3auth = new Web3Auth({
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID',
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+})
+
+await web3auth.init()
+await web3auth.connect()
+
+// Retrieve the identity token
+const { idToken } = await web3auth.getIdentityToken()
+
+// Send to your backend for verification
+const response = await fetch('/api/auth', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ idToken }),
+})
+
+const data = await response.json()
+console.log('Authenticated user:', data)
+```
+
+## Next steps
+
+See the [Identity Token](/embedded-wallets/authentication/id-token) documentation to learn the full JWT structure, how to verify signatures, and backend implementation examples.

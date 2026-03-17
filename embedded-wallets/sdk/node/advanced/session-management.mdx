@@ -1,0 +1,52 @@
+---
+title: Session management
+sidebar_label: Session management
+description: 'Understand session behaviour in the Node.js SDK | Embedded Wallets'
+---
+
+The Node.js SDK is **stateless by design**. Each request reconstructs the user's key from the provided JWT — there is no persistent session stored in the SDK.
+
+## How it works
+
+Every call to `web3auth.connect()` performs a fresh key reconstruction from the provided `idToken`. This means:
+
+- No session keys are stored between requests.
+- The same user always gets the same wallet address as long as the `verifier`, `verifierId`, and Client ID remain constant.
+- Your application is responsible for managing user sessions (for example, via cookies, JWT sessions, or your own database).
+
+```ts
+import { Web3Auth } from '@web3auth/node-sdk'
+
+const web3auth = new Web3Auth({
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID',
+  web3AuthNetwork: 'sapphire_mainnet',
+  usePnPKey: false,
+})
+
+// Each request: connect with a fresh, valid idToken (issued within the last 60 seconds)
+const provider = await web3auth.connect({
+  verifier: 'your-verifier-name',
+  verifierId: 'user-unique-id',
+  idToken: 'fresh-jwt-from-your-auth-provider', // Must be issued within 60 seconds
+})
+```
+
+:::warning
+
+The `idToken` (JWT) passed to the Node SDK must have an `iat` (issued-at) claim within **60 seconds** of current time, regardless of `exp`. Always issue a fresh JWT on every connect call.
+
+:::
+
+## User session management
+
+Since the Node SDK is stateless, your backend is responsible for maintaining the user session after authentication. A typical pattern:
+
+1. User authenticates with your auth provider (Firebase, Auth0, AWS Cognito, custom JWT).
+2. Your backend receives the user's JWT and calls `web3auth.connect()` to reconstruct the key.
+3. Your backend signs the desired transaction or derives the address.
+4. Your backend issues its own session token (e.g., a signed cookie or JWT) to the client.
+5. On subsequent requests, the client presents the session token — no need to call Web3Auth again unless signing is required.
+
+## Dashboard session configuration
+
+Session duration for dashboard users (not Node SDK) can be managed under **Advanced Settings → Session Management** in the [Embedded Wallets dashboard](https://dashboard.web3auth.io). This setting does not affect the stateless Node SDK.

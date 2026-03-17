@@ -1,0 +1,63 @@
+---
+title: Session management
+sidebar_label: Session management
+description: 'Configure session persistence and duration for your Vue app | Embedded Wallets'
+---
+
+The SDK maintains login state across page reloads and browser restarts so users don't have to re-authenticate on every visit. Session restoration is fast (milliseconds) and works transparently.
+
+## How sessions work
+
+Upon login, a unique session key is generated. The user state is encrypted with this session key and stored on the Web3Auth metadata server. The session key is stored in the client's environment (browser `localStorage` or `sessionStorage`).
+
+On page load the SDK:
+
+1. Retrieves the session key from storage.
+2. Requests user state restoration from the metadata server.
+3. Decrypts the user state with the session key.
+4. Falls back to standard login if no active session is found.
+
+## Configuration
+
+Control session duration and storage location via `Web3AuthOptions`:
+
+```ts title="web3AuthContextConfig.ts"
+import { WEB3AUTH_NETWORK } from '@web3auth/modal'
+import { type Web3AuthContextConfig } from '@web3auth/modal/vue'
+
+const web3AuthContextConfig: Web3AuthContextConfig = {
+  web3AuthOptions: {
+    clientId: 'YOUR_WEB3AUTH_CLIENT_ID',
+    web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+
+    // Session configuration
+    sessionTime: 86400 * 7, // 7 days (in seconds) — default
+    storageType: 'local',   // 'local' (persistent) or 'session' (tab only)
+  },
+}
+
+export default web3AuthContextConfig
+```
+
+### `sessionTime`
+
+Session duration in seconds.
+
+| Bound   | Value          |
+| ------- | -------------- |
+| Minimum | `1` second     |
+| Maximum | `86400 * 30` (30 days) |
+| Default | `86400 * 7` (7 days)   |
+
+### `storageType`
+
+Where the session key is stored in the browser.
+
+| Value       | Behaviour                                                          |
+| ----------- | ------------------------------------------------------------------ |
+| `"local"`   | Persists across browser tabs and restarts (`localStorage`). Default. |
+| `"session"` | Cleared when the tab closes (`sessionStorage`).                    |
+
+## Dashboard configuration
+
+Session duration can also be managed from the [Embedded Wallets dashboard](https://dashboard.web3auth.io) under **Advanced Settings → Session Management**, which lets you set the default session duration for all users without changing code.

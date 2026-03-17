@@ -1,7 +1,7 @@
 ---
-title: Wallet Pregeneration
+title: Wallet pregeneration
 sidebar_label: Wallet pregeneration
-description: 'Wallet Pregeneration | Embedded Wallets'
+description: 'Create wallets for users before they log in | Embedded Wallets'
 ---
 
 import BrowserOnly from '@docusaurus/BrowserOnly'
@@ -24,7 +24,7 @@ Pregenerated wallets simplify user onboarding by creating wallets for your users
 
 ## Utilizing the pregenerated wallet API
 
-Embedded Wallets' straightforward API facilitates the creation of pregenerated Externally Owned Accounts (EOA) wallets. You can integrate this API into your user signup flow, either after a user verifies their email or independently by supplying their email or unique identifier to the API.
+Embedded Wallets' straightforward API facilitates the creation of pregenerated Externally Owned Account (EOA) wallets. You can integrate this API into your user signup flow, either after a user verifies their email or independently by supplying their email or unique identifier to the API.
 
 :::note
 
@@ -34,7 +34,7 @@ Access to wallet pregeneration is gated. You can use this feature in `sapphire_d
 
 :::warning
 
-This API only returns the Core Kit/ SFA Key wallet addresses. To use the wallet addresses with the Embedded Wallet SDKs, you will need to either use the `useCoreKitKey` or `useSFAKey` flag.
+This API only returns the Core Kit / SFA Key wallet addresses. To use the wallet addresses with the Embedded Wallet SDKs, you will need to use the `useCoreKitKey` flag when initializing the React Native SDK.
 
 Learn more about how [keys can change within different products](/embedded-wallets/troubleshooting/different-private-key#product).
 

@@ -226,6 +226,22 @@ export type BUTTON_POSITION_TYPE = (typeof BUTTON_POSITION)[keyof typeof BUTTON_
   </TabItem>
 </Tabs>
 
+## Funding
+
+MetaMask Embedded Wallets supports multiple ways for users to add funds to their wallets via the Wallet Services UI. Users can:
+
+- Buy crypto with card, bank transfer, or local payment methods (fiat on-ramp aggregator).
+- Transfer from an existing wallet or exchange.
+- Connect an external wallet and deposit to the embedded wallet.
+
+The fiat on-ramp aggregator is chain-agnostic and supports over 100 payment methods across 50+ countries. To hide the top-up (funding) button from the Wallet Services widget, set `hideTopup: true` in `walletServicesConfig.whiteLabel`.
+
+:::note
+
+The fiat on-ramp supports both Externally Owned Accounts (EOA) and Account Abstraction (AA) accounts, as well as both EVM and Solana accounts.
+
+:::
+
 ## Usage
 
 ```tsx title="web3AuthContext.tsx"

@@ -1,0 +1,40 @@
+---
+title: Server-side verification
+sidebar_label: Server-side verification
+description: 'Authenticate users on your backend using the Web3Auth identity token | Embedded Wallets'
+---
+
+Server-side verification enables you to securely authenticate users on your backend by validating the ownership of a wallet address. When a user logs in, Web3Auth issues a `JWT` (identity token) signed with the `ES256` algorithm that is unique to your application. Your backend verifies this token to confirm the user's identity.
+
+## How it works
+
+1. **User logs in** — Web3Auth generates a signed `idToken` (JWT) upon successful authentication.
+2. **Send token to backend** — Your game client sends the `idToken` to your server.
+3. **Verify on backend** — Your server validates the JWT using Web3Auth's public key.
+4. **Authenticate the user** — Based on verified claims (wallet address, email, etc.), create a session or issue your own token.
+
+**Different flows for different wallets:**
+
+- **Social logins:** The token includes the user's public key linked to their wallet.
+
+## Retrieve the identity token in Unreal Engine
+
+After a successful login, retrieve the user information via the `GetUserInfo` function:
+
+```cpp
+// Get user info after successful login
+FWeb3AuthUserInfo userInfo = Web3Auth->GetUserInfo();
+FString idToken = userInfo.idToken;
+
+// Send to your backend for verification using Unreal's HTTP module
+TSharedRef<IHttpRequest, ESPMode::ThreadSafe> Request = FHttpModule::Get().CreateRequest();
+Request->SetURL(TEXT("https://your-backend.com/api/auth"));
+Request->SetVerb(TEXT("POST"));
+Request->SetHeader(TEXT("Content-Type"), TEXT("application/json"));
+Request->SetContentAsString(FString::Printf(TEXT("{\"idToken\":\"%s\"}"), *idToken));
+Request->ProcessRequest();
+```
+
+## Next steps
+
+See the [Identity Token](/embedded-wallets/authentication/id-token) documentation to learn the full JWT structure, how to verify signatures, and backend implementation examples.

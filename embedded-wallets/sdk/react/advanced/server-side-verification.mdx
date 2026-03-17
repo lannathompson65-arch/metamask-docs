@@ -1,0 +1,55 @@
+---
+title: Server-side verification
+sidebar_label: Server-side verification
+description: 'Authenticate users on your backend using the Web3Auth identity token | Embedded Wallets'
+---
+
+Server-side verification enables you to securely authenticate users on your backend by validating the ownership of a wallet address. When a user logs in, Web3Auth issues a `JWT` (identity token) signed with the `ES256` algorithm that is unique to your application. Your backend verifies this token to confirm the user's identity.
+
+## How it works
+
+1. **User logs in** — Web3Auth generates a signed `idToken` (JWT) upon successful authentication.
+2. **Send token to backend** — Your frontend sends the `idToken` to your server.
+3. **Verify on backend** — Your server validates the JWT using Web3Auth's public key.
+4. **Authenticate the user** — Based on verified claims (wallet address, email, etc.), create a session or issue your own token.
+
+**Different flows for different wallets:**
+
+- **Social logins:** The token includes the user's public key linked to their wallet.
+- **External wallets:** The token includes the wallet address instead of the public key.
+
+## Retrieve the identity token in React
+
+Use the `useIdentityToken` hook to retrieve the `idToken` after login:
+
+```tsx title="App.tsx"
+import { useIdentityToken } from '@web3auth/modal/react'
+
+function ServerAuth() {
+  const { getIdentityToken, token, loading, error } = useIdentityToken()
+
+  const authenticateWithBackend = async () => {
+    const idToken = await getIdentityToken()
+    if (!idToken) return
+
+    const response = await fetch('/api/auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ idToken }),
+    })
+
+    const data = await response.json()
+    console.log('Authenticated user:', data)
+  }
+
+  return (
+    <button onClick={authenticateWithBackend} disabled={loading}>
+      {loading ? 'Authenticating...' : 'Authenticate with backend'}
+    </button>
+  )
+}
+```
+
+## Next steps
+
+See the [Identity Token](/embedded-wallets/authentication/id-token) documentation to learn the full JWT structure, how to verify signatures, and backend implementation examples.

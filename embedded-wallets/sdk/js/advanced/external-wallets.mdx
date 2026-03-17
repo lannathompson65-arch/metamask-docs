@@ -1,0 +1,68 @@
+---
+title: External wallet aggregator
+sidebar_label: External wallets
+description: 'Integrate external wallets alongside social logins in your JavaScript app | Embedded Wallets'
+---
+
+The MetaMask Embedded Wallets SDK provides one of the most complete wallet aggregators on the market. It unifies EVM and Solana wallet discovery, connection, and session management into a single, production-ready layer you can drop into any JavaScript app.
+
+:::info Demo
+
+Looking for a quick preview? See the [Demo](https://demo.web3auth.io).
+
+:::
+
+## Highlights
+
+- **Cross-ecosystem:** EVM and Solana in a single flow.
+- **Standards-native:** EIP-6963 (EVM) and Solana Wallet Standard.
+- **Works with your stack:** `ethers`, `viem`, `wagmi`, `@solana/web3.js`.
+- **Framework-agnostic:** Works with Angular, Svelte, vanilla JS, or any web framework.
+- **Central control:** Manage everything in the [Embedded Wallets dashboard](https://dashboard.web3auth.io).
+
+![Wallet Discovery](/img/wallet-discovery.png) _A familiar, unified wallet selection experience for users._
+
+## Customize flow within the dashboard
+
+- **Wallet aggregator only:** Drop-in discovery, connection, and session state.
+- **With social logins:** Offer socials and external wallets side-by-side in one flow.
+
+![Dashboard Wallet Toggle](/img/embedded-wallets/w3a-dashboard/external-wallets-toggle.png) _Toggle social logins and external wallets visibility._
+
+![Dashboard Wallet Selector](/img/embedded-wallets/w3a-dashboard/external-wallets-select-wallets.png) _Toggle and manage supported wallets._
+
+## Usage in JavaScript
+
+External wallets are enabled by default when you initialize Web3Auth. Use the standard event listeners or direct property checks to track connection state.
+
+```ts
+import { Web3Auth, WEB3AUTH_NETWORK } from '@web3auth/modal'
+
+const web3auth = new Web3Auth({
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID',
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+})
+
+await web3auth.init()
+
+// Check connected adapter after connect
+console.log('Connected via:', web3auth.connectedAdapterName)
+```
+
+For EVM chains, the built-in provider and `web3auth.provider` work identically whether the user connected via a social login or an external wallet.
+
+## Hiding the wallet discovery UI
+
+To hide the wallet discovery UI and show only social logins, set `hideWalletDiscovery` in `modalConfig`:
+
+```ts
+import { Web3Auth, WALLET_CONNECTORS, WEB3AUTH_NETWORK } from '@web3auth/modal'
+
+const web3auth = new Web3Auth({
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID',
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  modalConfig: {
+    hideWalletDiscovery: true,
+  },
+})
+```

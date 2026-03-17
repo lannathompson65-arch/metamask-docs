@@ -1,0 +1,72 @@
+---
+title: External wallet aggregator
+sidebar_label: External wallets
+description: 'Integrate external wallets alongside social logins in your Vue app | Embedded Wallets'
+---
+
+The MetaMask Embedded Wallets SDK provides one of the most complete wallet aggregators on the market. It unifies EVM and Solana wallet discovery, connection, and session management into a single, production-ready layer you can drop into any Vue app.
+
+:::info Demo
+
+Looking for a quick preview? See the [Demo](https://demo.web3auth.io).
+
+:::
+
+## Highlights
+
+- **Cross-ecosystem:** EVM and Solana in a single flow.
+- **Standards-native:** EIP-6963 (EVM) and Solana Wallet Standard.
+- **Works with your stack:** `ethers`, `viem`, `wagmi`, `@solana/web3.js`.
+- **First-class developer experience:** Hooks and composables for React/Vue.
+- **Central control:** Manage everything in the [Embedded Wallets dashboard](https://dashboard.web3auth.io).
+
+![Wallet Discovery](/img/wallet-discovery.png) _A familiar, unified wallet selection experience for users._
+
+## Customize flow within the dashboard
+
+- **Wallet aggregator only:** Drop-in discovery, connection, and session state.
+- **With social logins:** Offer socials and external wallets side-by-side in one flow.
+
+![Dashboard Wallet Toggle](/img/embedded-wallets/w3a-dashboard/external-wallets-toggle.png) _Toggle social logins and external wallets visibility._
+
+![Dashboard Wallet Selector](/img/embedded-wallets/w3a-dashboard/external-wallets-select-wallets.png) _Toggle and manage supported wallets._
+
+## Usage in Vue
+
+External wallets are enabled by default when you initialize the Web3Auth provider. Use the standard Vue composables to check connection state and interact with the connected wallet.
+
+```ts title="WalletInfo.vue"
+<script setup>
+import { useWeb3Auth } from '@web3auth/modal/vue'
+
+const { isConnected, connectedAdapterName } = useWeb3Auth()
+</script>
+
+<template>
+  <p v-if="isConnected">Connected via: {{ connectedAdapterName }}</p>
+  <p v-else>Not connected</p>
+</template>
+```
+
+For EVM chains, the Ethereum composables work identically whether the user connected via a social login or an external wallet (MetaMask Extension, WalletConnect, Coinbase Wallet, etc.).
+
+## Hiding the wallet discovery UI
+
+To hide the wallet discovery UI and show only social logins, set `hideWalletDiscovery` in `modalConfig`:
+
+```ts title="web3AuthContextConfig.ts"
+import { WALLET_CONNECTORS, WEB3AUTH_NETWORK } from '@web3auth/modal'
+import { type Web3AuthContextConfig } from '@web3auth/modal/vue'
+
+const web3AuthContextConfig: Web3AuthContextConfig = {
+  web3AuthOptions: {
+    clientId: 'YOUR_WEB3AUTH_CLIENT_ID',
+    web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+    modalConfig: {
+      hideWalletDiscovery: true,
+    },
+  },
+}
+
+export default web3AuthContextConfig
+```
