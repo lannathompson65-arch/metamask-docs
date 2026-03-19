@@ -118,7 +118,7 @@ export const LoginProvider = ({ children }) => {
       },
       api: {
         supportedNetworks: {
-          ...getInfuraRpcUrls({ infuraApiKey: 'c3463e1ded2f4690b5dd7e1d3d104b3c' }),
+          ...getInfuraRpcUrls({ infuraApiKey: 'INFURA_API_KEY' }),
         },
       },
     }).then(instance => {
