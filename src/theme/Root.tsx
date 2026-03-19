@@ -48,6 +48,7 @@ interface IMetamaskProviderContext {
   setMetaMaskProvider: (arg: EIP1193Provider) => void
   uksTier: string
   client: MetamaskConnectEVM | null
+  clientError: string | null
   setNeedsMfa: (arg: boolean) => void
   needsMfa: boolean
   setWalletLinked: (arg: WALLET_LINK_TYPE) => void
@@ -75,6 +76,7 @@ export const MetamaskProviderContext = createContext<IMetamaskProviderContext>({
   metaMaskProvider: undefined,
   setMetaMaskProvider: () => {},
   client: null,
+  clientError: null,
   setNeedsMfa: () => {},
   needsMfa: false,
   setWalletLinked: () => {},
@@ -98,6 +100,7 @@ export const LoginProvider = ({ children }) => {
   const [metaMaskAccountEns, setMetaMaskAccountEns] = useState(undefined)
   const [uksTier, setUksTier] = useState(undefined)
   const [client, setClient] = useState<MetamaskConnectEVM | null>(null)
+  const [clientError, setClientError] = useState<string | null>(null)
   const clientInitialized = useRef(false)
   const [step, setStep] = useState<AUTH_LOGIN_STEP>(AUTH_LOGIN_STEP.CONNECTING)
   const [walletLinked, setWalletLinked] = useState<WALLET_LINK_TYPE | undefined>(undefined)
@@ -118,13 +121,23 @@ export const LoginProvider = ({ children }) => {
       },
       api: {
         supportedNetworks: {
-          ...getInfuraRpcUrls({ infuraApiKey: INFURA_API_KEY as string }),
+          ...(INFURA_API_KEY
+            ? getInfuraRpcUrls({ infuraApiKey: INFURA_API_KEY as string })
+            : {}),
+          '0xaa36a7': 'https://rpc.sepolia.org',
+          '0xe705': 'https://rpc.sepolia.linea.build',
         },
       },
-    }).then(instance => {
-      setClient(instance)
-      setMetaMaskProvider(instance.getProvider())
     })
+      .then(instance => {
+        setClient(instance)
+        setMetaMaskProvider(instance.getProvider())
+      })
+      .catch(error => {
+        console.error('MetaMask Connect EVM initialization failed:', error)
+        setClientError(error?.message || 'Failed to initialize wallet connection')
+        clientInitialized.current = false
+      })
   }, [])
 
   const fetchLineaEns = async (rawAddress: string) => {
@@ -249,6 +262,7 @@ export const LoginProvider = ({ children }) => {
           uksTier,
           setMetaMaskProvider,
           client,
+          clientError,
           walletLinked,
           setWalletLinked,
           needsMfa,
