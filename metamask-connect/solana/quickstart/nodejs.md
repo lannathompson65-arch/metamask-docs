@@ -8,7 +8,7 @@ keywords: [connect, MetaMask, Node.js, Solana, SDK, CLI, server-side, createSola
 # Connect to Solana - Node.js quickstart
 
 Get started with MetaMask Connect Solana in a Node.js application.
-The SDK displays a QR code in the terminal that you scan with MetaMask Mobile to establish a connection.
+The SDK displays a QR code in the terminal that you scan with the MetaMask mobile app to establish a connection.
 
 :::info Wallet Standard is browser-only
 [Wallet Standard](https://github.com/wallet-standard/wallet-standard) features (`getWallet()`,
@@ -21,7 +21,7 @@ In Node.js, use the multichain core directly via `client.core.connect()` and
 
 - [Node.js](https://nodejs.org/) version 20 or later installed.
 - A package manager installed, such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), [Yarn](https://yarnpkg.com/), or [pnpm](https://pnpm.io/installation).
-- [MetaMask Mobile](https://metamask.io/download/) installed on your phone.
+- The [MetaMask mobile app](https://metamask.io/download/) installed on your phone.
 - An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the MetaMask Developer dashboard.
 
 ## Steps
@@ -151,7 +151,7 @@ const solanaClient = await createSolanaClient({
   },
 })
 
-// Connect -- scan the QR code with MetaMask Mobile
+// Connect — scan the QR code with the MetaMask mobile app
 await solanaClient.core.connect([SOLANA_MAINNET], [])
 
 const session = await solanaClient.core.getSession()

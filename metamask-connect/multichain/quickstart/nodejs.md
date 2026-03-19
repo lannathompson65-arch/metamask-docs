@@ -9,7 +9,7 @@ keywords: [multichain, evm, solana, connect, Node.js, caip-25, scope, createMult
 
 Get started with MetaMask Connect Multichain in a Node.js application.
 Connect to EVM and Solana networks simultaneously through a single session.
-The SDK displays a QR code in the terminal that you scan with MetaMask Mobile.
+The SDK displays a QR code in the terminal that you scan with the MetaMask mobile app.
 
 :::info No polyfills required
 Node.js has native support for `Buffer`, `crypto`, `stream`, and other modules that require
@@ -20,7 +20,7 @@ polyfilling in browser or React Native environments.
 
 - [Node.js](https://nodejs.org/) version 20 or later installed.
 - A package manager installed, such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), [Yarn](https://yarnpkg.com/), or [pnpm](https://pnpm.io/installation).
-- [MetaMask Mobile](https://metamask.io/download/) installed on your phone.
+- The [MetaMask mobile app](https://metamask.io/download/) installed on your phone.
 - An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the [MetaMask Developer dashboard](https://developer.metamask.io).
 
 ## Steps
@@ -198,7 +198,7 @@ const client = await createMultichainClient({
   },
 })
 
-// Connect -- scan the QR code with MetaMask Mobile
+// Connect — scan the QR code with the MetaMask mobile app
 await client.connect([ETH_MAINNET, SOLANA_MAINNET], [])
 
 const session = await client.getSession()
