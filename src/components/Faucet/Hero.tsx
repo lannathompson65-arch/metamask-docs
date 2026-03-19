@@ -32,16 +32,12 @@ export default function Hero({
 }: IHero) {
   const {
     metaMaskAccount,
-    sdk,
     metaMaskWalletIdConnectHandler,
     walletLinked,
     projects,
     walletAuthUrl,
     needsMfa,
   } = useContext(MetamaskProviderContext)
-  const isMobile = sdk.platformManager?.isMobile ?? false
-  const isExtensionActive = sdk.isExtensionActive()
-  const showInstallButton = !isExtensionActive && !isMobile
   const [isWalletLinking, setIsWalletLinking] = useState(false)
   const { colorMode } = useColorMode()
 
@@ -82,22 +78,20 @@ export default function Hero({
             </span>
           </Text>
           <Text as="p" className="description">
-            {showInstallButton
-              ? 'Install MetaMask for your browser to get started and request ETH.'
-              : !Object.keys(projects).length
-                ? needsMfa
-                  ? 'Your Infura Account requires 2-Factor Authentication'
-                  : walletLinked === undefined
-                    ? 'Connect your MetaMask wallet to get started and request ETH.'
-                    : walletLinked === WALLET_LINK_TYPE.NO
-                      ? 'Link your Developer Dashboard account to get started and request ETH.'
-                      : 'Select your Developer Dashboard account to get started and request ETH.'
-                : !isMaintenance
-                  ? 'Enter your MetaMask wallet address and request ETH.'
-                  : 'The faucet is at full capacity due to high demand. Try checking back later.'}
+            {!Object.keys(projects).length
+              ? needsMfa
+                ? 'Your Infura Account requires 2-Factor Authentication'
+                : walletLinked === undefined
+                  ? 'Connect your MetaMask wallet to get started and request ETH.'
+                  : walletLinked === WALLET_LINK_TYPE.NO
+                    ? 'Link your Developer Dashboard account to get started and request ETH.'
+                    : 'Select your Developer Dashboard account to get started and request ETH.'
+              : !isMaintenance
+                ? 'Enter your MetaMask wallet address and request ETH.'
+                : 'The faucet is at full capacity due to high demand. Try checking back later.'}
           </Text>
           <div className={styles.actions}>
-            {!!Object.keys(projects).length && !showInstallButton && !isMaintenance && (
+            {!!Object.keys(projects).length && !isMaintenance && (
               <div className={styles.inputCont}>
                 <div className={styles.inputWrapper}>
                   <Input
@@ -137,29 +131,7 @@ export default function Hero({
               </div>
             )}
             <div className={styles.btnWrapper}>
-              {showInstallButton ? (
-                <Button
-                  as="button"
-                  data-test-id="hero-cta-install-metamask"
-                  label={'Install MetaMask'}
-                  style={
-                    colorMode === 'dark'
-                      ? {
-                          '--button-color': 'var(--consumer-orange)',
-                          '--button-text-color': 'var(--general-black)',
-                          '--button-color-hover': 'var(--general-white)',
-                          '--button-text-color-hover': 'var(--general-black)',
-                        }
-                      : {
-                          '--button-color': 'var(--consumer-orange)',
-                          '--button-text-color': 'var(--general-black)',
-                          '--button-color-hover': 'var(--general-black)',
-                          '--button-text-color-hover': 'var(--general-white)',
-                        }
-                  }
-                  onClick={handleConnectWallet}
-                />
-              ) : !Object.keys(projects).length ? (
+              {!Object.keys(projects).length ? (
                 <>
                   {needsMfa ? (
                     <Button

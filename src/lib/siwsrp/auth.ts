@@ -1,5 +1,4 @@
 import { SDK } from '@metamask/profile-sync-controller'
-import { SDKProvider } from '@metamask/sdk'
 import jwt from 'jsonwebtoken'
 
 type HydraEnv = {
@@ -66,7 +65,10 @@ const auth = (env: string) =>
     }
   )
 
-export const authenticateAndAuthorize = async (env: string, customProvider: SDKProvider) => {
+export const authenticateAndAuthorize = async (
+  env: string,
+  customProvider: { request: (args: { method: string; params?: unknown[] }) => Promise<unknown> }
+) => {
   let accessToken: string, userProfile: SDK.UserProfile
   try {
     const authInstance = auth(env)

@@ -1,8 +1,8 @@
-import React, { ReactElement, createContext, useEffect, useState, useCallback } from 'react'
+import React, { ReactElement, createContext, useEffect, useState, useCallback, useRef } from 'react'
 import { Provider as AlertProvider } from 'react-alert'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import { AlertTemplate, options } from '@site/src/components/Alert'
-import { MetaMaskSDK, SDKProvider } from '@metamask/sdk'
+import { createEVMClient, MetamaskConnectEVM, EIP1193Provider } from '@metamask/connect-evm'
 import { REF_ALLOW_LOGIN_PATH, REQUEST_PARAMS } from '@site/src/lib/constants'
 import {
   clearStorage,
@@ -18,6 +18,7 @@ import AuthModal, {
   AUTH_LOGIN_STEP,
   WALLET_LINK_TYPE,
 } from '@site/src/components/AuthLogin/AuthModal'
+import { getInfuraRpcUrls } from '@metamask/connect-evm'
 
 interface Project {
   id: string
@@ -43,10 +44,10 @@ interface IMetamaskProviderContext {
   metaMaskAccount: string
   metaMaskAccountEns: string
   setMetaMaskAccount: (arg: string[] | string) => void
-  metaMaskProvider: SDKProvider
-  setMetaMaskProvider: (arg: SDKProvider) => void
+  metaMaskProvider: EIP1193Provider
+  setMetaMaskProvider: (arg: EIP1193Provider) => void
   uksTier: string
-  sdk: MetaMaskSDK
+  client: MetamaskConnectEVM | null
   setNeedsMfa: (arg: boolean) => void
   needsMfa: boolean
   setWalletLinked: (arg: WALLET_LINK_TYPE) => void
@@ -73,7 +74,7 @@ export const MetamaskProviderContext = createContext<IMetamaskProviderContext>({
   uksTier: undefined,
   metaMaskProvider: undefined,
   setMetaMaskProvider: () => {},
-  sdk: undefined,
+  client: null,
   setNeedsMfa: () => {},
   needsMfa: false,
   setWalletLinked: () => {},
@@ -87,29 +88,17 @@ export const MetamaskProviderContext = createContext<IMetamaskProviderContext>({
   setUserEncPublicKey: () => {},
 })
 
-const sdk = new MetaMaskSDK({
-  dappMetadata: {
-    name: 'Reference pages',
-    url: 'https://docs.metamask.io/',
-  },
-  preferDesktop: true,
-  extensionOnly: true,
-  checkInstallationImmediately: false,
-  logging: {
-    sdk: false,
-  },
-})
-
 export const LoginProvider = ({ children }) => {
   const [projects, setProjects] = useState({})
   const [userId, setUserId] = useState<string>('')
   const [token, setToken] = useState<string>(undefined)
   const [openAuthModal, setOpenAuthModal] = useState<boolean>(false)
-  const [metaMaskProvider, setMetaMaskProvider] = useState(undefined)
+  const [metaMaskProvider, setMetaMaskProvider] = useState<EIP1193Provider>(undefined)
   const [metaMaskAccount, setMetaMaskAccount] = useState(undefined)
   const [metaMaskAccountEns, setMetaMaskAccountEns] = useState(undefined)
   const [uksTier, setUksTier] = useState(undefined)
-  const [isInitialized, setIsInitialized] = useState<boolean>(false)
+  const [client, setClient] = useState<MetamaskConnectEVM | null>(null)
+  const clientInitialized = useRef(false)
   const [step, setStep] = useState<AUTH_LOGIN_STEP>(AUTH_LOGIN_STEP.CONNECTING)
   const [walletLinked, setWalletLinked] = useState<WALLET_LINK_TYPE | undefined>(undefined)
   const [needsMfa, setNeedsMfa] = useState<boolean>(false)
@@ -119,9 +108,24 @@ export const LoginProvider = ({ children }) => {
   const { siteConfig } = useDocusaurusContext()
   const { DASHBOARD_URL, LINEA_ENS_URL } = siteConfig?.customFields || {}
 
-  if (sdk.isInitialized() && !isInitialized) {
-    setIsInitialized(true)
-  }
+  useEffect(() => {
+    if (clientInitialized.current) return
+    clientInitialized.current = true
+    createEVMClient({
+      dapp: {
+        name: 'MetaMask Developer Documentation',
+        url: 'https://docs.metamask.io/',
+      },
+      api: {
+        supportedNetworks: {
+          ...getInfuraRpcUrls({ infuraApiKey: 'c3463e1ded2f4690b5dd7e1d3d104b3c' }),
+        },
+      },
+    }).then(instance => {
+      setClient(instance)
+      setMetaMaskProvider(instance.getProvider())
+    })
+  }, [])
 
   const fetchLineaEns = async (rawAddress: string) => {
     if (getWalletEns()) {
@@ -147,18 +151,18 @@ export const LoginProvider = ({ children }) => {
   }
 
   const getStaleDate = async () => {
+    if (!client) return
     try {
       setProjects(JSON.parse(sessionStorage.getItem(AUTH_WALLET_PROJECTS) || '{}'))
       setUserId(getUserIdFromJwtToken())
       setToken(getTokenString())
       setUksTier(getUksTier())
       setMetaMaskAccountEns(getWalletEns())
-      const accounts = await sdk.connect()
-      setMetaMaskAccount(accounts)
+      // Sepolia and Linea Sepolia
+      const { accounts } = await client.connect({ chainIds: ['0xaa36a7', '0xe705'] })
       if (accounts && accounts.length > 0) {
         setMetaMaskAccount(accounts[0])
-        const provider = sdk.getProvider()
-        setMetaMaskProvider(provider)
+        setMetaMaskProvider(client.getProvider())
       }
     } catch (e) {}
   }
@@ -173,7 +177,7 @@ export const LoginProvider = ({ children }) => {
 
   const metaMaskDisconnect = useCallback(async () => {
     try {
-      await sdk?.terminate()
+      await client?.disconnect()
       setOpenAuthModal(false)
       setUserId(undefined)
       setToken(undefined)
@@ -188,22 +192,10 @@ export const LoginProvider = ({ children }) => {
     } catch (err) {
       console.warn('failed to disconnect..', err)
     }
-  }, [sdk, setOpenAuthModal, setUserId, setToken, setMetaMaskAccount, setUksTier, setProjects])
+  }, [client, setOpenAuthModal, setUserId, setToken, setMetaMaskAccount, setUksTier, setProjects])
 
   useEffect(() => {
-    const provider = sdk?.getProvider()
-    setMetaMaskProvider(provider)
-  }, [])
-
-  useEffect(() => {
-    if (isInitialized && sdk.isExtensionActive()) {
-      const provider = sdk.getProvider()
-      sdk.resume()
-      setMetaMaskProvider(provider)
-    }
-  }, [isInitialized])
-
-  useEffect(() => {
+    if (!client) return
     const url = new URL(window.location.href)
     getStaleDate()
     if (REF_ALLOW_LOGIN_PATH.some(item => url.pathname.includes(item))) {
@@ -238,7 +230,7 @@ export const LoginProvider = ({ children }) => {
         })()
       }
     }
-  }, [])
+  }, [client])
 
   return (
     <MetamaskProviderContext.Provider
@@ -256,7 +248,7 @@ export const LoginProvider = ({ children }) => {
           metaMaskProvider,
           uksTier,
           setMetaMaskProvider,
-          sdk,
+          client,
           walletLinked,
           setWalletLinked,
           needsMfa,

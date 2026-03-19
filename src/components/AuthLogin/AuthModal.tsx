@@ -126,7 +126,7 @@ const AuthModal = ({
   const { siteConfig } = useDocusaurusContext()
   const { DASHBOARD_URL, VERCEL_ENV } = siteConfig?.customFields || {}
   const {
-    sdk,
+    client,
     setNeedsMfa,
     setWalletLinked,
     setWalletAuthUrl,
@@ -140,23 +140,18 @@ const AuthModal = ({
   const { pathname } = location
 
   const login = async () => {
+    if (!client) return
     setStep(AUTH_LOGIN_STEP.CONNECTING)
     try {
-      if (!sdk.isExtensionActive()) {
-        setOpen(false)
-      }
-
-      // Try to connect wallet first
-      const accounts = await sdk.connect()
+      const { accounts } = await client.connect({ chainIds: ['0xaa36a7', '0xe705'] })
 
       if (accounts && accounts.length > 0) {
         setMetaMaskAccount(accounts[0])
         fetchLineaEns(accounts[0])
-        const provider = sdk.getProvider()
-        setMetaMaskProvider(provider)
+        setMetaMaskProvider(client.getProvider())
       }
 
-      const customProvider = sdk.getProvider()
+      const customProvider = client.getProvider()
       // Call Profile SDK API to retrieve Hydra Access Token & Wallet userProfile
       // Hydra Access Token will be used to fetch Infura API
       const { accessToken, userProfile } = await authenticateAndAuthorize(
@@ -251,7 +246,9 @@ const AuthModal = ({
         ...REQUEST_PARAMS('GET', { Authorization: `Bearer ${token}` }),
       })
       if (!projectsResponse.ok) {
-        throw new Error(`Failed to fetch projects: ${projectsResponse.status} ${projectsResponse.statusText}`)
+        throw new Error(
+          `Failed to fetch projects: ${projectsResponse.status} ${projectsResponse.statusText}`
+        )
       }
       const {
         result: { projects },
@@ -263,7 +260,9 @@ const AuthModal = ({
         ...REQUEST_PARAMS('GET', { Authorization: `Bearer ${token}` }),
       })
       if (!uksUserRawResp.ok) {
-        throw new Error(`Failed to fetch user info: ${uksUserRawResp.status} ${uksUserRawResp.statusText}`)
+        throw new Error(
+          `Failed to fetch user info: ${uksUserRawResp.status} ${uksUserRawResp.statusText}`
+        )
       }
       const {
         result: {
