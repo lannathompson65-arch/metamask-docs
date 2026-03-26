@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 # Delegation API reference
 
-The following API methods are related to creating and managing [delegations](../../concepts/delegation/index.md).
+The following API methods are related to creating and managing [delegations](../../concepts/delegation/overview.md).
 
 ## `createCaveatBuilder`
 
@@ -326,6 +326,26 @@ export const delegation = createDelegation({
 </TabItem>
 </Tabs>
 
+## `enableDelegation`
+
+Encodes the calldata to enable a disabled delegation. 
+
+### Parameters
+
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| `delegation` | [`Delegation`](../types.md#delegation) | Yes | The delegation to be enabled. |
+
+### Example
+
+```ts
+import { DelegationManager } from "@metamask/smart-accounts-kit/contracts";
+
+const enableDelegationData = DelegationManager.encode.enableDelegation({
+  delegation, // Already disabled delegation.
+});
+```
+
 ## `encodeDelegations`
 
 Encodes an array of delegations to an ABI-encoded hex string.
@@ -549,7 +569,7 @@ This method supports batch redemption, allowing multiple delegations to be proce
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
 | `delegations` | [`Delegation`](../types.md#delegation)`[][]` | Yes | A nested collection representing chains of delegations. Each inner collection contains a chain of delegations to be redeemed. |
-| `modes` | [`ExecutionMode`](../types.md#executionmode)`[]` | Yes | A collection specifying the [execution mode](../../concepts/delegation/index.md#execution-modes) for each corresponding delegation chain. |
+| `modes` | [`ExecutionMode`](../types.md#executionmode)`[]` | Yes | A collection specifying the [execution mode](../../concepts/delegation/delegation-manager.md#execution-modes) for each corresponding delegation chain. |
 | `executions` | [`ExecutionStruct`](../types.md#executionstruct)`[][]` | Yes | A nested collection where each inner collection contains a list of `ExecutionStruct` objects associated with a specific delegation chain. |
 
 ### Example

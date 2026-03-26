@@ -8,8 +8,8 @@ keywords: [connect, MetaMask, Dynamic, SDK, dapp, Wallet SDK, dynamic xyz, embed
 
 :::info Heads up
 Looks like you've landed on a guide that still uses the MetaMask legacy SDK (`@metamask/sdk`).
-The MetaMask Connect integration for this library is on its way -- once ready, it will be linked
-from the sidebar navigation. In the meantime, this guide is still perfectly valid if you're using
+The MetaMask Connect integration for this library is on its way — once ready, it will be linked
+from the sidebar navigation. In the meantime, this guide is still valid if you're using
 MetaMask SDK.
 :::
 
@@ -51,7 +51,7 @@ Use MetaMask SDK features directly within Dynamic SDK.
     <div>
 
     `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
-    
+
     Alternatively, use `git clone` to download the entire repository.
     Clone the MetaMask SDK examples repository and navigate into the `partners/dynamic` directory:
 

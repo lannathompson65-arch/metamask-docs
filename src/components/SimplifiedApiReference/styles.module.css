@@ -9,7 +9,11 @@
 
 .colLeft {
   position: relative;
+<<<<<<< HEAD
   width: calc(100% - 45rem);
+=======
+  width: calc(100% - 50rem);
+>>>>>>> origin/main
   border-right: 1px solid var(--ifm-toc-border-color);
   overflow: hidden;
 }
@@ -21,7 +25,11 @@
 }
 
 .colRight {
+<<<<<<< HEAD
   width: 45rem;
+=======
+  width: 50rem;
+>>>>>>> origin/main
   padding-left: 1.5rem;
 }
 

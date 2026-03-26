@@ -12,7 +12,9 @@ import TabItem from "@theme/TabItem";
 
 Install `@metamask/connect-evm`, initialize a client with `createEVMClient`, and connect to the MetaMask wallet in under 5 minutes. MetaMask Connect EVM provides an EIP-1193 provider that works with viem, ethers.js, and web3.js, handles cross-platform connections (desktop extension, mobile QR code, and deeplinks), and persists sessions across page reloads.
 
+<!--
 [Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect EVM](#set-up-manually) in an existing dapp.
+-->
 
 <!-- <p align="center">
   <a href="https://metamask-javascript-demo.vercel.app/" target="_blank">
@@ -27,6 +29,7 @@ Install `@metamask/connect-evm`, initialize a client with `createEVMClient`, and
 - [MetaMask](https://metamask.io/) installed in your browser or on mobile.
 - An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the MetaMask Developer dashboard.
 
+<!--
 ## Set up using a template
 
 1. Download the [MetaMask Connect JavaScript template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstarts/javascript):
@@ -58,6 +61,23 @@ Install `@metamask/connect-evm`, initialize a client with `createEVMClient`, and
     </div>
     </details>
 
+    <details>
+    <summary>Using React?</summary>
+    <div>
+
+   If you're building with React, try the [interactive React quickstart](/quickstart/?product=METAMASK_CONNECT&ecosystem=EVM&framework=REACT&stepIndex=0) instead.
+   It walks you through connecting, signing, sending transactions, and switching chains with a live
+   code preview alongside each step.
+
+   You can also clone the [React quickstart template](https://github.com/MetaMask/metamask-connect-examples/tree/main/quickstarts/evm/react) directly:
+
+   ```bash
+   npx degit MetaMask/metamask-connect-examples/quickstarts/evm/react mm-react-quickstart
+   ```
+
+    </div>
+    </details>
+
 3. Install dependencies:
 
    ```bash
@@ -83,8 +103,9 @@ Install `@metamask/connect-evm`, initialize a client with `createEVMClient`, and
    ```
 
 You've successfully set up MetaMask Connect EVM.
+-->
 
-## Set up manually
+## Steps
 
 ### 1. Install MetaMask Connect EVM
 
@@ -123,9 +144,9 @@ These examples configure MetaMask Connect EVM with the following options:
 - `api.supportedNetworks` - A map of hex chain IDs to RPC URLs for all networks supported by the app.
   Use the [`getInfuraRpcUrls`](../reference/methods.md#getinfurarpcurls) helper to generate URLs for all Infura-supported chains, or specify your own.
 
-:::info `createEVMClient` is async
+:::info Asynchronous client
 `createEVMClient` returns a promise. Always `await` it before using the client.
-The client is a **singleton** -- calling `createEVMClient` again returns the same instance.
+The client is a **singleton** — calling `createEVMClient` again returns the same instance.
 :::
 
 ### 3. Connect and use provider
@@ -158,11 +179,11 @@ const balance = await provider.request({
 console.log('Balance:', balance)
 ```
 
-`evmClient.connect()` handles cross-platform connection (desktop and mobile), including deeplinking.
+[`evmClient.connect()`](../reference/methods.md#connect) handles cross-platform connection (desktop and mobile), including deeplinking.
 Pass `chainIds` to request permission for specific chains (hex strings). Ethereum Mainnet (`0x1`)
 is always included regardless of what you pass.
 
-Use `provider.request()` for arbitrary [JSON-RPC requests](../reference/json-rpc-api/index.md) like `eth_chainId` or `eth_getBalance`, or for [batching requests](../guides/metamask-exclusive/batch-requests.md) via `metamask_batch`.
+Use [`provider.request()`](../reference/provider-api.md#request) for arbitrary [JSON-RPC requests](../reference/json-rpc-api/index.md) like `eth_chainId` or `eth_getBalance`, or for [batching requests](../guides/metamask-exclusive/batch-requests.md) via `metamask_batch`.
 
 ## Common MetaMask Connect EVM methods at a glance
 
