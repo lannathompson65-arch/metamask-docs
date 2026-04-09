@@ -328,7 +328,7 @@
 }
 
 /*  Algolia Ask AI Sidepanel  */
-div[class*="DocSearch"] {
+div[class*="DocSearch-Sidepanel"] {
   [class*="Answer"],
   [class*="answer"],
   [class*="Response"],
@@ -414,7 +414,7 @@ div[class*="DocSearch"] {
 }
 
 /* Light mode */
-[data-theme='light'] div[class*="DocSearch"] {
+[data-theme='light'] div[class*="DocSearch-Sidepanel"] {
   [class*="ChatInput"],
   [class*="chat-input"],
   .DocSearch-ChatInputWrapper {
@@ -436,7 +436,6 @@ div[class*="DocSearch"] {
   [class*="Response"],
   [class*="response"] {
     code { color: #373739 !important; }
-    ul { list-style-color: #1a1a1a !important; }
     li { color: #1a1a1a !important; }
     li::marker { color: #1a1a1a !important; }
   }

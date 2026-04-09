@@ -1,6 +1,7 @@
 import React, { ReactElement, createContext, useEffect, useState, useCallback } from 'react'
 import { Provider as AlertProvider } from 'react-alert'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
+import useIsBrowser from '@docusaurus/useIsBrowser'
 import { AlertTemplate, options } from '@site/src/components/Alert'
 import { MetaMaskSDK, SDKProvider } from '@metamask/sdk'
 import { REF_ALLOW_LOGIN_PATH, REQUEST_PARAMS } from '@site/src/lib/constants'
@@ -299,13 +300,14 @@ export const LoginProvider = ({ children }) => {
 
 export default function Root({ children }: { children: ReactElement }) {
   const { siteConfig } = useDocusaurusContext()
+  const isBrowser = useIsBrowser()
   const algolia = siteConfig?.themeConfig?.algolia as AlgoliaThemeConfig | undefined
 
   return (
     <LoginProvider>
       <AlertProvider template={AlertTemplate} {...options}>
         {children}
-        {algolia?.assistantId || algolia?.askAi?.assistantId ? (
+        {isBrowser && (algolia?.assistantId || algolia?.askAi?.assistantId) ? (
           <DocSearchSidepanel 
             appId={algolia.appId}
             apiKey={algolia.apiKey}
