@@ -20,6 +20,7 @@ import { getWindowLocation } from '../../theme/URLParams'
 import { METAMASK_CONNECT, EMBEDDED_WALLETS, YES, NO } from './builder/choices'
 import NavigationOverlay from './NavigationOverlay'
 import MediaStep from './MediaStep'
+import FeedbackWidget from '../../components/FeedbackWidget'
 
 const ALLOWED_OPTION_KEYS = new Set([
   'product',
@@ -1025,6 +1026,9 @@ export default function IntegrationBuilderPage(props) {
         {showNavigationOverlay && (
           <NavigationOverlay onClose={handleCloseOverlay} onSelect={handleNavigationSelect} />
         )}
+      </div>
+      <div className="container" style={{ padding: '0 24px 32px' }}>
+        <FeedbackWidget />
       </div>
     </Layout>
   )

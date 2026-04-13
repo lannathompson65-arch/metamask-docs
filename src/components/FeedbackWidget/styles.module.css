@@ -1,0 +1,110 @@
+.widget {
+  margin-top: 32px;
+  padding: 24px 0;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.prompt {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ifm-color-content);
+  margin: 0 0 12px;
+}
+
+.thanks {
+  font-size: 0.875rem;
+  color: var(--ifm-color-content-secondary);
+  margin: 0;
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.ratingBtn {
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 6px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: transparent;
+  color: var(--ifm-color-content-secondary);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.ratingBtn:hover:not(:disabled) {
+  background: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-emphasis-500);
+}
+
+.commentSection {
+  margin-top: 16px;
+}
+
+.label {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--ifm-color-content-secondary);
+  margin-bottom: 8px;
+}
+
+.textarea {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  padding: 10px 12px;
+  font-size: 0.875rem;
+  color: var(--ifm-color-content);
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  font-family: inherit;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.textarea::placeholder {
+  color: var(--ifm-color-emphasis-500);
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.submitBtn {
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 6px 20px;
+  border-radius: 6px;
+  border: none;
+  background: var(--ifm-color-primary);
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.submitBtn:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.submitBtn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.error {
+  font-size: 0.875rem;
+  color: var(--ifm-color-emphasis-600);
+  margin: 0;
+}
