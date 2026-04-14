@@ -1,13 +1,23 @@
 ---
-title: "Send Solana Versioned Transactions - MetaMask Connect"
+title: 'Send Solana Versioned Transactions - MetaMask Connect'
 sidebar_label: Send a versioned transaction
 description: Create, sign, and send Solana versioned (v0) transactions with Address Lookup Tables through MetaMask Connect using @solana/web3.js.
-keywords: [solana, versioned transaction, v0 transaction, address lookup table, metamask, signAndSendTransaction, wallet-standard, solana web3.js]
+keywords:
+  [
+    solana,
+    versioned transaction,
+    v0 transaction,
+    address lookup table,
+    metamask,
+    signAndSendTransaction,
+    wallet-standard,
+    solana web3.js,
+  ]
 ---
 
 # Send a versioned transaction
 
-Solana [versioned transactions](https://solana.com/developers/guides/advanced/versions) (`v0`) support [Address Lookup Tables](https://solana.com/developers/guides/advanced/lookup-tables), which let you reference up to 256 addresses in a single transaction — useful for complex operations that would exceed the limits of legacy transactions.
+Solana [versioned transactions](https://solana.com/developers/guides/advanced/versions) (`v0`) support [Address Lookup Tables](https://solana.com/developers/guides/advanced/lookup-tables), which let you reference up to 256 addresses in a single transaction. This is useful for complex operations that would exceed the limits of legacy transactions.
 
 This guide shows you how to create, sign, and send versioned transactions through MetaMask.
 
@@ -74,7 +84,9 @@ After creating an unsigned versioned transaction, use the wallet's `solana:signA
 The method returns a promise for an object containing the `signature`.
 
 ```javascript
-const [{ signature }] = await wallet.features['solana:signAndSendTransaction'].signAndSendTransaction({
+const [{ signature }] = await wallet.features[
+  'solana:signAndSendTransaction'
+].signAndSendTransaction({
   account,
   transaction: transactionV0.serialize(),
   chain: 'solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1',
@@ -123,7 +135,9 @@ const lookupMessage = new TransactionMessage({
 
 const lookupTransaction = new VersionedTransaction(lookupMessage)
 
-const [{ signature: lookupSignature }] = await wallet.features['solana:signAndSendTransaction'].signAndSendTransaction({
+const [{ signature: lookupSignature }] = await wallet.features[
+  'solana:signAndSendTransaction'
+].signAndSendTransaction({
   account,
   transaction: lookupTransaction.serialize(),
   chain: 'solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1',
@@ -141,10 +155,7 @@ const extendInstruction = AddressLookupTableProgram.extendLookupTable({
   payer: publicKey,
   authority: publicKey,
   lookupTable: lookupTableAddress,
-  addresses: [
-    publicKey,
-    SystemProgram.programId,
-  ],
+  addresses: [publicKey, SystemProgram.programId],
 })
 
 const { blockhash: extensionBlockhash } = await connection.getLatestBlockhash()
@@ -157,7 +168,9 @@ const extensionMessageV0 = new TransactionMessage({
 
 const extensionTransactionV0 = new VersionedTransaction(extensionMessageV0)
 
-const [{ signature: extensionSignature }] = await wallet.features['solana:signAndSendTransaction'].signAndSendTransaction({
+const [{ signature: extensionSignature }] = await wallet.features[
+  'solana:signAndSendTransaction'
+].signAndSendTransaction({
   account,
   transaction: extensionTransactionV0.serialize(),
   chain: 'solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1',
@@ -171,7 +184,9 @@ After creating an ALT, create a versioned transaction with the ALT and ask the u
 First, use the [`getAddressLookupTable`](https://solana-foundation.github.io/solana-web3.js/classes/Connection.html#getaddresslookuptable) method to fetch the account of the created ALT:
 
 ```typescript
-const lookupTableAccount = await connection.getAddressLookupTable(lookupTableAddress).then((res) => res.value)
+const lookupTableAccount = await connection
+  .getAddressLookupTable(lookupTableAddress)
+  .then(res => res.value)
 console.log('Table address from cluster:', lookupTableAccount.key.toBase58())
 ```
 
@@ -206,7 +221,9 @@ const messageV0 = new TransactionMessage({
 
 const transactionV0 = new VersionedTransaction(messageV0)
 
-const [{ signature }] = await wallet.features['solana:signAndSendTransaction'].signAndSendTransaction({
+const [{ signature }] = await wallet.features[
+  'solana:signAndSendTransaction'
+].signAndSendTransaction({
   account,
   transaction: transactionV0.serialize(),
   chain: 'solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1',

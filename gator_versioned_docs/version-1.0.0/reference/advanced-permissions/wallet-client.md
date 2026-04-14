@@ -22,13 +22,13 @@ Requests Advanced Permissions from the MetaMask extension account according to t
 
 ### Parameters
 
-| Name | Type | Required | Description |
-| ---- | ---- | -------- | ----------- |
-| `chainId` | `number` | Yes | The chain ID on which the permission is being requested. |
-| `from` | `Address` | No | The wallet address to request the permission from. |
-| `expiry` | `number` | Yes | The timestamp (in seconds) by which the permission must expire. |
-| `permission` | `SupportedPermissionParams` | Yes | The permission to request. The toolkit supports multiple [Advanced Permissions types](permissions.md). Set `isAdjustmentAllowed` to define whether the user can modify the requested permission. |
-| `to` | `Address` | Yes | The account to which the permission will be assigned. |
+| Name         | Type                        | Required | Description                                                                                                                                                                                      |
+| ------------ | --------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `chainId`    | `number`                    | Yes      | The chain ID on which the permission is being requested.                                                                                                                                         |
+| `from`       | `Address`                   | No       | The wallet address to request the permission from.                                                                                                                                               |
+| `expiry`     | `number`                    | Yes      | The timestamp (in seconds) by which the permission must expire.                                                                                                                                  |
+| `permission` | `SupportedPermissionParams` | Yes      | The permission to request. The toolkit supports multiple [Advanced Permissions types](permissions.md). Set `isAdjustmentAllowed` to define whether the user can modify the requested permission. |
+| `to`         | `Address`                   | Yes      | The account to which the permission will be assigned.                                                                                                                                            |
 
 ### Example
 
@@ -36,42 +36,44 @@ Requests Advanced Permissions from the MetaMask extension account according to t
 <TabItem value ="example.ts">
 
 ```ts
-import { sepolia as chain } from "viem/chains";
-import { parseUnits } from "viem";
-import { walletClient } from "./client.ts";
+import { sepolia as chain } from 'viem/chains'
+import { parseUnits } from 'viem'
+import { walletClient } from './client.ts'
 
-const currentTime = Math.floor(Date.now() / 1000);
-const expiry = currentTime + 604800;
+const currentTime = Math.floor(Date.now() / 1000)
+const expiry = currentTime + 604800
 
-const grantedPermissions = await walletClient.requestExecutionPermissions([{
-  chainId: chain.id,
-  expiry,
-  // The requested permissions will be granted to the
-  // session account.
-  to: sessionAccount.address,
-  permission: {
-    type: "erc20-token-periodic",
-    data: {
-      tokenAddress: "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
-      periodAmount: parseUnits("10", 6),
-      periodDuration: 86400,
-      justification: "Permission to transfer 10 USDC every day",
+const grantedPermissions = await walletClient.requestExecutionPermissions([
+  {
+    chainId: chain.id,
+    expiry,
+    // The requested permissions will be granted to the
+    // session account.
+    to: sessionAccount.address,
+    permission: {
+      type: 'erc20-token-periodic',
+      data: {
+        tokenAddress: '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238',
+        periodAmount: parseUnits('10', 6),
+        periodDuration: 86400,
+        justification: 'Permission to transfer 10 USDC every day',
+      },
+      isAdjustmentAllowed: true,
     },
-    isAdjustmentAllowed: true,
   },
-}]);
+])
 ```
 
 </TabItem>
 <TabItem value ="client.ts">
 
 ```ts
-import { createWalletClient, custom } from "viem";
-import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
+import { createWalletClient, custom } from 'viem'
+import { erc7715ProviderActions } from '@metamask/smart-accounts-kit/actions'
 
 export const walletClient = createWalletClient({
   transport: custom(window.ethereum),
-}).extend(erc7715ProviderActions());
+}).extend(erc7715ProviderActions())
 ```
 
 </TabItem>
@@ -80,7 +82,7 @@ export const walletClient = createWalletClient({
 ## `getSupportedExecutionPermissions`
 
 Returns the Advanced Permissions types that the wallet supports, according to the
-[ERC-7715](https://eips.ethereum.org/EIPS/eip-7715) 
+[ERC-7715](https://eips.ethereum.org/EIPS/eip-7715)
 specification. Use this to verify the available permission types and supported
 chains before requesting permissions.
 
@@ -109,21 +111,21 @@ This action takes no parameters and returns a [`GetSupportedExecutionPermissions
 <TabItem value="example.ts">
 
 ```ts
-import { walletClient } from "./client.ts";
+import { walletClient } from './client.ts'
 
-const supportedPermissions = await walletClient.getSupportedExecutionPermissions();
+const supportedPermissions = await walletClient.getSupportedExecutionPermissions()
 ```
 
 </TabItem>
 <TabItem value="client.ts">
 
 ```ts
-import { createWalletClient, custom } from "viem";
-import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
+import { createWalletClient, custom } from 'viem'
+import { erc7715ProviderActions } from '@metamask/smart-accounts-kit/actions'
 
 export const walletClient = createWalletClient({
   transport: custom(window.ethereum),
-}).extend(erc7715ProviderActions());
+}).extend(erc7715ProviderActions())
 ```
 
 </TabItem>
@@ -168,21 +170,21 @@ This action takes no parameters and returns a [`GetGrantedExecutionPermissionsRe
 <TabItem value="example.ts">
 
 ```ts
-import { walletClient } from "./client.ts";
+import { walletClient } from './client.ts'
 
-const grantedPermissions = await walletClient.getGrantedExecutionPermissions();
+const grantedPermissions = await walletClient.getGrantedExecutionPermissions()
 ```
 
 </TabItem>
 <TabItem value="client.ts">
 
 ```ts
-import { createWalletClient, custom } from "viem";
-import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
+import { createWalletClient, custom } from 'viem'
+import { erc7715ProviderActions } from '@metamask/smart-accounts-kit/actions'
 
 export const walletClient = createWalletClient({
   transport: custom(window.ethereum),
-}).extend(erc7715ProviderActions());
+}).extend(erc7715ProviderActions())
 ```
 
 </TabItem>

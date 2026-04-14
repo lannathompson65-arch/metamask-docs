@@ -45,6 +45,21 @@ jobs:
       - name: Lint
         uses: ConsenSys/github-actions/docs-lint-all@main
 
+  prettier:
+    name: Prettier
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Use Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Check formatting
+        run: npm run format:check
+
   spelling:
     name: Spelling
     runs-on: ubuntu-latest

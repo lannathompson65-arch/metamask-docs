@@ -1,5 +1,5 @@
 ---
-title: "Use Rust"
+title: 'Use Rust'
 description: A tutorial for legacy and EIP-1559 transactions.
 ---
 
@@ -316,5 +316,5 @@ Tx receipt:
 }
 ```
 
-Ignore the `"warning: unused import: types::TransactionRequest"`. 
+Ignore the `"warning: unused import: types::TransactionRequest"`.
 In the above transaction receipt, the transaction type shows `"type":"0x2"` indicating that this was an EIP-1559 transaction.

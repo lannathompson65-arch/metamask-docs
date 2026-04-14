@@ -1,8 +1,17 @@
 ---
-title: "Sign-In with Solana (SIWS) - MetaMask Connect"
+title: 'Sign-In with Solana (SIWS) - MetaMask Connect'
 sidebar_label: Sign in with Solana
 description: Implement Sign-In with Solana (SIWS) authentication in your dapp using MetaMask Connect, with domain binding and phishing protection.
-keywords: [sign in with solana, SIWS, solana authentication, domain binding, offchain auth, metamask, solana login]
+keywords:
+  [
+    sign in with solana,
+    SIWS,
+    solana authentication,
+    domain binding,
+    offchain auth,
+    metamask,
+    solana login,
+  ]
 ---
 
 # Sign in with Solana

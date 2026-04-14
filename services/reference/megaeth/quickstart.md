@@ -48,25 +48,25 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    Replace the endpoint with your MegaETH Mainnet endpoint from the MetaMask Developer dashboard.
 
    ```javascript title="index.js"
-   import fetch from "node-fetch"
+   import fetch from 'node-fetch'
 
-   fetch("https://megaeth-mainnet.infura.io/v3/<YOUR-API-KEY>", {
-     method: "POST",
+   fetch('https://megaeth-mainnet.infura.io/v3/<YOUR-API-KEY>', {
+     method: 'POST',
      headers: {
-       "Content-Type": "application/json",
+       'Content-Type': 'application/json',
      },
      body: JSON.stringify({
-       jsonrpc: "2.0",
-       method: "eth_blockNumber",
+       jsonrpc: '2.0',
+       method: 'eth_blockNumber',
        params: [],
        id: 1,
      }),
    })
-     .then((response) => response.json())
-     .then((data) => {
+     .then(response => response.json())
+     .then(data => {
        console.log(data)
      })
-     .catch((error) => {
+     .catch(error => {
        console.error(error)
      })
    ```
@@ -90,19 +90,19 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    Replace the endpoint with your MegaETH Mainnet endpoint from the MetaMask Developer dashboard.
 
    ```javascript title="index.js"
-   const axios = require("axios")
+   const axios = require('axios')
 
    axios
-     .post("https://megaeth-mainnet.infura.io/v3/<YOUR-API-KEY>", {
-       jsonrpc: "2.0",
-       method: "eth_blockNumber",
+     .post('https://megaeth-mainnet.infura.io/v3/<YOUR-API-KEY>', {
+       jsonrpc: '2.0',
+       method: 'eth_blockNumber',
        params: [],
        id: 1,
      })
-     .then((response) => {
+     .then(response => {
        console.log(response.data)
      })
-     .catch((error) => {
+     .catch(error => {
        console.error(error)
      })
    ```
@@ -126,18 +126,18 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    Replace the endpoint with your MegaETH Mainnet endpoint from the MetaMask Developer dashboard.
 
    ```javascript title="index.js"
-   const ethers = require("ethers")
+   const ethers = require('ethers')
 
    const provider = new ethers.providers.JsonRpcProvider(
-     "https://megaeth-mainnet.infura.io/v3/<YOUR-API-KEY>"
+     'https://megaeth-mainnet.infura.io/v3/<YOUR-API-KEY>'
    )
 
    provider
      .getBlockNumber()
-     .then((blockNumber) => {
+     .then(blockNumber => {
        console.log(blockNumber)
      })
-     .catch((error) => {
+     .catch(error => {
        console.error(error)
      })
    ```

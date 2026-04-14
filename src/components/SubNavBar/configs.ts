@@ -75,10 +75,7 @@ export const SDK_SUBNAV_CONFIG: SubNavBarConfig = {
 }
 
 // Array of all sub nav configs for easy iteration
-export const ALL_SUBNAV_CONFIGS = [
-  EMBEDDED_WALLETS_SUBNAV_CONFIG,
-  SDK_SUBNAV_CONFIG,
-]
+export const ALL_SUBNAV_CONFIGS = [EMBEDDED_WALLETS_SUBNAV_CONFIG, SDK_SUBNAV_CONFIG]
 
 // Helper function to get config for current path
 export function getSubNavConfigForPath(pathname: string): SubNavBarConfig | null {

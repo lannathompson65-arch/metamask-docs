@@ -6,8 +6,8 @@ keywords: [scaffold-eth, delegation, advanced permissions, erc7715, 7715, templa
 
 # Use Advanced Permissions with Scaffold-ETH 2
 
-Use the [Advanced Permissions (ERC-7715) extension](https://github.com/MetaMask/erc-7715-extension) for [Scaffold-ETH 2](https://docs.scaffoldeth.io/) to bootstrap a project in 
-under two minutes. This extension helps you quickly generate the boilerplate code to request fine-grained permissions 
+Use the [Advanced Permissions (ERC-7715) extension](https://github.com/MetaMask/erc-7715-extension) for [Scaffold-ETH 2](https://docs.scaffoldeth.io/) to bootstrap a project in
+under two minutes. This extension helps you quickly generate the boilerplate code to request fine-grained permissions
 from a MetaMask user, and execute transactions on their behalf.
 
 ## Prerequisites

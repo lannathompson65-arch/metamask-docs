@@ -8,7 +8,7 @@ import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Use MetaMask Smart Accounts with Scaffold-ETH 2
 
-Use the [MetaMask Smart Accounts extension](https://github.com/metamask/gator-extension) for [Scaffold-ETH 2](https://docs.scaffoldeth.io/) to bootstrap a project in 
+Use the [MetaMask Smart Accounts extension](https://github.com/metamask/gator-extension) for [Scaffold-ETH 2](https://docs.scaffoldeth.io/) to bootstrap a project in
 under two minutes. This extension helps you quickly generate the boilerplate code to create an embedded <GlossaryTerm term="MetaMask smart account">smart account</GlossaryTerm>, and complete
 the <GlossaryTerm term="Delegation">delegation</GlossaryTerm> lifecycle (create, sign, and redeem a delegation).
 

@@ -6,9 +6,9 @@ keywords: [passkey, smart account, signer, metamask smart account]
 
 # Use a passkey with MetaMask Smart Accounts
 
-Passkeys eliminate the need for traditional seed phrases that are difficult to remember, enabling a more seamless 
-and secure way for users to access their Externally Owned Accounts (EOAs). Compared to traditional EOAs which use 
-secp256k1 elliptic curve to generate key pairs and signatures, a passkey-based EOA uses the 
+Passkeys eliminate the need for traditional seed phrases that are difficult to remember, enabling a more seamless
+and secure way for users to access their Externally Owned Accounts (EOAs). Compared to traditional EOAs which use
+secp256k1 elliptic curve to generate key pairs and signatures, a passkey-based EOA uses the
 secp256r1 (P-256) elliptic curve.
 
 MetaMask Smart Accounts is signer agnostic and natively supports passkeys (P-256 elliptic curve signatures), so you can use a passkey as the signer.
@@ -17,8 +17,8 @@ MetaMask Smart Accounts is signer agnostic and natively supports passkeys (P-256
 
 - Install [Node.js](https://nodejs.org/en/blog/release/v18.18.0) v18 or later
 - Install [Yarn](https://yarnpkg.com/),
-    [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager
- 
+  [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager
+
 ## Steps
 
 ### 1. Install dependencies
@@ -52,27 +52,27 @@ a compressed public key, you need to deserialize it, and extract the X and Y coo
 <TabItem value="example.ts">
 
 ```typescript
-import { publicClient } from "./config.ts"
-import { Implementation, toMetaMaskSmartAccount } from "@metamask/smart-accounts-kit";
-import { toWebAuthnAccount } from "viem/account-abstraction";
-import { Address, PublicKey } from "ox";
-import { toHex } from "viem";
-  
-const webAuthnAccount = toWebAuthnAccount({ credential });
+import { publicClient } from './config.ts'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
+import { toWebAuthnAccount } from 'viem/account-abstraction'
+import { Address, PublicKey } from 'ox'
+import { toHex } from 'viem'
+
+const webAuthnAccount = toWebAuthnAccount({ credential })
 
 // Deserialize compressed public key
-const publicKey = PublicKey.fromHex(credential.publicKey);
+const publicKey = PublicKey.fromHex(credential.publicKey)
 
 // Convert public key to address
-const owner = Address.fromPublicKey(publicKey);
+const owner = Address.fromPublicKey(publicKey)
 
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
   deployParams: [owner, [toHex(credential.id)], [publicKey.x], [publicKey.y]],
-  deploySalt: "0x",
+  deploySalt: '0x',
   signer: { webAuthnAccount, keyId: toHex(credential.id) },
-});
+})
 ```
 
 </TabItem>
@@ -80,14 +80,14 @@ const smartAccount = await toMetaMaskSmartAccount({
 <TabItem value="config.ts">
 
 ```typescript
-import { http, createPublicClient } from "viem";
-import { sepolia as chain } from "viem/chains";
+import { http, createPublicClient } from 'viem'
+import { sepolia as chain } from 'viem/chains'
 
-const transport = http(); 
-export const publicClient = createPublicClient({ 
-  transport, 
-  chain, 
-});
+const transport = http()
+export const publicClient = createPublicClient({
+  transport,
+  chain,
+})
 ```
 
 </TabItem>

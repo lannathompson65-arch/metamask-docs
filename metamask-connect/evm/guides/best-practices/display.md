@@ -1,8 +1,19 @@
 ---
-title: "Customize Dapp Display in MetaMask"
+title: 'Customize Dapp Display in MetaMask'
 sidebar_label: Display in MetaMask
 description: Configure your dapp's favicon icon and smart contract method names to improve how transactions and requests appear in the MetaMask UI.
-keywords: [metamask, favicon, dapp icon, display, method names, 4byte, transaction confirmation, UX, branding]
+keywords:
+  [
+    metamask,
+    favicon,
+    dapp icon,
+    display,
+    method names,
+    4byte,
+    transaction confirmation,
+    UX,
+    branding,
+  ]
 ---
 
 # Display in MetaMask

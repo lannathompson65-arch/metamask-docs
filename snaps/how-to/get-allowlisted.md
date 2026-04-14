@@ -23,7 +23,6 @@ Always do your own research before installing a Snap.
 ## Prerequisites
 
 - Ensure that your Snap:
-
   - Has publicly available source code.
     You don't need to publish your code with an open source license, but users should be able to read
     the source code of the Snap package.
@@ -37,7 +36,6 @@ Always do your own research before installing a Snap.
 
 - If your Snap uses any of the following API methods related to key management, you must provide
   evidence of a third-party audit from an approved auditor:
-
   - [`snap_getBip32Entropy`](../reference/snaps-api/snap_getbip32entropy.mdx)
   - [`snap_getBip32PublicKey`](../reference/snaps-api/snap_getbip32publickey.mdx)
   - [`snap_getBip44Entropy`](../reference/snaps-api/snap_getbip44entropy.mdx)
@@ -81,7 +79,7 @@ The form requests information about your Snap, including the following:
   You cannot use HTML.
   If applicable, describe quick steps to onboard and use the Snap.
 
-- **GitHub repository and npm package URLs** - The public GitHub repo that hosts your Snap's 
+- **GitHub repository and npm package URLs** - The public GitHub repo that hosts your Snap's
   source code, and the npm package of your [published Snap](../how-to/publish-a-snap.md).
   If your Snap's source code is hosted on a different site, such as GitLab, you can link to that instead.
 

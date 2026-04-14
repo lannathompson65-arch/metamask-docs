@@ -29,20 +29,20 @@ At the start of each new period, the allowance resets.
 #### Example
 
 ```typescript
-import { parseUnits } from "viem";
+import { parseUnits } from 'viem'
 
-const currentTime = Math.floor(Date.now() / 1000);
-const expiry = currentTime + 604800;
+const currentTime = Math.floor(Date.now() / 1000)
+const expiry = currentTime + 604800
 
 const permission = {
-  type: "erc20-token-periodic",
+  type: 'erc20-token-periodic',
   data: {
-    tokenAddress: "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
-    periodAmount: parseUnits("10", 6),
+    tokenAddress: '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238',
+    periodAmount: parseUnits('10', 6),
     periodDuration: 86400,
-    justification: "Permission to transfer 10 USDC every day",
+    justification: 'Permission to transfer 10 USDC every day',
   },
-};
+}
 ```
 
 ### ERC-20 stream permission
@@ -65,22 +65,22 @@ At the start, a specified initial amount is released, after which tokens accrue 
 #### Example
 
 ```typescript
-import { parseUnits } from "viem";
+import { parseUnits } from 'viem'
 
-const currentTime = Math.floor(Date.now() / 1000);
-const expiry = currentTime + 604800;
+const currentTime = Math.floor(Date.now() / 1000)
+const expiry = currentTime + 604800
 
 const permission = {
-  type: "erc20-token-stream",
+  type: 'erc20-token-stream',
   data: {
-    tokenAddress: "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
-    amountPerSecond: parseUnits("0.1", 6),
-    initialAmount: parseUnits("1", 6),
-    maxAmount: parseUnits("2", 6),
+    tokenAddress: '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238',
+    amountPerSecond: parseUnits('0.1', 6),
+    initialAmount: parseUnits('1', 6),
+    maxAmount: parseUnits('2', 6),
     startTime: currentTime,
-    justification: "Permission to use 0.1 USDC per second",
+    justification: 'Permission to use 0.1 USDC per second',
   },
-};
+}
 ```
 
 ### ERC-20 revocation permission
@@ -97,11 +97,11 @@ Enables revoking an existing ERC-20 token allowance on behalf of the user.
 
 ```typescript
 const permission = {
-  type: "erc20-token-revocation",
+  type: 'erc20-token-revocation',
   data: {
-    justification: "Permission to revoke ERC-20 token allowances",
+    justification: 'Permission to revoke ERC-20 token allowances',
   },
-};
+}
 ```
 
 ## Native token permissions
@@ -113,30 +113,30 @@ At the start of each new period, the allowance resets.
 
 #### Parameters
 
-| Name             | Type      | Required | Description                                                            |
-| ---------------- | --------- | -------- | ---------------------------------------------------------------------- |
-| `periodAmount`   | `bigint`  | Yes      | The maximum amount of tokens that can be transferred per period.       |
-| `periodDuration` | `number`  | Yes      | The duration of each period in seconds.                                |
-| `startTime`      | `number`  | No       | The start timestamp in seconds. The default is the current time.       |
-| `justification`  | `string`  | No       | A human-readable explanation of why the permission is being requested. |
+| Name             | Type     | Required | Description                                                            |
+| ---------------- | -------- | -------- | ---------------------------------------------------------------------- |
+| `periodAmount`   | `bigint` | Yes      | The maximum amount of tokens that can be transferred per period.       |
+| `periodDuration` | `number` | Yes      | The duration of each period in seconds.                                |
+| `startTime`      | `number` | No       | The start timestamp in seconds. The default is the current time.       |
+| `justification`  | `string` | No       | A human-readable explanation of why the permission is being requested. |
 
 #### Example
 
 ```typescript
-import { parseEther } from "viem";
+import { parseEther } from 'viem'
 
-const currentTime = Math.floor(Date.now() / 1000);
-const expiry = currentTime + 604800;
+const currentTime = Math.floor(Date.now() / 1000)
+const expiry = currentTime + 604800
 
 const permission = {
-  type: "native-token-periodic",
+  type: 'native-token-periodic',
   data: {
-    periodAmount: parseEther("0.001"),
+    periodAmount: parseEther('0.001'),
     periodDuration: 86400,
     startTime: currentTime,
-    justification: "Permission to use 0.001 ETH every day",
+    justification: 'Permission to use 0.001 ETH every day',
   },
-};
+}
 ```
 
 ### Native token stream permission
@@ -147,32 +147,32 @@ At the start, a specified initial amount is released, after which tokens accrue 
 
 #### Parameters
 
-| Name              | Type      | Required | Description                                                                   |
-| ----------------- | --------- | -------- | ----------------------------------------------------------------------------- |
-| `initialAmount`   | `bigint`  | No       | The initial amount that can be transferred at start time. The default is `0`. |
-| `maxAmount`       | `bigint`  | No       | The maximum total amount that can be unlocked. The default is no limit.       |
-| `amountPerSecond` | `bigint`  | Yes      | The rate at which tokens accrue per second.                                   |
-| `startTime`       | `number`  | No       | The start timestamp in seconds. The default is the current time.              |
-| `justification`   | `string`  | No       | A human-readable explanation of why the permission is being requested.        |
+| Name              | Type     | Required | Description                                                                   |
+| ----------------- | -------- | -------- | ----------------------------------------------------------------------------- |
+| `initialAmount`   | `bigint` | No       | The initial amount that can be transferred at start time. The default is `0`. |
+| `maxAmount`       | `bigint` | No       | The maximum total amount that can be unlocked. The default is no limit.       |
+| `amountPerSecond` | `bigint` | Yes      | The rate at which tokens accrue per second.                                   |
+| `startTime`       | `number` | No       | The start timestamp in seconds. The default is the current time.              |
+| `justification`   | `string` | No       | A human-readable explanation of why the permission is being requested.        |
 
 #### Example
 
 ```typescript
-import { sepolia as chain } from "viem/chains";
-import { parseEther } from "viem";
-import { walletClient } from "./client.ts"
+import { sepolia as chain } from 'viem/chains'
+import { parseEther } from 'viem'
+import { walletClient } from './client.ts'
 
-const currentTime = Math.floor(Date.now() / 1000);
-const expiry = currentTime + 604800;
+const currentTime = Math.floor(Date.now() / 1000)
+const expiry = currentTime + 604800
 
 const permission = {
-  type: "native-token-stream",
+  type: 'native-token-stream',
   data: {
-    amountPerSecond: parseEther("0.0001"),
-    initialAmount: parseEther("0.1"),
-    maxAmount: parseEther("1"),
+    amountPerSecond: parseEther('0.0001'),
+    initialAmount: parseEther('0.1'),
+    maxAmount: parseEther('1'),
     startTime: currentTime,
-    justification: "Permission to use 0.0001 ETH per second",
+    justification: 'Permission to use 0.0001 ETH per second',
   },
-};
+}
 ```

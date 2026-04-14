@@ -1,7 +1,27 @@
 ---
-title: "Interact with Smart Contracts - MetaMask Connect EVM"
+title: 'Interact with Smart Contracts - MetaMask Connect EVM'
 description: Read and write smart contract data, handle events, and manage transactions using viem, ethers.js, or web3.js with MetaMask Connect EVM.
-keywords: [SDK, JavaScript, wagmi, read, write, smart, contract, contracts, dapp, smart contract interaction, ABI, contract read, contract write, viem, ethers.js, web3.js, ERC-20, ERC-721]
+keywords:
+  [
+    SDK,
+    JavaScript,
+    wagmi,
+    read,
+    write,
+    smart,
+    contract,
+    contracts,
+    dapp,
+    smart contract interaction,
+    ABI,
+    contract read,
+    contract write,
+    viem,
+    ethers.js,
+    web3.js,
+    ERC-20,
+    ERC-721,
+  ]
 sidebar_label: Interact with contracts
 toc_max_heading_level: 3
 ---

@@ -1,6 +1,6 @@
 ---
 description: Learn how to use Externally Owned Account (EOA) with MetaMask Smart Accounts.
-sidebar_label: EOA (e.g. MetaMask) 
+sidebar_label: EOA (e.g. MetaMask)
 keywords: [metamask, smart account, signer, metamask smart account]
 ---
 
@@ -19,8 +19,8 @@ This guide supports React and React-based frameworks. For Vue, see [Wagmi docs](
 
 - Install [Node.js](https://nodejs.org/en/blog/release/v18.18.0) v18 or later.
 - Install [Yarn](https://yarnpkg.com/),
-    [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
- 
+  [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
+
 ## Steps
 
 ### 1. Install dependencies
@@ -34,7 +34,7 @@ npm install @metamask/smart-accounts-kit wagmi @tanstack/react-query viem
 ### 2. Create the App provider
 
 Once you've created the `AppProvider`, wrap it at the root of your application so
-that the rest of your application has access to the Wagmi's and TanStack's context. 
+that the rest of your application has access to the Wagmi's and TanStack's context.
 This will allow every component inside the provider to use the Wagmi hooks.
 
 For the advance configuration, see [Wagmi's createConfig API reference](https://wagmi.sh/react/api/createConfig).
@@ -66,15 +66,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
 <TabItem value = "config.ts">
 
 ```ts
-import { createConfig, http } from "wagmi";
-import { sepolia } from "viem/chains";
+import { createConfig, http } from 'wagmi'
+import { sepolia } from 'viem/chains'
 
 export const config = createConfig({
   chains: [sepolia],
   transports: {
     [sepolia.id]: http(),
   },
-});
+})
 ```
 
 </TabItem>
@@ -86,26 +86,26 @@ Once the user has connected their wallet, use the [Wallet Client](https://viem.s
 <GlossaryTerm term="MetaMask smart account" />.
 
 ```ts
-import { Implementation, toMetaMaskSmartAccount } from "@metamask/smart-accounts-kit";
-import { useAccount, usePublicClient, useWalletClient } from "wagmi";
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
+import { useAccount, usePublicClient, useWalletClient } from 'wagmi'
 
-const { address } = useAccount();
-const publicClient = usePublicClient();
-const { data: walletClient } = useWalletClient();
+const { address } = useAccount()
+const publicClient = usePublicClient()
+const { data: walletClient } = useWalletClient()
 
 // Additional check to make sure the EOA wallet is connected
 // and values are available.
-if (!address || !walletClient || !publicClient ) {
+if (!address || !walletClient || !publicClient) {
   // Handle the error case
- }
+}
 
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
   deployParams: [address, [], [], []],
-  deploySalt: "0x",
+  deploySalt: '0x',
   signer: { walletClient },
-});
+})
 ```
 
 ## Next steps

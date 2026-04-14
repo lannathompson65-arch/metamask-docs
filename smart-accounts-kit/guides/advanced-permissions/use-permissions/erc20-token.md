@@ -3,11 +3,11 @@ description: Learn how to use the ERC-20 token permissions with Advanced Permiss
 keywords: [permissions, spending limit, restrict, 7715, erc-7715, erc20-permissions, revocation]
 ---
 
-import Tabs from "@theme/Tabs"; 
+import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 # Use ERC-20 token permissions
- 
+
 [Advanced Permissions (ERC-7715)](../../../concepts/advanced-permissions.md) supports ERC-20 token permission types that allow you to request fine-grained
 permissions for ERC-20 token transfers with time-based (periodic), streaming, or revocation conditions, depending on your use case.
 
@@ -30,49 +30,51 @@ See the [ERC-20 periodic permission API reference](../../../reference/advanced-p
 <TabItem value="example.ts">
 
 ```typescript
-import { sepolia as chain } from "viem/chains";
-import { parseUnits } from "viem";
-import { walletClient } from "./client.ts"
+import { sepolia as chain } from 'viem/chains'
+import { parseUnits } from 'viem'
+import { walletClient } from './client.ts'
 
 // Since current time is in seconds, convert milliseconds to seconds.
-const currentTime = Math.floor(Date.now() / 1000);
+const currentTime = Math.floor(Date.now() / 1000)
 // 1 week from now.
-const expiry = currentTime + 604800;
+const expiry = currentTime + 604800
 
 // USDC address on Ethereum Sepolia.
-const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
+const tokenAddress = '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238'
 
-const grantedPermissions = await walletClient.requestExecutionPermissions([{
-  chainId: chain.id,
-  expiry,
-  // The requested permissions will granted to the
-  // session account.
-  to: sessionAccount.address,
-  permission: {
-    type: "erc20-token-periodic",
-    data: {
-      tokenAddress,
-      // 10 USDC in WEI format. Since USDC has 6 decimals, 10 * 10^6.
-      periodAmount: parseUnits("10", 6),
-      // 1 day in seconds.
-      periodDuration: 86400,
-      justification: "Permission to transfer 10 USDC every day",
+const grantedPermissions = await walletClient.requestExecutionPermissions([
+  {
+    chainId: chain.id,
+    expiry,
+    // The requested permissions will granted to the
+    // session account.
+    to: sessionAccount.address,
+    permission: {
+      type: 'erc20-token-periodic',
+      data: {
+        tokenAddress,
+        // 10 USDC in WEI format. Since USDC has 6 decimals, 10 * 10^6.
+        periodAmount: parseUnits('10', 6),
+        // 1 day in seconds.
+        periodDuration: 86400,
+        justification: 'Permission to transfer 10 USDC every day',
+      },
+      isAdjustmentAllowed: true,
     },
-    isAdjustmentAllowed: true,
   },
-}]);
+])
 ```
 
 </TabItem>
 <TabItem value="client.ts">
 
 ```typescript
-import { createWalletClient, custom } from "viem";
-import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
+import { createWalletClient, custom } from 'viem'
+import { erc7715ProviderActions } from '@metamask/smart-accounts-kit/actions'
 
 export const walletClient = createWalletClient({
   transport: custom(window.ethereum),
-}).extend(erc7715ProviderActions());
+}).extend(erc7715ProviderActions())
 ```
 
 </TabItem>
@@ -80,7 +82,7 @@ export const walletClient = createWalletClient({
 
 ## ERC-20 stream permission
 
-This permission type ensures a linear streaming transfer limit for ERC-20 tokens. Token transfers are blocked until the 
+This permission type ensures a linear streaming transfer limit for ERC-20 tokens. Token transfers are blocked until the
 defined start timestamp. At the start, a specified initial amount is released, after which tokens accrue linearly at the
 configured rate, up to the maximum allowed amount.
 
@@ -93,52 +95,54 @@ See the [ERC-20 stream permission API reference](../../../reference/advanced-per
 <TabItem value="example.ts">
 
 ```typescript
-import { sepolia as chain } from "viem/chains";
-import { parseUnits } from "viem";
-import { walletClient } from "./client.ts"
+import { sepolia as chain } from 'viem/chains'
+import { parseUnits } from 'viem'
+import { walletClient } from './client.ts'
 
 // Since current time is in seconds, convert milliseconds to seconds.
-const currentTime = Math.floor(Date.now() / 1000);
+const currentTime = Math.floor(Date.now() / 1000)
 // 1 week from now.
-const expiry = currentTime + 604800;
+const expiry = currentTime + 604800
 
 // USDC address on Ethereum Sepolia.
-const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
+const tokenAddress = '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238'
 
-const grantedPermissions = await walletClient.requestExecutionPermissions([{
-  chainId: chain.id,
-  expiry,
-  // The requested permissions will granted to the
-  // session account.
-  to: sessionAccount.address,
-  permission: {
-    type: "erc20-token-stream",
-    data: {
-      tokenAddress,
-      // 0.1 USDC in WEI format. Since USDC has 6 decimals, 0.1 * 10^6.
-      amountPerSecond: parseUnits("0.1", 6),
-      // 1 USDC in WEI format. Since USDC has 6 decimals, 1 * 10^6.
-      initialAmount: parseUnits("1", 6),
-      // 2 USDC in WEI format. Since USDC has 6 decimals, 2 * 10^6.
-      maxAmount: parseUnits("2", 6),
-      startTime: currentTime,
-      justification: "Permission to use 0.1 USDC per second",
+const grantedPermissions = await walletClient.requestExecutionPermissions([
+  {
+    chainId: chain.id,
+    expiry,
+    // The requested permissions will granted to the
+    // session account.
+    to: sessionAccount.address,
+    permission: {
+      type: 'erc20-token-stream',
+      data: {
+        tokenAddress,
+        // 0.1 USDC in WEI format. Since USDC has 6 decimals, 0.1 * 10^6.
+        amountPerSecond: parseUnits('0.1', 6),
+        // 1 USDC in WEI format. Since USDC has 6 decimals, 1 * 10^6.
+        initialAmount: parseUnits('1', 6),
+        // 2 USDC in WEI format. Since USDC has 6 decimals, 2 * 10^6.
+        maxAmount: parseUnits('2', 6),
+        startTime: currentTime,
+        justification: 'Permission to use 0.1 USDC per second',
+      },
+      isAdjustmentAllowed: true,
     },
-    isAdjustmentAllowed: true,
   },
-}]);
+])
 ```
 
 </TabItem>
 <TabItem value="client.ts">
 
 ```typescript
-import { createWalletClient, custom } from "viem";
-import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
+import { createWalletClient, custom } from 'viem'
+import { erc7715ProviderActions } from '@metamask/smart-accounts-kit/actions'
 
 export const walletClient = createWalletClient({
   transport: custom(window.ethereum),
-}).extend(erc7715ProviderActions());
+}).extend(erc7715ProviderActions())
 ```
 
 </TabItem>
@@ -157,40 +161,42 @@ See the [ERC-20 revocation permission API reference](../../../reference/advanced
 <TabItem value="example.ts">
 
 ```typescript
-import { sepolia as chain } from "viem/chains";
-import { walletClient } from "./client.ts"
+import { sepolia as chain } from 'viem/chains'
+import { walletClient } from './client.ts'
 
 // Since current time is in seconds, convert milliseconds to seconds.
-const currentTime = Math.floor(Date.now() / 1000);
+const currentTime = Math.floor(Date.now() / 1000)
 // 1 week from now.
-const expiry = currentTime + 604800;
+const expiry = currentTime + 604800
 
-const grantedPermissions = await walletClient.requestExecutionPermissions([{
-  chainId: chain.id,
-  expiry,
-  // The requested permissions will granted to the
-  // session account.
-  to: sessionAccount.address,
-  permission: {
-    type: "erc20-token-revocation",
-    data: {
-      justification: "Permission to revoke ERC-20 token allowances",
+const grantedPermissions = await walletClient.requestExecutionPermissions([
+  {
+    chainId: chain.id,
+    expiry,
+    // The requested permissions will granted to the
+    // session account.
+    to: sessionAccount.address,
+    permission: {
+      type: 'erc20-token-revocation',
+      data: {
+        justification: 'Permission to revoke ERC-20 token allowances',
+      },
+      isAdjustmentAllowed: true,
     },
-    isAdjustmentAllowed: true,
   },
-}]);
+])
 ```
 
 </TabItem>
 <TabItem value="client.ts">
 
 ```typescript
-import { createWalletClient, custom } from "viem";
-import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
+import { createWalletClient, custom } from 'viem'
+import { erc7715ProviderActions } from '@metamask/smart-accounts-kit/actions'
 
 export const walletClient = createWalletClient({
   transport: custom(window.ethereum),
-}).extend(erc7715ProviderActions());
+}).extend(erc7715ProviderActions())
 ```
 
 </TabItem>

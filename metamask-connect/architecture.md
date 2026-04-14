@@ -1,8 +1,21 @@
 ---
-title: "MetaMask Connect Architecture - Platform Detection and Session Routing"
+title: 'MetaMask Connect Architecture - Platform Detection and Session Routing'
 sidebar_label: Architecture
 description: Understand how MetaMask Connect detects platforms, selects transports, creates encrypted sessions, and persists connections across page reloads.
-keywords: [connect, sdk, architecture, platform detection, relay, session, end-to-end encryption, transport layer, websocket relay, session persistence, connection flow]
+keywords:
+  [
+    connect,
+    sdk,
+    architecture,
+    platform detection,
+    relay,
+    session,
+    end-to-end encryption,
+    transport layer,
+    websocket relay,
+    session persistence,
+    connection flow,
+  ]
 ---
 
 # Architecture

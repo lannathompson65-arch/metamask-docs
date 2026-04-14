@@ -1,15 +1,28 @@
 ---
-title: "Web3Auth Embedded Wallets - MetaMask Connect EVM"
+title: 'Web3Auth Embedded Wallets - MetaMask Connect EVM'
 sidebar_label: Embedded Wallets SDK
 description: Integrate MetaMask with Web3Auth Embedded Wallets SDK to enable email and social login alongside browser wallet connections in your dapp.
 toc_max_heading_level: 3
-keywords: [connect, MetaMask, Embedded Wallets, SDK, dapp, Wallet SDK, web3auth, embedded wallet, social login, MPC wallet, seedless onboarding]
+keywords:
+  [
+    connect,
+    MetaMask,
+    Embedded Wallets,
+    SDK,
+    dapp,
+    Wallet SDK,
+    web3auth,
+    embedded wallet,
+    social login,
+    MPC wallet,
+    seedless onboarding,
+  ]
 ---
 
 :::info Heads up
-Looks like you've landed on a guide that still uses the MetaMask legacy SDK (`@metamask/sdk`).
-The MetaMask Connect integration for this library is on its way — once ready, it will be linked
-from the sidebar navigation. In the meantime, this guide is still perfectly valid if you're using
+You've landed on a guide that still uses the MetaMask legacy SDK (`@metamask/sdk`).
+The MetaMask Connect integration for this library is coming soon. Once ready, it will be linked
+from the sidebar navigation. In the meantime, this guide is still valid if you're using
 MetaMask SDK.
 :::
 
@@ -51,15 +64,15 @@ Use MetaMask SDK features directly within Embedded Wallets SDK.
     <summary>Degit vs. Git clone</summary>
     <div>
 
-    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
-    
-    Alternatively, use `git clone` to download the entire repository.
-    Clone the MetaMask SDK examples repository and navigate into the `partners/web3auth` directory:
+   `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
 
-    ```bash
-    git clone https://github.com/MetaMask/metamask-sdk-examples
-    cd metamask-sdk-examples/partners/web3auth
-    ```
+   Alternatively, use `git clone` to download the entire repository.
+   Clone the MetaMask SDK examples repository and navigate into the `partners/web3auth` directory:
+
+   ```bash
+   git clone https://github.com/MetaMask/metamask-sdk-examples
+   cd metamask-sdk-examples/partners/web3auth
+   ```
 
     </div>
     </details>

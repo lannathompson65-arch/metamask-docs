@@ -22,8 +22,8 @@ This skill enables your agent to grant, redeem, inspect, and revoke ERC-7710 <Gl
 
 :::warning Alpha version
 
-This CLI is in alpha version, and stores agent's private key in a local 
-JSON file (`~/.gator-cli/`). Please proceed with caution, and do not use 
+This CLI is in alpha version, and stores agent's private key in a local
+JSON file (`~/.gator-cli/`). Please proceed with caution, and do not use
 it with accounts holding significant funds.
 
 :::
@@ -51,17 +51,17 @@ Install the skill from https://github.com/MetaMask/openclaw-skills/blob/main/met
 
 The skill provides access to the following commands:
 
-| Command   | Description                                       |
-|-----------|---------------------------------------------------|
-| `init`    | Generate a private key and save config.           |
-| `create`  | Upgrade an EOA to an EIP-7702 smart account.      |
-| `show`    | Display the EOA address.                          |
-| `status`  | Check config and on chain account status.         |
-| `balance` | Show native or ERC-20 balance.                    |
-| `grant`   | Create, sign, and store a delegation.             |
-| `redeem`  | Redeem a delegation using an action type.         |
-| `revoke`  | Revoke a delegation on chain.                     |
-| `inspect` | View delegations for your account.                |
+| Command   | Description                                  |
+| --------- | -------------------------------------------- |
+| `init`    | Generate a private key and save config.      |
+| `create`  | Upgrade an EOA to an EIP-7702 smart account. |
+| `show`    | Display the EOA address.                     |
+| `status`  | Check config and on chain account status.    |
+| `balance` | Show native or ERC-20 balance.               |
+| `grant`   | Create, sign, and store a delegation.        |
+| `redeem`  | Redeem a delegation using an action type.    |
+| `revoke`  | Revoke a delegation on chain.                |
+| `inspect` | View delegations for your account.           |
 
 ## Smart Accounts Kit skill
 
@@ -98,8 +98,8 @@ Install the skill from https://github.com/smartgator/smart-accounts-kit-skills.g
 
 The skill provides access to the following capabilities:
 
-| Capability | Description |
-|------------|-------------|
-| [Smart accounts](https://github.com/smartgator/smart-accounts-kit-skills/blob/main/references/smart-accounts.md) | Helps you integrate MetaMask Smart Accounts to support batch transactions, multi-sig signatures, and gas sponsorship. |
-| [Delegation](https://github.com/smartgator/smart-accounts-kit-skills/blob/main/references/delegations.md) | Helps you integrate delegations with scopes and caveats. |
-| [Advanced Permissions](https://github.com/smartgator/smart-accounts-kit-skills/blob/main/references/advanced-permissions.md) | Helps you integrate Advanced Permissions. |
+| Capability                                                                                                                   | Description                                                                                                           |
+| ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| [Smart accounts](https://github.com/smartgator/smart-accounts-kit-skills/blob/main/references/smart-accounts.md)             | Helps you integrate MetaMask Smart Accounts to support batch transactions, multi-sig signatures, and gas sponsorship. |
+| [Delegation](https://github.com/smartgator/smart-accounts-kit-skills/blob/main/references/delegations.md)                    | Helps you integrate delegations with scopes and caveats.                                                              |
+| [Advanced Permissions](https://github.com/smartgator/smart-accounts-kit-skills/blob/main/references/advanced-permissions.md) | Helps you integrate Advanced Permissions.                                                                             |

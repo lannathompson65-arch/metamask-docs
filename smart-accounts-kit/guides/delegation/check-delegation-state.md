@@ -72,7 +72,7 @@ This example uses the [`getErc20PeriodTransferEnforcerAvailableAmount`](../../re
 ```typescript
 import { delegation } './config.ts'
 
-// Returns the available amount for current period. 
+// Returns the available amount for current period.
 const { availableAmount } = await caveatEnforcerClient.getErc20PeriodTransferEnforcerAvailableAmount({
   delegation,
 })
@@ -86,7 +86,7 @@ import { createDelegation, ScopeType } from '@metamask/smart-accounts-kit'
 import { parseUnits } from 'viem'
 
 // startDate should be in seconds.
-const startDate = Math.floor(Date.now() / 1000);
+const startDate = Math.floor(Date.now() / 1000)
 
 export const delegation = createDelegation({
   scope: {

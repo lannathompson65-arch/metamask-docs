@@ -1206,7 +1206,8 @@ export const pnpUnityExamples: ExamplesInterface[] = [
 export const pnpUnrealExamples: ExamplesInterface[] = [
   {
     title: 'Web3Auth PnP Unreal Engine SDK Quick Start',
-    description: 'A quick integration of MetaMask Embedded Wallets Unreal Engine SDK in Android & iOS',
+    description:
+      'A quick integration of MetaMask Embedded Wallets Unreal Engine SDK in Android & iOS',
     image: 'img/embedded-wallets/banners/unreal.png',
     type: QUICK_START,
     tags: [tags.pnp, tags.unreal, 'csharp', tags.android, tags.evm, tags.ios],
@@ -1250,54 +1251,36 @@ export const pnpUnrealExamples: ExamplesInterface[] = [
   },
 ]
 
-
 export const pnpNodeExamples: ExamplesInterface[] = [
   {
     title: 'Web3Auth PnP Node SDK Quick Start',
-    description:
-      'A quick integration of MetaMask Embedded Wallets Node SDK',
+    description: 'A quick integration of MetaMask Embedded Wallets Node SDK',
     image: 'img/embedded-wallets/banners/node.png',
     type: QUICK_START,
-    tags: [tags.pnp, tags.node, 'nodejs', tags.evm,],
+    tags: [tags.pnp, tags.node, 'nodejs', tags.evm],
     link: 'https://github.com/Web3Auth/web3auth-node-examples/tree/main/evm-quick-start',
     id: 'node-quick-start',
     githubLink: 'https://github.com/Web3Auth/web3auth-node-examples/tree/main/evm-quick-start',
   },
   {
     title: 'Using Firebase with Web3Auth PnP Node SDK',
-    description:
-      'Using Firebase Backend Login in MetaMask Embedded Wallets Node SDK',
+    description: 'Using Firebase Backend Login in MetaMask Embedded Wallets Node SDK',
     image: 'img/embedded-wallets/banners/node-firebase.png',
     type: SAMPLE_APP,
-    tags: [
-      tags.pnp,
-      tags.node,
-
-      'firebase',
-
-      tags.evm,
-    ],
+    tags: [tags.pnp, tags.node, 'firebase', tags.evm],
     link: 'https://github.com/Web3Auth/web3auth-node-examples/tree/main/firebase-quick-start',
     id: 'node-firebase-example',
     githubLink: 'https://github.com/Web3Auth/web3auth-node-examples/tree/main/firebase-quick-start',
   },
   {
     title: 'Using Solana with Web3Auth PnP Node SDK',
-    description:
-      'Using Solana with MetaMask Embedded Wallets Node SDK',
+    description: 'Using Solana with MetaMask Embedded Wallets Node SDK',
     image: 'img/embedded-wallets/banners/node-solana.png',
     type: SAMPLE_APP,
-    tags: [
-      tags.pnp,
-      tags.node,
-      'nodejs',
-      tags.solana,
-      'ed25519',
-    ],
+    tags: [tags.pnp, tags.node, 'nodejs', tags.solana, 'ed25519'],
     link: 'https://github.com/Web3Auth/web3auth-node-examples/tree/main/solana-quick-start',
     id: 'node-solana-example',
-    githubLink:
-      'https://github.com/Web3Auth/web3auth-node-examples/tree/main/solana-quick-start',
+    githubLink: 'https://github.com/Web3Auth/web3auth-node-examples/tree/main/solana-quick-start',
   },
 ]
 

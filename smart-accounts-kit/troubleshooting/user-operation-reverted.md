@@ -26,6 +26,7 @@ selector doesn't match any function on that contract, and no fallback function e
 reverts with empty data.
 
 This commonly happens when:
+
 - The function selector has a typo or doesn't match the target's ABI.
 - The target address is wrong or points to a different contract.
 - The target contract isn't deployed on the current chain.
@@ -38,10 +39,10 @@ and that the function selector matches the target's ABI.
 ```typescript
 const code = await publicClient.getCode({
   address: targetAddress,
-});
+})
 
 if (!code) {
-  console.log("No contract deployed at this address");
+  console.log('No contract deployed at this address')
 }
 ```
 
@@ -54,7 +55,7 @@ or guard functions.
 ### Solution
 
 Look at the target contract's source code to identify which `require` or `revert` your call
-parameters could trigger. 
+parameters could trigger.
 
 Use [Tenderly](https://tenderly.co) to simulate the transaction and pinpoint the exact line. See the
 [Tenderly debugger documentation](https://docs.tenderly.co/debugger) for details.
@@ -84,21 +85,21 @@ that revert without a reason string.
 Check that the smart account has sufficient token balance and approvals for the operation.
 
 ```typescript
-import { erc20Abi } from "viem";
+import { erc20Abi } from 'viem'
 
 const balance = await publicClient.readContract({
   address: tokenAddress,
   abi: erc20Abi,
-  functionName: "balanceOf",
+  functionName: 'balanceOf',
   args: [smartAccount.address],
-});
+})
 
 const allowance = await publicClient.readContract({
   address: tokenAddress,
   abi: erc20Abi,
-  functionName: "allowance",
+  functionName: 'allowance',
   args: [smartAccount.address, spenderAddress],
-});
+})
 ```
 
 ## Manual debugging
@@ -109,5 +110,5 @@ If the cause isn't immediately clear, follow these steps:
    confirm what the smart account executes.
 2. Use Tenderly: Simulate the user operation in [Tenderly](https://tenderly.co) to get a full
    execution trace. The trace view shows the exact line where the inner call reverts.
-2. Check the basics: Verify the target has deployed code, the smart account has enough
+3. Check the basics: Verify the target has deployed code, the smart account has enough
    ETH and tokens, and the function selector is correct.

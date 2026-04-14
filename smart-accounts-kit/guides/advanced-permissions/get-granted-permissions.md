@@ -4,25 +4,23 @@ sidebar_label: Get granted permissions
 keywords: [advanced permissions, granted execution permissions, erc-7715, 7715]
 ---
 
-import Tabs from "@theme/Tabs"; 
+import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Get granted permissions
 
 [ERC-7715](https://eip.tools/eip/7715) defines an RPC method that returns the granted execution permissions
-for a wallet. Use the method to get the granted <GlossaryTerm term="Advanced Permissions" /> for a wallet. 
-
+for a wallet. Use the method to get the granted <GlossaryTerm term="Advanced Permissions" /> for a wallet.
 
 ## Prerequisites
 
 - [Install and set up the Smart Accounts Kit.](../../get-started/install.md)
 - [Learn about Advanced Permissions.](../../concepts/advanced-permissions.md)
 
-
 ## Request granted permissions
 
-Request the granted Advanced Permissions for a wallet with the 
+Request the granted Advanced Permissions for a wallet with the
 Wallet Client's [`getGrantedExecutionPermissions`](../../reference/advanced-permissions/wallet-client.md#getgrantedexecutionpermissions) action.
 
 <Tabs>
@@ -54,21 +52,21 @@ Wallet Client's [`getGrantedExecutionPermissions`](../../reference/advanced-perm
 <TabItem value="example.ts" default>
 
 ```typescript
-import { walletClient } from "./config.ts";
+import { walletClient } from './config.ts'
 
-const grantedExecutionPermissions = await walletClient.getGrantedExecutionPermissions();
+const grantedExecutionPermissions = await walletClient.getGrantedExecutionPermissions()
 ```
 
 </TabItem>
 <TabItem value="config.ts">
 
 ```ts
-import { createWalletClient, custom } from "viem";;
-import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
+import { createWalletClient, custom } from 'viem'
+import { erc7715ProviderActions } from '@metamask/smart-accounts-kit/actions'
 
 export const walletClient = createWalletClient({
   transport: custom(window.ethereum),
-}).extend(erc7715ProviderActions());
+}).extend(erc7715ProviderActions())
 ```
 
 </TabItem>

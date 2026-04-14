@@ -14,15 +14,15 @@ The following API methods are related to `CaveatEnforcerClient` used to [check t
 
 ## `createCaveatEnforcerClient`
 
-Create a Viem Client extended with caveat enforcer actions. This client allows you to interact with the caveat enforcers of the 
+Create a Viem Client extended with caveat enforcer actions. This client allows you to interact with the caveat enforcers of the
 delegation, and read the required state.
 
 ### Parameters
 
-| Name          | Type                   | Required | Description |
-| ------------- | ---------------------- | -------- | ----------- |
-| `client`      | `Client`               | Yes      | The Viem Client to interact with the caveat enforcer contracts and read their state. |
-| `environment` | `SmartAccountsEnvironment` | Yes      | Environment to resolve the smart contracts for the current chain.       |
+| Name          | Type                       | Required | Description                                                                          |
+| ------------- | -------------------------- | -------- | ------------------------------------------------------------------------------------ |
+| `client`      | `Client`                   | Yes      | The Viem Client to interact with the caveat enforcer contracts and read their state. |
+| `environment` | `SmartAccountsEnvironment` | Yes      | Environment to resolve the smart contracts for the current chain.                    |
 
 ### Example
 
@@ -64,9 +64,9 @@ Returns the available amount from the ERC-20 period transfer enforcer for the cu
 
 ### Parameters
 
-| Name          | Type                   | Required | Description |
-| ------------- | ---------------------- | -------- | ----------- |
-| `delegation`  | `Delegation`           | Yes      | The delegation object for which you want to check the available amount. |
+| Name         | Type         | Required | Description                                                             |
+| ------------ | ------------ | -------- | ----------------------------------------------------------------------- |
+| `delegation` | `Delegation` | Yes      | The delegation object for which you want to check the available amount. |
 
 ### Example
 
@@ -76,7 +76,7 @@ Returns the available amount from the ERC-20 period transfer enforcer for the cu
 ```typescript
 import { delegation } './config.ts'
 
-// Returns the available amount for current period. 
+// Returns the available amount for current period.
 const { availableAmount } = await caveatEnforcerClient.getErc20PeriodTransferEnforcerAvailableAmount({
   delegation,
 })
@@ -118,9 +118,9 @@ Returns the available amount from the ERC-20 streaming enforcer.
 
 ### Parameters
 
-| Name          | Type                   | Required | Description |
-| ------------- | ---------------------- | -------- | ----------- |
-| `delegation`  | `Delegation`           | Yes      | The delegation object for which you want to check the available amount. |
+| Name         | Type         | Required | Description                                                             |
+| ------------ | ------------ | -------- | ----------------------------------------------------------------------- |
+| `delegation` | `Delegation` | Yes      | The delegation object for which you want to check the available amount. |
 
 ### Example
 
@@ -130,7 +130,7 @@ Returns the available amount from the ERC-20 streaming enforcer.
 ```typescript
 import { delegation } './config.ts'
 
-// Returns the available amount 
+// Returns the available amount
 const { availableAmount } = await caveatEnforcerClient.getErc20StreamingEnforcerAvailableAmount({
   delegation,
 })
@@ -174,9 +174,9 @@ Returns the available amount from the native token period enforcer for the curre
 
 ### Parameters
 
-| Name          | Type                   | Required | Description |
-| ------------- | ---------------------- | -------- | ----------- |
-| `delegation`  | `Delegation`           | Yes      | The delegation object for which you want to check the available amount. |
+| Name         | Type         | Required | Description                                                             |
+| ------------ | ------------ | -------- | ----------------------------------------------------------------------- |
+| `delegation` | `Delegation` | Yes      | The delegation object for which you want to check the available amount. |
 
 ### Example
 
@@ -186,7 +186,7 @@ Returns the available amount from the native token period enforcer for the curre
 ```typescript
 import { delegation } './config.ts'
 
-// Returns the available amount for current period. 
+// Returns the available amount for current period.
 const { availableAmount } = await caveatEnforcerClient.getNativeTokenPeriodTransferEnforcerAvailableAmount({
   delegation,
 })
@@ -228,9 +228,9 @@ Returns the available amount from the native streaming enforcer.
 
 ### Parameters
 
-| Name          | Type                   | Required | Description |
-| ------------- | ---------------------- | -------- | ----------- |
-| `delegation`  | `Delegation`           | Yes      | The delegation object for which you want to check the available amount. |
+| Name         | Type         | Required | Description                                                             |
+| ------------ | ------------ | -------- | ----------------------------------------------------------------------- |
+| `delegation` | `Delegation` | Yes      | The delegation object for which you want to check the available amount. |
 
 ### Example
 
@@ -240,7 +240,7 @@ Returns the available amount from the native streaming enforcer.
 ```typescript
 import { delegation } './config.ts'
 
-// Returns the available amount 
+// Returns the available amount
 const { availableAmount } = await caveatEnforcerClient.getNativeTokenStreamingEnforcerAvailableAmount({
   delegation,
 })
@@ -261,7 +261,7 @@ const startTime = Math.floor(Date.now() / 1000)
 
 export const delegation = createDelegation({
   scope: {
-    type: "nativeTokenStreaming",
+    type: 'nativeTokenStreaming',
     amountPerSecond: parseEther('0.001'),
     initialAmount: parseEther('0.01'),
     maxAmount: parseEther('0.1'),
@@ -278,14 +278,14 @@ export const delegation = createDelegation({
 
 ## `getMultiTokenPeriodEnforcerAvailableAmount`
 
-Returns the available amount from the multi token period transfer enforcer for the current period. You'll need to 
-encode the args for the token index you want to check the available amount. 
+Returns the available amount from the multi token period transfer enforcer for the current period. You'll need to
+encode the args for the token index you want to check the available amount.
 
 ### Parameters
 
-| Name          | Type                   | Required | Description |
-| ------------- | ---------------------- | -------- | ----------- |
-| `delegation`  | `Delegation`           | Yes      | The delegation object with token index for which you want to check the available amount. |
+| Name         | Type         | Required | Description                                                                              |
+| ------------ | ------------ | -------- | ---------------------------------------------------------------------------------------- |
+| `delegation` | `Delegation` | Yes      | The delegation object with token index for which you want to check the available amount. |
 
 ### Example
 
@@ -301,7 +301,7 @@ const args = encodePacked(['uint256'], [BigInt(0)]);
 // Ensure the index is correct when working with multiple enforcers.
 delegation.caveats[0].args = args
 
-// Returns the available amount for the first token in the list.  
+// Returns the available amount for the first token in the list.
 const { availableAmount } = await caveatEnforcerClient.getMultiTokenPeriodEnforcerAvailableAmount({
   delegation,
 })
@@ -319,7 +319,7 @@ import { parseUnits, parseEther } from 'viem'
 const environment = getSmartAccountsEnvironment(chain.id)
 const caveatBuilder = createCaveatBuilder(environment)
 
-// Current time as start date. 
+// Current time as start date.
 // Since startDate is in seconds, we need to convert milliseconds to seconds.
 const startDate = Math.floor(Date.now() / 1000);
 

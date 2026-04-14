@@ -6,9 +6,9 @@ keywords: [web3auth, smart account, signer, metamask smart account]
 
 # Use MetaMask Embedded Wallets (Web3Auth) with MetaMask Smart Accounts
 
-[MetaMask Embedded Wallets (Web3Auth)](/embedded-wallets/) provides a pluggable embedded wallet 
-infrastructure to simplify Web3 wallet integration and user onboarding. It supports social logins allowing 
-users to access Web3 applications through familiar authentication methods in under a minute. 
+[MetaMask Embedded Wallets (Web3Auth)](/embedded-wallets/) provides a pluggable embedded wallet
+infrastructure to simplify Web3 wallet integration and user onboarding. It supports social logins allowing
+users to access Web3 applications through familiar authentication methods in under a minute.
 
 MetaMask Smart Accounts is a signer agnostic implementation that allows you to use Embedded Wallets as a signer for MetaMask Smart Accounts.
 
@@ -20,9 +20,9 @@ This guide supports React and React-based frameworks.
 
 - Install [Node.js](https://nodejs.org/en/blog/release/v18.18.0) v18 or later
 - Install [Yarn](https://yarnpkg.com/),
-    [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager
+  [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager
 - An [Embedded Wallets Client ID](/embedded-wallets/dashboard)
- 
+
 ## Steps
 
 ### 1. Install dependencies
@@ -35,12 +35,12 @@ npm install @metamask/smart-accounts-kit @web3auth/modal wagmi @tanstack/react-q
 
 ### 2. Create the Web3Auth provider
 
-Configure the `Web3AuthProvider` component to provide the Embedded Wallets context to your application. 
-You'll also use the `WagmiProvider` to integrate Embedded Wallets with Wagmi. 
-This provider enables you to use Wagmi hooks with Embedded Wallets. 
+Configure the `Web3AuthProvider` component to provide the Embedded Wallets context to your application.
+You'll also use the `WagmiProvider` to integrate Embedded Wallets with Wagmi.
+This provider enables you to use Wagmi hooks with Embedded Wallets.
 
 Once you've created the `Web3AuthAppProvider`, wrap it at the root of your application so
-that the rest of your application has access to the Embedded Wallets context. 
+that the rest of your application has access to the Embedded Wallets context.
 
 For the advance configuration, see [Embedded Wallets guide](https://docs.metamask.io/embedded-wallets/sdk/react/advanced/).
 
@@ -73,16 +73,16 @@ export function Web3AuthAppProvider({ children }: { children: ReactNode }) {
 <TabItem value = "config.ts">
 
 ```ts
-import { Web3AuthOptions } from "@web3auth/modal";
+import { Web3AuthOptions } from '@web3auth/modal'
 
 const web3AuthOptions: Web3AuthOptions = {
-  clientId: "<YOUR_WEB3AUTH_CLIENT_ID>",
-  web3AuthNetwork: "<YOUR_WEB3AUTH_NETWORK>",
-};
+  clientId: '<YOUR_WEB3AUTH_CLIENT_ID>',
+  web3AuthNetwork: '<YOUR_WEB3AUTH_NETWORK>',
+}
 
 export const web3authConfig = {
   web3AuthOptions,
-};
+}
 ```
 
 </TabItem>
@@ -94,26 +94,26 @@ Once the user has connected their wallet, use the [Wallet Client](https://viem.s
 MetaMask smart account.
 
 ```ts
-import { Implementation, toMetaMaskSmartAccount } from "@metamask/smart-accounts-kit";
-import { useAccount, usePublicClient, useWalletClient } from "wagmi";
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
+import { useAccount, usePublicClient, useWalletClient } from 'wagmi'
 
-const { address } = useAccount();
-const publicClient = usePublicClient();
-const { data: walletClient } = useWalletClient();
+const { address } = useAccount()
+const publicClient = usePublicClient()
+const { data: walletClient } = useWalletClient()
 
 // Additional check to make sure the Embedded Wallets is connected
 // and values are available.
-if (!address || !walletClient || !publicClient ) {
+if (!address || !walletClient || !publicClient) {
   // Handle the error case
- }
+}
 
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
   deployParams: [address, [], [], []],
-  deploySalt: "0x",
+  deploySalt: '0x',
   signer: { walletClient },
-});
+})
 ```
 
 ## Next steps

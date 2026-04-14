@@ -1,8 +1,18 @@
 ---
-title: "Sign-In with Ethereum (SIWE) - MetaMask Connect"
+title: 'Sign-In with Ethereum (SIWE) - MetaMask Connect'
 sidebar_label: Sign in with Ethereum
 description: Implement Sign-In with Ethereum (SIWE) using ERC-4361 to authenticate users with their MetaMask wallet and prevent phishing attacks.
-keywords: [sign in with ethereum, ERC-4361, SIWE, authentication, domain binding, phishing prevention, ethereum login, metamask]
+keywords:
+  [
+    sign in with ethereum,
+    ERC-4361,
+    SIWE,
+    authentication,
+    domain binding,
+    phishing prevention,
+    ethereum login,
+    metamask,
+  ]
 ---
 
 # Sign in with Ethereum

@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 
 You can enable users to create a [MetaMask smart account](../../concepts/smart-accounts.md) directly in your dapp.
 This page provides examples of using [`toMetaMaskSmartAccount`](../../reference/smart-account.md#tometamasksmartaccount) with Viem Core SDK to create different types of smart accounts with different signature schemes.
-An account's supported *signatories* can sign data on behalf of the smart account.
+An account's supported _signatories_ can sign data on behalf of the smart account.
 
 ## Prerequisites
 
@@ -29,20 +29,17 @@ Use [`toMetaMaskSmartAccount`](../../reference/smart-account.md#tometamasksmarta
 <TabItem value="example.ts">
 
 ```typescript
-import { publicClient } from "./client.ts"
-import { account } from "./signer.ts";
-import { 
-  Implementation, 
-  toMetaMaskSmartAccount,
-} from "@metamask/smart-accounts-kit";
+import { publicClient } from './client.ts'
+import { account } from './signer.ts'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
 
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
   deployParams: [account.address, [], [], []],
-  deploySalt: "0x",
+  deploySalt: '0x',
   signer: { account },
-});
+})
 ```
 
 </TabItem>
@@ -50,14 +47,14 @@ const smartAccount = await toMetaMaskSmartAccount({
 <TabItem value="client.ts">
 
 ```typescript
-import { http, createPublicClient } from "viem";
-import { sepolia as chain } from "viem/chains";
+import { http, createPublicClient } from 'viem'
+import { sepolia as chain } from 'viem/chains'
 
-const transport = http(); 
-export const publicClient = createPublicClient({ 
-  transport, 
-  chain, 
-});
+const transport = http()
+export const publicClient = createPublicClient({
+  transport,
+  chain,
+})
 ```
 
 </TabItem>
@@ -65,10 +62,10 @@ export const publicClient = createPublicClient({
 <TabItem value="signer.ts">
 
 ```typescript
-import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
+import { privateKeyToAccount, generatePrivateKey } from 'viem/accounts'
 
-const privateKey = generatePrivateKey(); 
-export const account = privateKeyToAccount(privateKey);
+const privateKey = generatePrivateKey()
+export const account = privateKeyToAccount(privateKey)
 ```
 
 </TabItem>
@@ -82,23 +79,20 @@ Use [`toMetaMaskSmartAccount`](../../reference/smart-account.md#tometamasksmarta
 <TabItem value="example.ts">
 
 ```typescript
-import { publicClient } from "./client.ts"
-import { walletClient } from "./signer.ts";
-import { 
-  Implementation, 
-  toMetaMaskSmartAccount,
-} from "@metamask/smart-accounts-kit";
+import { publicClient } from './client.ts'
+import { walletClient } from './signer.ts'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
 
-const addresses = await walletClient.getAddresses();
-const owner = addresses[0];
+const addresses = await walletClient.getAddresses()
+const owner = addresses[0]
 
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
   deployParams: [owner, [], [], []],
-  deploySalt: "0x",
+  deploySalt: '0x',
   signer: { walletClient },
-});
+})
 ```
 
 </TabItem>
@@ -106,14 +100,14 @@ const smartAccount = await toMetaMaskSmartAccount({
 <TabItem value="client.ts">
 
 ```typescript
-import { http, createPublicClient } from "viem";
-import { sepolia as chain } from "viem/chains";
+import { http, createPublicClient } from 'viem'
+import { sepolia as chain } from 'viem/chains'
 
-const transport = http(); 
-export const publicClient = createPublicClient({ 
-  transport, 
-  chain, 
-});
+const transport = http()
+export const publicClient = createPublicClient({
+  transport,
+  chain,
+})
 ```
 
 </TabItem>
@@ -121,17 +115,17 @@ export const publicClient = createPublicClient({
 <TabItem value="signer.ts">
 
 ```typescript
-import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
-import { sepolia as chain } from "viem/chains";
-import { http, createWalletClient } from "viem";
+import { privateKeyToAccount, generatePrivateKey } from 'viem/accounts'
+import { sepolia as chain } from 'viem/chains'
+import { http, createWalletClient } from 'viem'
 
-const privateKey = generatePrivateKey(); 
-const account = privateKeyToAccount(privateKey);
+const privateKey = generatePrivateKey()
+const account = privateKeyToAccount(privateKey)
 
 export const walletClient = createWalletClient({
   account,
   chain,
-  transport: http()
+  transport: http(),
 })
 ```
 
@@ -150,28 +144,25 @@ To work with WebAuthn, install the [Ox SDK](https://oxlib.sh/).
 <TabItem value="example.ts">
 
 ```typescript
-import { publicClient } from "./client.ts"
-import { webAuthnAccount, credential } from "./signer.ts";
-import { 
-  Implementation, 
-  toMetaMaskSmartAccount,
-} from "@metamask/smart-accounts-kit";
-import { Address, PublicKey } from "ox";
-import { toHex } from "viem";
+import { publicClient } from './client.ts'
+import { webAuthnAccount, credential } from './signer.ts'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
+import { Address, PublicKey } from 'ox'
+import { toHex } from 'viem'
 
 // Deserialize compressed public key
-const publicKey = PublicKey.fromHex(credential.publicKey);
+const publicKey = PublicKey.fromHex(credential.publicKey)
 
 // Convert public key to address
-const owner = Address.fromPublicKey(publicKey);
+const owner = Address.fromPublicKey(publicKey)
 
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
   deployParams: [owner, [toHex(credential.id)], [publicKey.x], [publicKey.y]],
-  deploySalt: "0x",
+  deploySalt: '0x',
   signer: { webAuthnAccount, keyId: toHex(credential.id) },
-});
+})
 ```
 
 </TabItem>
@@ -179,14 +170,14 @@ const smartAccount = await toMetaMaskSmartAccount({
 <TabItem value="client.ts">
 
 ```typescript
-import { http, createPublicClient } from "viem";
-import { sepolia as chain } from "viem/chains";
+import { http, createPublicClient } from 'viem'
+import { sepolia as chain } from 'viem/chains'
 
-const transport = http(); 
-export const publicClient = createPublicClient({ 
-  transport, 
-  chain, 
-});
+const transport = http()
+export const publicClient = createPublicClient({
+  transport,
+  chain,
+})
 ```
 
 </TabItem>
@@ -194,16 +185,13 @@ export const publicClient = createPublicClient({
 <TabItem value="signer.ts">
 
 ```typescript
-import { 
-  createWebAuthnCredential, 
-  toWebAuthnAccount, 
-} from "viem/account-abstraction";
-  
-export const credential = await createWebAuthnCredential({
-  name: "MetaMask smart account",
-});
+import { createWebAuthnCredential, toWebAuthnAccount } from 'viem/account-abstraction'
 
-export const webAuthnAccount = toWebAuthnAccount({ credential });
+export const credential = await createWebAuthnCredential({
+  name: 'MetaMask smart account',
+})
+
+export const webAuthnAccount = toWebAuthnAccount({ credential })
 ```
 
 </TabItem>
@@ -218,24 +206,21 @@ Use [`toMetaMaskSmartAccount`](../../reference/smart-account.md#tometamasksmarta
 <TabItem value="example.ts">
 
 ```typescript
-import { publicClient } from "./client.ts";
-import { account, walletClient } from "./signers.ts";
-import { 
-  Implementation, 
-  toMetaMaskSmartAccount,
-} from "@metamask/smart-accounts-kit";
+import { publicClient } from './client.ts'
+import { account, walletClient } from './signers.ts'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
 
-const owners = [ account.address, walletClient.address ];
-const signer = [ { account }, { walletClient } ];
+const owners = [account.address, walletClient.address]
+const signer = [{ account }, { walletClient }]
 const threshold = 2n
 
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.MultiSig,
   deployParams: [owners, threshold],
-  deploySalt: "0x",
+  deploySalt: '0x',
   signer,
-});
+})
 ```
 
 </TabItem>
@@ -243,37 +228,38 @@ const smartAccount = await toMetaMaskSmartAccount({
 <TabItem value="client.ts">
 
 ```typescript
-import { http, createPublicClient } from "viem";
-import { sepolia as chain } from "viem/chains";
+import { http, createPublicClient } from 'viem'
+import { sepolia as chain } from 'viem/chains'
 
-const transport = http(); 
-export const publicClient = createPublicClient({ 
-  transport, 
-  chain, 
-});
+const transport = http()
+export const publicClient = createPublicClient({
+  transport,
+  chain,
+})
 ```
+
 </TabItem>
 
 <TabItem value="signers.ts">
 
 ```typescript
-import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
-import { sepolia as chain } from "viem/chains";
-import { http, createWalletClient } from "viem";
+import { privateKeyToAccount, generatePrivateKey } from 'viem/accounts'
+import { sepolia as chain } from 'viem/chains'
+import { http, createWalletClient } from 'viem'
 
 // This private key will be used to generate the first signer.
-const privateKey = generatePrivateKey(); 
-export const account = privateKeyToAccount(privateKey);
+const privateKey = generatePrivateKey()
+export const account = privateKeyToAccount(privateKey)
 
 // This private key will be used to generate the second signer.
-const walletClientPrivatekey = generatePrivateKey(); 
-const walletClientAccount = privateKeyToAccount(walletClientPrivatekey);
+const walletClientPrivatekey = generatePrivateKey()
+const walletClientAccount = privateKeyToAccount(walletClientPrivatekey)
 
 export const walletClient = createWalletClient({
   account: walletClientAccount,
   chain,
-  transport: http()
-});
+  transport: http(),
+})
 ```
 
 </TabItem>
@@ -285,7 +271,7 @@ The number of signers in the signatories must be at least equal to the threshold
 
 ## Create a Stateless 7702 smart account
 
-A [Stateless 7702 smart account](../../concepts/smart-accounts.md#stateless-7702-smart-account) represents an EOA that has been upgraded to support MetaMask Smart Accounts 
+A [Stateless 7702 smart account](../../concepts/smart-accounts.md#stateless-7702-smart-account) represents an EOA that has been upgraded to support MetaMask Smart Accounts
 functionality as defined by [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702).
 
 :::note
@@ -304,8 +290,8 @@ Use [`toMetaMaskSmartAccount`](../../reference/smart-account.md#tometamasksmarta
 ```typescript
 import { publicClient } from "./client.ts";
 import { account } from "./signer.ts";
-import { 
-  Implementation, 
+import {
+  Implementation,
   toMetaMaskSmartAccount,
 } from "@metamask/smart-accounts-kit";
 
@@ -322,14 +308,14 @@ const smartAccount = await toMetaMaskSmartAccount({
 <TabItem value="client.ts">
 
 ```typescript
-import { http, createPublicClient } from "viem";
-import { sepolia as chain } from "viem/chains";
+import { http, createPublicClient } from 'viem'
+import { sepolia as chain } from 'viem/chains'
 
-const transport = http(); 
-export const publicClient = createPublicClient({ 
-  transport, 
-  chain, 
-});
+const transport = http()
+export const publicClient = createPublicClient({
+  transport,
+  chain,
+})
 ```
 
 </TabItem>
@@ -337,10 +323,10 @@ export const publicClient = createPublicClient({
 <TabItem value="signer.ts">
 
 ```typescript
-import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
+import { privateKeyToAccount, generatePrivateKey } from 'viem/accounts'
 
-const privateKey = generatePrivateKey(); 
-export const account = privateKeyToAccount(privateKey);
+const privateKey = generatePrivateKey()
+export const account = privateKeyToAccount(privateKey)
 ```
 
 </TabItem>
@@ -354,22 +340,19 @@ Use [`toMetaMaskSmartAccount`](../../reference/smart-account.md#tometamasksmarta
 <TabItem value="example.ts">
 
 ```typescript
-import { publicClient } from "./client.ts";
-import { walletClient } from "./signer.ts";
-import { 
-  Implementation, 
-  toMetaMaskSmartAccount,
-} from "@metamask/smart-accounts-kit";
+import { publicClient } from './client.ts'
+import { walletClient } from './signer.ts'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
 
-const addresses = await walletClient.getAddresses();
-const address = addresses[0];
+const addresses = await walletClient.getAddresses()
+const address = addresses[0]
 
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Stateless7702,
   address, // Address of the upgraded EOA
   signer: { walletClient },
-});
+})
 ```
 
 </TabItem>
@@ -377,14 +360,14 @@ const smartAccount = await toMetaMaskSmartAccount({
 <TabItem value="client.ts">
 
 ```typescript
-import { http, createPublicClient } from "viem";
-import { sepolia as chain } from "viem/chains";
+import { http, createPublicClient } from 'viem'
+import { sepolia as chain } from 'viem/chains'
 
-const transport = http(); 
-export const publicClient = createPublicClient({ 
-  transport, 
-  chain, 
-});
+const transport = http()
+export const publicClient = createPublicClient({
+  transport,
+  chain,
+})
 ```
 
 </TabItem>
@@ -392,12 +375,12 @@ export const publicClient = createPublicClient({
 <TabItem value="signer.ts">
 
 ```typescript
-import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
-import { sepolia as chain } from "viem/chains";
-import { http, createWalletClient } from "viem";
+import { privateKeyToAccount, generatePrivateKey } from 'viem/accounts'
+import { sepolia as chain } from 'viem/chains'
+import { http, createWalletClient } from 'viem'
 
-const privateKey = generatePrivateKey(); 
-const account = privateKeyToAccount(privateKey);
+const privateKey = generatePrivateKey()
+const account = privateKeyToAccount(privateKey)
 
 export const walletClient = createWalletClient({
   account,
@@ -416,4 +399,4 @@ With a MetaMask smart account, you can perform the following functions:
 - In conjunction with [Viem Account Abstraction clients](../configure-toolkit.md), [deploy the smart account](deploy-smart-account.md)
   and [send user operations](send-user-operation.md).
 - [Create delegations](../delegation/execute-on-smart-accounts-behalf.md) that can be used to grant specific rights and permissions to other accounts.
-  Smart accounts that create delegations are called *delegator accounts*.
+  Smart accounts that create delegations are called _delegator accounts_.

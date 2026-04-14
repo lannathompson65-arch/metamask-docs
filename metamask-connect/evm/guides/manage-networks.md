@@ -1,8 +1,25 @@
 ---
-title: "Manage Networks - MetaMask Connect EVM"
+title: 'Manage Networks - MetaMask Connect EVM'
 sidebar_label: Manage networks
 description: Detect, switch, and add EVM networks programmatically using wallet_switchEthereumChain and wallet_addEthereumChain in your dapp.
-keywords: [SDK, JavaScript, wagmi, detect, switch, add, network, networks, dapp, wallet_switchEthereumChain, wallet_addEthereumChain, chain ID, network detection, custom network, EVM chain]
+keywords:
+  [
+    SDK,
+    JavaScript,
+    wagmi,
+    detect,
+    switch,
+    add,
+    network,
+    networks,
+    dapp,
+    wallet_switchEthereumChain,
+    wallet_addEthereumChain,
+    chain ID,
+    network detection,
+    custom network,
+    EVM chain,
+  ]
 toc_max_heading_level: 2
 ---
 
@@ -235,11 +252,11 @@ Follow these best practices when managing networks.
 
 The following table lists common network management errors and their codes:
 
-| Error code | Description             | Solution                                                                                         |
-| ---------- | ----------------------- | ------------------------------------------------------------------------------------------------ |
+| Error code | Description             | Solution                                                                                                         |
+| ---------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `4902`     | Network not added       | Use [`wallet_addEthereumChain`](../reference/json-rpc-api/wallet_addEthereumChain.mdx) to add the network first. |
-| `4001`     | User rejected request   | Show a message asking the user to approve the network switch.                                    |
-| `-32002`   | Request already pending | Disable the switch network button while the request is pending.                                  |
+| `4001`     | User rejected request   | Show a message asking the user to approve the network switch.                                                    |
+| `-32002`   | Request already pending | Disable the switch network button while the request is pending.                                                  |
 
 ## Next steps
 

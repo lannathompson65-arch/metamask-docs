@@ -12,7 +12,7 @@ You can get started quickly with [MetaMask Smart Accounts](../../concepts/smart-
 
 - Install [Node.js](https://nodejs.org/en/blog/release/v18.18.0) v18 or later.
 - Install [Yarn](https://yarnpkg.com/),
-    [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
+  [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
 
 ## Steps
 
@@ -29,13 +29,13 @@ npm install @metamask/smart-accounts-kit
 Set up a [Viem Public Client](https://viem.sh/docs/clients/public) using Viem's `createPublicClient` function. This client will let the smart account query the signer's account state and interact with the blockchain network.
 
 ```typescript
-import { createPublicClient, http } from "viem";
-import { sepolia as chain } from "viem/chains";
+import { createPublicClient, http } from 'viem'
+import { sepolia as chain } from 'viem/chains'
 
 const publicClient = createPublicClient({
   chain,
   transport: http(),
-});
+})
 ```
 
 ### 3. Set up a Bundler Client
@@ -43,12 +43,12 @@ const publicClient = createPublicClient({
 Set up a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler) using Viem's `createBundlerClient` function. This lets you use the bundler service to estimate gas for user operations and submit transactions to the network.
 
 ```typescript
-import { createBundlerClient } from "viem/account-abstraction";
+import { createBundlerClient } from 'viem/account-abstraction'
 
 const bundlerClient = createBundlerClient({
   client: publicClient,
-  transport: http("https://your-bundler-rpc.com"),
-});
+  transport: http('https://your-bundler-rpc.com'),
+})
 ```
 
 ### 4. Create a MetaMask smart account
@@ -59,18 +59,18 @@ This example configures a Hybrid smart account,
 which is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers:
 
 ```typescript
-import { Implementation, toMetaMaskSmartAccount } from "@metamask/smart-accounts-kit";
-import { privateKeyToAccount } from "viem/accounts";
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
+import { privateKeyToAccount } from 'viem/accounts'
 
-const account = privateKeyToAccount("0x...");
+const account = privateKeyToAccount('0x...')
 
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
   deployParams: [account.address, [], [], []],
-  deploySalt: "0x",
+  deploySalt: '0x',
   signer: { account },
-});
+})
 ```
 
 ### 5. Send a user operation
@@ -79,27 +79,27 @@ Send a user operation using Viem's [`sendUserOperation`](https://viem.sh/account
 
 See [Send a user operation](../../guides/smart-accounts/send-user-operation.md) to learn how to estimate fee per gas, and wait for the transaction receipt.
 
-The smart account will remain counterfactual until the first user operation. If the smart account is not 
+The smart account will remain counterfactual until the first user operation. If the smart account is not
 deployed, it will be automatically deployed upon the sending first user operation.
 
 ```ts
-import { parseEther } from "viem";
+import { parseEther } from 'viem'
 
 // Appropriate fee per gas must be determined for the specific bundler being used.
-const maxFeePerGas = 1n;
-const maxPriorityFeePerGas = 1n;
+const maxFeePerGas = 1n
+const maxPriorityFeePerGas = 1n
 
 const userOperationHash = await bundlerClient.sendUserOperation({
   account: smartAccount,
   calls: [
     {
-      to: "0x1234567890123456789012345678901234567890",
-      value: parseEther("1"),
+      to: '0x1234567890123456789012345678901234567890',
+      value: parseEther('1'),
     },
   ],
   maxFeePerGas,
   maxPriorityFeePerGas,
-});
+})
 ```
 
 ## Next steps

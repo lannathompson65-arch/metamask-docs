@@ -1,13 +1,22 @@
 ---
 description: Learn how to use the native token permissions with Advanced Permissions (ERC-7715).
-keywords: [permissions, spending limit, restrict, 7715, erc-7715, native-token-permissions, advanced permissions]
+keywords:
+  [
+    permissions,
+    spending limit,
+    restrict,
+    7715,
+    erc-7715,
+    native-token-permissions,
+    advanced permissions,
+  ]
 ---
 
-import Tabs from "@theme/Tabs"; 
+import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 # Use native token permissions
- 
+
 [Advanced Permissions (ERC-7715)](../../../concepts/advanced-permissions.md) supports native token permission types that allow you to request fine-grained
 permissions for native token transfers with time-based (periodic) or streaming conditions, depending on your use case.
 
@@ -30,53 +39,55 @@ See the [native token periodic permission API reference](../../../reference/adva
 <TabItem value="example.ts">
 
 ```typescript
-import { sepolia as chain } from "viem/chains";
-import { parseEther } from "viem";
-import { walletClient } from "./client.ts"
+import { sepolia as chain } from 'viem/chains'
+import { parseEther } from 'viem'
+import { walletClient } from './client.ts'
 
 // Since current time is in seconds, convert milliseconds to seconds.
-const currentTime = Math.floor(Date.now() / 1000);
+const currentTime = Math.floor(Date.now() / 1000)
 // 1 week from now.
-const expiry = currentTime + 604800;
+const expiry = currentTime + 604800
 
-const grantedPermissions = await walletClient.requestExecutionPermissions([{
-  chainId: chain.id,
-  expiry,
-  signer: {
-    type: "account",
-    data: {
-      // Session account created as a prerequisite.
-      //
-      // The requested permissions will granted to the
-      // session account.
-      address: sessionAccountAddress,
+const grantedPermissions = await walletClient.requestExecutionPermissions([
+  {
+    chainId: chain.id,
+    expiry,
+    signer: {
+      type: 'account',
+      data: {
+        // Session account created as a prerequisite.
+        //
+        // The requested permissions will granted to the
+        // session account.
+        address: sessionAccountAddress,
+      },
     },
-  },
-  permission: {
-    type: "native-token-periodic",
-    data: {
-      // 0.001 ETH in wei format.
-      periodAmount: parseEther("0.001"),
-      // 1 hour in seconds.
-      periodDuration: 86400,
-      startTime: currentTime,
-      justification: "Permission to use 0.001 ETH every day",
+    permission: {
+      type: 'native-token-periodic',
+      data: {
+        // 0.001 ETH in wei format.
+        periodAmount: parseEther('0.001'),
+        // 1 hour in seconds.
+        periodDuration: 86400,
+        startTime: currentTime,
+        justification: 'Permission to use 0.001 ETH every day',
+      },
     },
+    isAdjustmentAllowed: true,
   },
-  isAdjustmentAllowed: true,
-}]);
+])
 ```
 
 </TabItem>
 <TabItem value="client.ts">
 
 ```typescript
-import { createWalletClient, custom } from "viem";
-import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
+import { createWalletClient, custom } from 'viem'
+import { erc7715ProviderActions } from '@metamask/smart-accounts-kit/actions'
 
 export const walletClient = createWalletClient({
   transport: custom(window.ethereum),
-}).extend(erc7715ProviderActions());
+}).extend(erc7715ProviderActions())
 ```
 
 </TabItem>
@@ -84,7 +95,7 @@ export const walletClient = createWalletClient({
 
 ## Native token stream permission
 
-This permission type ensures a linear streaming transfer limit for native tokens. Token transfers are blocked until the 
+This permission type ensures a linear streaming transfer limit for native tokens. Token transfers are blocked until the
 defined start timestamp. At the start, a specified initial amount is released, after which tokens accrue linearly at the
 configured rate, up to the maximum allowed amount.
 
@@ -97,55 +108,57 @@ See the [native token stream permission API reference](../../../reference/advanc
 <TabItem value="example.ts">
 
 ```typescript
-import { sepolia as chain } from "viem/chains";
-import { parseEther } from "viem";
-import { walletClient } from "./client.ts"
+import { sepolia as chain } from 'viem/chains'
+import { parseEther } from 'viem'
+import { walletClient } from './client.ts'
 
 // Since current time is in seconds, convert milliseconds to seconds.
-const currentTime = Math.floor(Date.now() / 1000);
+const currentTime = Math.floor(Date.now() / 1000)
 // 1 week from now.
-const expiry = currentTime + 604800;
+const expiry = currentTime + 604800
 
-const grantedPermissions = await walletClient.requestExecutionPermissions([{
-  chainId: chain.id,
-  expiry,
-  signer: {
-    type: "account",
-    data: {
-      // Session account created as a prerequisite.
-      //
-      // The requested permissions will granted to the
-      // session account.
-      address: sessionAccountAddress,
+const grantedPermissions = await walletClient.requestExecutionPermissions([
+  {
+    chainId: chain.id,
+    expiry,
+    signer: {
+      type: 'account',
+      data: {
+        // Session account created as a prerequisite.
+        //
+        // The requested permissions will granted to the
+        // session account.
+        address: sessionAccountAddress,
+      },
     },
-  },
-  permission: {
-    type: "native-token-stream",
-    data: {
-      // 0.0001 ETH in wei format.
-      amountPerSecond: parseEther("0.0001"),
-      // 0.1 ETH in wei format.
-      initialAmount: parseEther("0.1"),
-      // 1 ETH in wei format.
-      maxAmount: parseEther("1"),
-      startTime: currentTime,
-      justification: "Permission to use 0.0001 ETH per second",
+    permission: {
+      type: 'native-token-stream',
+      data: {
+        // 0.0001 ETH in wei format.
+        amountPerSecond: parseEther('0.0001'),
+        // 0.1 ETH in wei format.
+        initialAmount: parseEther('0.1'),
+        // 1 ETH in wei format.
+        maxAmount: parseEther('1'),
+        startTime: currentTime,
+        justification: 'Permission to use 0.0001 ETH per second',
+      },
     },
+    isAdjustmentAllowed: true,
   },
-  isAdjustmentAllowed: true,
-}]);
+])
 ```
 
 </TabItem>
 <TabItem value="client.ts">
 
 ```typescript
-import { createWalletClient, custom } from "viem";
-import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
+import { createWalletClient, custom } from 'viem'
+import { erc7715ProviderActions } from '@metamask/smart-accounts-kit/actions'
 
 export const walletClient = createWalletClient({
   transport: custom(window.ethereum),
-}).extend(erc7715ProviderActions());
+}).extend(erc7715ProviderActions())
 ```
 
 </TabItem>

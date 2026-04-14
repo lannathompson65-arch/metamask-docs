@@ -12,7 +12,7 @@ const siteUrl = 'https://docs.metamask.io'
 
 const remarkPlugins = [
   require('remark-math'),
-  [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }]
+  [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }],
 ]
 
 const rehypePlugins = [[require('rehype-katex'), { strict: false }]]
@@ -76,19 +76,20 @@ const config = {
         type: 'application/ld+json',
       },
       innerHTML: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "@id": `${fullUrl}#organization`,
-        "name": "MetaMask",
-        "url": fullUrl,
-        "logo": new URL('img/favicons/favicon-96x96.png', fullUrl).toString(),
-        "description": "MetaMask is the leading self-custodial cryptocurrency wallet and Web3 gateway, enabling developers to build dapps that connect to MetaMask across EVM and Solana ecosystems.",
-        "sameAs": [
-          "https://github.com/MetaMask",
-          "https://twitter.com/MetaMask",
-          "https://www.linkedin.com/company/metamask",
-          "https://metamask.io"
-        ]
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        '@id': `${fullUrl}#organization`,
+        name: 'MetaMask',
+        url: fullUrl,
+        logo: new URL('img/favicons/favicon-96x96.png', fullUrl).toString(),
+        description:
+          'MetaMask is the leading self-custodial cryptocurrency wallet and Web3 gateway, enabling developers to build dapps that connect to MetaMask across EVM and Solana ecosystems.',
+        sameAs: [
+          'https://github.com/MetaMask',
+          'https://twitter.com/MetaMask',
+          'https://www.linkedin.com/company/metamask',
+          'https://metamask.io',
+        ],
       }),
     },
     {
@@ -97,13 +98,14 @@ const config = {
         type: 'application/ld+json',
       },
       innerHTML: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "@id": `${fullUrl}#website`,
-        "name": "MetaMask Developer Documentation",
-        "url": fullUrl,
-        "publisher": { "@id": `${fullUrl}#organization` },
-        "description": "Official developer documentation for MetaMask Connect, Embedded Wallets, Snaps, and the MetaMask developer platform."
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        '@id': `${fullUrl}#website`,
+        name: 'MetaMask Developer Documentation',
+        url: fullUrl,
+        publisher: { '@id': `${fullUrl}#organization` },
+        description:
+          'Official developer documentation for MetaMask Connect, Embedded Wallets, Snaps, and the MetaMask developer platform.',
       }),
     },
   ],
@@ -191,7 +193,10 @@ const config = {
     ],
   ],
   plugins: [
-    ['./src/plugins/docusaurus-plugin-virtual-files', { rootDir: '.integrationBuilderCache', globalDataKeys: ['EW_AI_SKILL_MD'] }],
+    [
+      './src/plugins/docusaurus-plugin-virtual-files',
+      { rootDir: '.integrationBuilderCache', globalDataKeys: ['EW_AI_SKILL_MD'] },
+    ],
     './src/plugins/docusaurus-plugin-tutorials',
     'docusaurus-plugin-sass',
     './src/plugins/mm-scss-utils',

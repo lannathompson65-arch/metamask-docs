@@ -32,26 +32,26 @@ For an EIP-7702-upgraded EOA, verify that you submit the authorization to set th
 before redeeming the delegation.
 
 ```ts
-import { getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
-import { sepolia as chain } from "viem/chains";
+import { getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
+import { sepolia as chain } from 'viem/chains'
 
 // Get the EOA account code
 const code = await publicClient.getCode({
   address,
-});
+})
 
 if (code) {
   // According to EIP-7702, the code format is 0xef0100 || address.
   // Remove the first 8 characters (0xef0100) to get the delegator address.
-  const delegatorAddress = `0x${code.substring(8)}`;
+  const delegatorAddress = `0x${code.substring(8)}`
 
-  const statelessDelegatorAddress = getSmartAccountsEnvironment(chain.id)
-  .implementations
-  .EIP7702StatelessDeleGatorImpl;
+  const statelessDelegatorAddress = getSmartAccountsEnvironment(chain.id).implementations
+    .EIP7702StatelessDeleGatorImpl
 
   // If the account isn't upgraded to a MetaMask smart account, you can
   // either upgrade programmatically or ask the user to switch to a smart account manually.
-  const isAccountUpgraded = delegatorAddress.toLowerCase() === statelessDelegatorAddress.toLowerCase();
+  const isAccountUpgraded =
+    delegatorAddress.toLowerCase() === statelessDelegatorAddress.toLowerCase()
 }
 ```
 

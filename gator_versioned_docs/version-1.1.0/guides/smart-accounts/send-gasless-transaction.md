@@ -27,25 +27,25 @@ In this example, the paymaster client is passed to the `sendUserOperation` metho
 <TabItem value="example.ts">
 
 ```typescript
-import { bundlerClient, smartAccount, paymasterClient } from "./config.ts";
-import { parseEther } from "viem";
+import { bundlerClient, smartAccount, paymasterClient } from './config.ts'
+import { parseEther } from 'viem'
 
 // Appropriate fee per gas must be determined for the specific bundler being used.
-const maxFeePerGas = 1n;
-const maxPriorityFeePerGas = 1n;
+const maxFeePerGas = 1n
+const maxPriorityFeePerGas = 1n
 
 const userOperationHash = await bundlerClient.sendUserOperation({
   account: smartAccount,
   calls: [
     {
-      to: "0x1234567890123456789012345678901234567890",
-      value: parseEther("0.001")
-    }
+      to: '0x1234567890123456789012345678901234567890',
+      value: parseEther('0.001'),
+    },
   ],
   maxFeePerGas,
   maxPriorityFeePerGas,
   paymaster: paymasterClient,
-});
+})
 ```
 
 </TabItem>
@@ -53,41 +53,37 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 <TabItem value="config.ts">
 
 ```typescript
-import { createPublicClient, createPaymasterClient, http } from "viem";
-import { createBundlerClient } from "viem/account-abstraction";
-import { sepolia as chain } from "viem/chains";
-import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
-import { 
-  Implementation, 
-  toMetaMaskSmartAccount,
-} from "@metamask/smart-accounts-kit";
-
+import { createPublicClient, createPaymasterClient, http } from 'viem'
+import { createBundlerClient } from 'viem/account-abstraction'
+import { sepolia as chain } from 'viem/chains'
+import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
 
 const publicClient = createPublicClient({
   chain,
-  transport: http()
-});
+  transport: http(),
+})
 
-const privateKey = generatePrivateKey(); 
-const account = privateKeyToAccount(privateKey);
+const privateKey = generatePrivateKey()
+const account = privateKeyToAccount(privateKey)
 
 export const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
   deployParams: [account.address, [], [], []],
-  deploySalt: "0x",
+  deploySalt: '0x',
   signer: { account },
-});
+})
 
 export const bundlerClient = createBundlerClient({
   client: publicClient,
-  transport: http("https://api.pimlico.io/v2/11155111/rpc?apikey=<YOUR-API-KEY>")
-});
+  transport: http('https://api.pimlico.io/v2/11155111/rpc?apikey=<YOUR-API-KEY>'),
+})
 
 export const paymasterClient = createPaymasterClient({
   // You can use the paymaster of your choice
-  transport: http("https://api.pimlico.io/v2/11155111/rpc?apikey=<YOUR-API-KEY>")
-});
+  transport: http('https://api.pimlico.io/v2/11155111/rpc?apikey=<YOUR-API-KEY>'),
+})
 ```
 
 </TabItem>

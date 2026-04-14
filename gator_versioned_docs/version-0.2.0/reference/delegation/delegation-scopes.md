@@ -4,7 +4,7 @@ sidebar_label: Delegation scopes
 keywords: [delegation scopes, configuration, reference]
 ---
 
-import Tabs from "@theme/Tabs"; 
+import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 # Delegation scopes
@@ -105,7 +105,7 @@ const delegation = createDelegation({
 
 ### ERC-20 transfer scope
 
-Ensures that ERC-20 token transfers are limited to a predefined maximum amount. 
+Ensures that ERC-20 token transfers are limited to a predefined maximum amount.
 This scope is useful for setting simple, fixed transfer limits without any time-based or streaming conditions.
 
 #### Parameters
@@ -144,9 +144,9 @@ Limits the delegation to ERC-721 token (NFT) transfers only.
 
 #### Parameters
 
-| Name           | Type      | Required | Description                                                                  |
-| -------------- | --------- | -------- | ---------------------------------------------------------------------------- |
-| `tokenAddress` | `Address` | Yes      | The ERC-721 token contract address.                                          |
+| Name           | Type      | Required | Description                                                      |
+| -------------- | --------- | -------- | ---------------------------------------------------------------- |
+| `tokenAddress` | `Address` | Yes      | The ERC-721 token contract address.                              |
 | `tokenId`      | `bigint`  | Yes      | The ID of the ERC-721 token that can be transferred by delegate. |
 
 #### Example
@@ -177,13 +177,13 @@ At the start of each new period, the allowance resets.
 
 #### Parameters
 
-| Name             | Type      | Required | Description                                                      |
-| ---------------- | --------- | -------- | ---------------------------------------------------------------- |
-| `periodAmount`   | `bigint`  | Yes      | The maximum amount of tokens that can be transferred per period. |
-| `periodDuration` | `number`  | Yes      | The duration of each period in seconds.                          |
-| `startDate`      | `number`  | Yes      | The timestamp when the first period begins in seconds.           |
-| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of calldata the delegate is allowed to call. It doesn't support multiple selectors. Each entry in the list represents a portion of calldata corresponding to the same function signature. You can include or exclude specific parameters to define what parts of the calldata are valid. Cannot be used together with `exactCalldata`. |
-| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The calldata the delegate is allowed to call. The default is `0x` to disallow ERC-20 and ERC-721 token transfers. Cannot be used together with `allowedCalldata`. |
+| Name              | Type                             | Required | Description                                                                                                                                                                                                                                                                                                                                     |
+| ----------------- | -------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `periodAmount`    | `bigint`                         | Yes      | The maximum amount of tokens that can be transferred per period.                                                                                                                                                                                                                                                                                |
+| `periodDuration`  | `number`                         | Yes      | The duration of each period in seconds.                                                                                                                                                                                                                                                                                                         |
+| `startDate`       | `number`                         | Yes      | The timestamp when the first period begins in seconds.                                                                                                                                                                                                                                                                                          |
+| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No       | The list of calldata the delegate is allowed to call. It doesn't support multiple selectors. Each entry in the list represents a portion of calldata corresponding to the same function signature. You can include or exclude specific parameters to define what parts of the calldata are valid. Cannot be used together with `exactCalldata`. |
+| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No       | The calldata the delegate is allowed to call. The default is `0x` to disallow ERC-20 and ERC-721 token transfers. Cannot be used together with `allowedCalldata`.                                                                                                                                                                               |
 
 #### Example
 
@@ -219,14 +219,14 @@ At the start, a specified initial amount is released, after which tokens accrue 
 
 #### Parameters
 
-| Name              | Type      | Required | Description                                               |
-| ----------------- | --------- | -------- | --------------------------------------------------------- |
-| `initialAmount`   | `bigint`  | Yes      | The initial amount that can be transferred at start time. |
-| `maxAmount`       | `bigint`  | Yes      | The maximum total amount that can be unlocked.            |
-| `amountPerSecond` | `bigint`  | Yes      | The rate at which tokens accrue per second.               |
-| `startTime`       | `number`  | Yes      | The start timestamp in seconds.                           |
-| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of calldata the delegate is allowed to call. It doesn't support multiple selectors. Each entry in the list represents a portion of calldata corresponding to the same function signature. You can include or exclude specific parameters to define what parts of the calldata are valid. Cannot be used together with `exactCalldata`. |
-| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The calldata the delegate is allowed to call. The default is `0x` to disallow ERC-20 and ERC-721 token transfers. Cannot be used together with `allowedCalldata`. |
+| Name              | Type                             | Required | Description                                                                                                                                                                                                                                                                                                                                     |
+| ----------------- | -------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `initialAmount`   | `bigint`                         | Yes      | The initial amount that can be transferred at start time.                                                                                                                                                                                                                                                                                       |
+| `maxAmount`       | `bigint`                         | Yes      | The maximum total amount that can be unlocked.                                                                                                                                                                                                                                                                                                  |
+| `amountPerSecond` | `bigint`                         | Yes      | The rate at which tokens accrue per second.                                                                                                                                                                                                                                                                                                     |
+| `startTime`       | `number`                         | Yes      | The start timestamp in seconds.                                                                                                                                                                                                                                                                                                                 |
+| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No       | The list of calldata the delegate is allowed to call. It doesn't support multiple selectors. Each entry in the list represents a portion of calldata corresponding to the same function signature. You can include or exclude specific parameters to define what parts of the calldata are valid. Cannot be used together with `exactCalldata`. |
+| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No       | The calldata the delegate is allowed to call. The default is `0x` to disallow ERC-20 and ERC-721 token transfers. Cannot be used together with `allowedCalldata`.                                                                                                                                                                               |
 
 #### Example
 
@@ -257,16 +257,16 @@ const delegation = createDelegation({
 
 ### Native token transfer scope
 
-Ensures that native token transfers are limited to a predefined maximum amount. 
+Ensures that native token transfers are limited to a predefined maximum amount.
 This scope is useful for setting simple, fixed transfer limits without any time based or streaming conditions.
 
 #### Parameters
 
-| Name              | Type      | Required | Description                                                       |
-| ----------------- | --------- | -------- | ----------------------------------------------------------------- |
-| `maxAmount`       | `bigint`  | Yes      | The maximum amount of tokens that can be transferred by delegate. |
-| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of calldata the delegate is allowed to call. It doesn't support multiple selectors. Each entry in the list represents a portion of calldata corresponding to the same function signature. You can include or exclude specific parameters to define what parts of the calldata are valid. Cannot be used together with `exactCalldata`. |
-| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The calldata the delegate is allowed to call. The default is `0x` to disallow ERC-20 and ERC-721 token transfers. Cannot be used together with `allowedCalldata`. |
+| Name              | Type                             | Required | Description                                                                                                                                                                                                                                                                                                                                     |
+| ----------------- | -------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `maxAmount`       | `bigint`                         | Yes      | The maximum amount of tokens that can be transferred by delegate.                                                                                                                                                                                                                                                                               |
+| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No       | The list of calldata the delegate is allowed to call. It doesn't support multiple selectors. Each entry in the list represents a portion of calldata corresponding to the same function signature. You can include or exclude specific parameters to define what parts of the calldata are valid. Cannot be used together with `exactCalldata`. |
+| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No       | The calldata the delegate is allowed to call. The default is `0x` to disallow ERC-20 and ERC-721 token transfers. Cannot be used together with `allowedCalldata`.                                                                                                                                                                               |
 
 #### Example
 
@@ -296,12 +296,12 @@ Defines the specific methods, contract addresses, and calldata that are allowed 
 
 #### Parameters
 
-| Name              | Type                             | Required | Description                                                                                                                                                     |
-| ----------------- | -------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `targets`         | `Address[]`                      | Yes      | The list of addresses that the delegate is allowed to call.                                                                                                     |
-| `selectors`       | `MethodSelector[]`               | Yes      | The list of method selectors that the delegate is allowed to call. The selector value can be 4-byte hex string, ABI function signature, or ABI function object. |
+| Name              | Type                             | Required | Description                                                                                                                                                                                                                                                                                                                                     |
+| ----------------- | -------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `targets`         | `Address[]`                      | Yes      | The list of addresses that the delegate is allowed to call.                                                                                                                                                                                                                                                                                     |
+| `selectors`       | `MethodSelector[]`               | Yes      | The list of method selectors that the delegate is allowed to call. The selector value can be 4-byte hex string, ABI function signature, or ABI function object.                                                                                                                                                                                 |
 | `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No       | The list of calldata the delegate is allowed to call. It doesn't support multiple selectors. Each entry in the list represents a portion of calldata corresponding to the same function signature. You can include or exclude specific parameters to define what parts of the calldata are valid. Cannot be used together with `exactCalldata`. |
-| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No       | The calldata the delegate is allowed to call. Cannot be used together with `allowedCalldata`. |
+| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No       | The calldata the delegate is allowed to call. Cannot be used together with `allowedCalldata`.                                                                                                                                                                                                                                                   |
 
 #### Example
 
@@ -333,7 +333,7 @@ Restricts a delegation to ownership transfer calls only.
 #### Parameters
 
 | Name              | Type      | Required | Description                                                            |
-| ----------------- | --------- | -------- | -----------------------------------------------------------------------|
+| ----------------- | --------- | -------- | ---------------------------------------------------------------------- |
 | `contractAddress` | `Address` | Yes      | The target contract address for which ownership transfers are allowed. |
 
 #### Example

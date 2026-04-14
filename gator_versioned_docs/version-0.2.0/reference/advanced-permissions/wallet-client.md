@@ -22,14 +22,14 @@ To use `requestExecutionPermissions`, the Viem Wallet Client must be extended wi
 
 ### Parameters
 
-| Name | Type | Required | Description |
-| ---- | ---- | -------- | ----------- |
-| `chainId` | `number` | Yes | The chain ID on which the permission is being requested. |
-| `address` | `Address` | No | Address of the wallet to which the permission is being requested. |
-| `expiry` | `number` | Yes | The timestamp (in seconds) by which the permission must expire. |
-| `permission` | `SupportedPermissionParams` | Yes | The permission to be requested. The toolkit supports multiple [Advanced Permissions types](permissions.md). |
-| `signer` | `SignerParam` | Yes | The account to which the permission will be assigned. |
-| `isAdjustmentAllowed` | `boolean` | Yes | Defines whether the user is allowed to modify the requested permission. |
+| Name                  | Type                        | Required | Description                                                                                                 |
+| --------------------- | --------------------------- | -------- | ----------------------------------------------------------------------------------------------------------- |
+| `chainId`             | `number`                    | Yes      | The chain ID on which the permission is being requested.                                                    |
+| `address`             | `Address`                   | No       | Address of the wallet to which the permission is being requested.                                           |
+| `expiry`              | `number`                    | Yes      | The timestamp (in seconds) by which the permission must expire.                                             |
+| `permission`          | `SupportedPermissionParams` | Yes      | The permission to be requested. The toolkit supports multiple [Advanced Permissions types](permissions.md). |
+| `signer`              | `SignerParam`               | Yes      | The account to which the permission will be assigned.                                                       |
+| `isAdjustmentAllowed` | `boolean`                   | Yes      | Defines whether the user is allowed to modify the requested permission.                                     |
 
 ### Example
 
@@ -71,12 +71,12 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
 <TabItem value ="client.ts">
 
 ```ts
-import { createWalletClient, custom } from "viem";
-import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
+import { createWalletClient, custom } from 'viem'
+import { erc7715ProviderActions } from '@metamask/smart-accounts-kit/actions'
 
 export const walletClient = createWalletClient({
   transport: custom(window.ethereum),
-}).extend(erc7715ProviderActions());
+}).extend(erc7715ProviderActions())
 ```
 
 </TabItem>
@@ -96,10 +96,10 @@ extended with `erc7710WalletActions`.
 See the [Viem `sendTransaction` parameters](https://viem.sh/docs/actions/wallet/sendTransaction#parameters).
 This function has the same parameters, and it also requires the following parameters:
 
-| Name | Type | Required | Description                                                                                                                                                                                               |
-| ---- | ---- | -------- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `delegationManager` | `Address` | Yes | The address of the Delegation Manager.                                                                                                                                                                    |
-| `permissionsContext` | `Hex` | Yes | Encoded calldata for redeeming delegations. If you're not using Advanced Permissions (ERC-7715), you can use the [`redeemDelegations`](../delegation/index.md#redeemdelegations) utility function to generate the calldata manually. |
+| Name                 | Type      | Required | Description                                                                                                                                                                                                                          |
+| -------------------- | --------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `delegationManager`  | `Address` | Yes      | The address of the Delegation Manager.                                                                                                                                                                                               |
+| `permissionsContext` | `Hex`     | Yes      | Encoded calldata for redeeming delegations. If you're not using Advanced Permissions (ERC-7715), you can use the [`redeemDelegations`](../delegation/index.md#redeemdelegations) utility function to generate the calldata manually. |
 
 ### Example
 
@@ -107,45 +107,45 @@ This function has the same parameters, and it also requires the following parame
 <TabItem value ="example.ts">
 
 ```ts
-import { walletClient, publicClient } from "./client.ts";
+import { walletClient, publicClient } from './client.ts'
 
 // These properties must be extracted from the permission response. See
 // `grantPermissions` action to learn how to request permissions.
-const permissionsContext = permissionsResponse[0].context;
-const delegationManager = permissionsResponse[0].signerMeta.delegationManager;
+const permissionsContext = permissionsResponse[0].context
+const delegationManager = permissionsResponse[0].signerMeta.delegationManager
 
 const hash = walletClient.sendTransactionWithDelegation({
   chain,
-  to: "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
+  to: '0x70997970c51812dc3a010c7d01b50e0d17dc79c8',
   value: 1n,
   permissionsContext,
-  delegationManager
-});
+  delegationManager,
+})
 ```
 
 </TabItem>
 <TabItem value ="client.ts">
 
 ```ts
-import { http, createPublicClient, createWalletClient } from "viem";
-import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
-import { sepolia as chain } from "viem/chains";
-import { erc7710WalletActions } from "@metamask/smart-accounts-kit/actions";
+import { http, createPublicClient, createWalletClient } from 'viem'
+import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts'
+import { sepolia as chain } from 'viem/chains'
+import { erc7710WalletActions } from '@metamask/smart-accounts-kit/actions'
 
 export const publicClient = createPublicClient({
   chain,
-  transport: http()
-});
+  transport: http(),
+})
 
 // Your session account for requesting and redeeming should be the same.
-const privateKey = "0x...";
-const account = privateKeyToAccount(privateKey);
+const privateKey = '0x...'
+const account = privateKeyToAccount(privateKey)
 
 const walletClient = createWalletClient({
   account,
   transport: http(),
   chain,
-}).extend(erc7710WalletActions());
+}).extend(erc7710WalletActions())
 ```
 
 </TabItem>

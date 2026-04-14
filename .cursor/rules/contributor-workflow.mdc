@@ -65,6 +65,10 @@ Keeping rule files current prevents stale guidance from producing incorrect cont
 
 ## CI linting
 
+Pull requests run **`npm run format:check`** (Prettier against `.prettierrc` and `.prettierignore`). Run
+**`npm run format`** locally to fix style before pushing. Generated Snaps API pages under
+`snaps/reference/snaps-api/` are excluded from formatting in git (see `.prettierignore`).
+
 Pull requests are checked by a Vale-based linter
 ([docs-spelling-check](https://github.com/Consensys/github-actions/tree/main/docs-spelling-check))
 that enforces Microsoft style, Consensys terminology, and spelling. Fix any linter warnings before

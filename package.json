@@ -20,16 +20,19 @@
     "lint:js": "eslint . --max-warnings=5",
     "lint:style": "stylelint \"src/**/*.css\" --fix",
     "lint:fix": "npm run lint:js -- --fix",
-    "format": "prettier --write '{blog,docs,src}/**/*.{md,mdx,ts,js,tsx,jsx,json}'"
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "lint-staged": {
     "src/**/*.{ts,js,jsx,tsx}": "npm run lint:fix",
     "**/*.{ts,tsx}": "npm run typecheck-staged",
     "**/*.css": "npm run lint:style",
-    "**/*.{md,mdx,ts,js,tsx,jsx,json}": "npm run format"
+    "**/*.{md,mdx,ts,js,tsx,jsx,json,css,scss,html,yml,yaml}": "prettier --write"
   },
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^14.2.0",
+    "@docsearch/css": "^4.6.2",
+    "@docsearch/react": "^4.6.2",
     "@docusaurus/core": "3.9.2",
     "@docusaurus/plugin-client-redirects": "3.9.2",
     "@docusaurus/plugin-content-docs": "3.9.2",
@@ -40,7 +43,6 @@
     "@docusaurus/remark-plugin-npm2yarn": "3.9.2",
     "@docusaurus/theme-common": "3.9.2",
     "@docusaurus/theme-mermaid": "3.9.2",
-    "@intercom/messenger-js-sdk": "^0.0.14",
     "@lottiefiles/react-lottie-player": "^3.6.0",
     "@mdx-js/react": "^3.1.0",
     "@mermaid-js/layout-elk": "^0.1.9",

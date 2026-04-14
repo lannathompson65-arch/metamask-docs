@@ -27,27 +27,24 @@ See Viem's [account abstraction documentation](https://viem.sh/account-abstracti
 To use the bundler and paymaster clients with the toolkit, create instances of these clients and configure them as follows:
 
 ```typescript
-import {
-  createPaymasterClient,
-  createBundlerClient,
-} from "viem/account-abstraction";
-import { http } from "viem";
-import { sepolia as chain } from "viem/chains"; 
+import { createPaymasterClient, createBundlerClient } from 'viem/account-abstraction'
+import { http } from 'viem'
+import { sepolia as chain } from 'viem/chains'
 
 // Replace these URLs with your actual bundler and paymaster endpoints.
-const bundlerUrl = "https://your-bundler-url.com";
-const paymasterUrl = "https://your-paymaster-url.com";
+const bundlerUrl = 'https://your-bundler-url.com'
+const paymasterUrl = 'https://your-paymaster-url.com'
 
 // The paymaster is optional.
 const paymasterClient = createPaymasterClient({
   transport: http(paymasterUrl),
-});
+})
 
 const bundlerClient = createBundlerClient({
   transport: http(bundlerUrl),
   paymaster: paymasterClient,
   chain,
-});
+})
 ```
 
 Replace the bundler and paymaster URLs with your bundler and paymaster endpoints.
@@ -76,10 +73,10 @@ If no environment is found for the specified chain, it throws an error.
 <TabItem value="example.ts">
 
 ```typescript
-import { SmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
-import { delegatorSmartAccount } from "./config.ts";
+import { SmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
+import { delegatorSmartAccount } from './config.ts'
 
-const environment: SmartAccountsEnvironment = delegatorSmartAccount.environment; 
+const environment: SmartAccountsEnvironment = delegatorSmartAccount.environment
 ```
 
 </TabItem>
@@ -93,7 +90,7 @@ import {
 import { privateKeyToAccount } from "viem/accounts";
 import { createPublicClient, http } from "viem";
 import { sepolia as chain } from "viem/chains";
- 
+
 const publicClient = createPublicClient({
   chain,
   transport: http(),
@@ -124,14 +121,11 @@ This function is especially useful if your <GlossaryTerm term="Delegator account
 creating a <GlossaryTerm term="Redelegation">redelegation</GlossaryTerm>.
 
 ```typescript
-import { 
-  getSmartAccountsEnvironment, 
-  SmartAccountsEnvironment, 
-} from "@metamask/smart-accounts-kit";
-import { sepolia } from "viem/chains";
+import { getSmartAccountsEnvironment, SmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
+import { sepolia } from 'viem/chains'
 
 // Resolves the SmartAccountsEnvironment for Sepolia
-const environment: SmartAccountsEnvironment = getSmartAccountsEnvironment(sepolia.id);
+const environment: SmartAccountsEnvironment = getSmartAccountsEnvironment(sepolia.id)
 ```
 
 ### Deploy a custom environment
@@ -139,7 +133,7 @@ const environment: SmartAccountsEnvironment = getSmartAccountsEnvironment(sepoli
 You can deploy the contracts using any method, but the toolkit provides a convenient [`deploySmartAccountsEnvironment`](../reference/delegation/index.md#deploysmartaccountsenvironment) function. This function simplifies deploying the <GlossaryTerm term="Delegation Framework" /> contracts to your desired EVM chain.
 
 This function requires a Viem [Public Client](https://viem.sh/docs/clients/public), [Wallet Client](https://viem.sh/docs/clients/wallet), and [Chain](https://viem.sh/docs/glossary/types#chain)
-to deploy the contracts and resolve the `SmartAccountsEnvironment`. 
+to deploy the contracts and resolve the `SmartAccountsEnvironment`.
 
 Your wallet must have a sufficient native token balance to deploy the contracts.
 
@@ -147,39 +141,35 @@ Your wallet must have a sufficient native token balance to deploy the contracts.
 <TabItem value="example.ts">
 
 ```typescript
-import { walletClient, publicClient } from "./config.ts";
-import { sepolia as chain } from "viem/chains";
-import { deploySmartAccountsEnvironment } from "@metamask/smart-accounts-kit/utils";
+import { walletClient, publicClient } from './config.ts'
+import { sepolia as chain } from 'viem/chains'
+import { deploySmartAccountsEnvironment } from '@metamask/smart-accounts-kit/utils'
 
-const environment = await deploySmartAccountsEnvironment(
-  walletClient, 
-  publicClient, 
-  chain
-);
+const environment = await deploySmartAccountsEnvironment(walletClient, publicClient, chain)
 ```
 
 </TabItem>
 <TabItem value="config.ts">
 
 ```typescript
-import { privateKeyToAccount } from "viem/accounts";
-import { sepolia as chain } from "viem/chains";
-import { http, createWalletClient, createPublicClient } from "viem";
+import { privateKeyToAccount } from 'viem/accounts'
+import { sepolia as chain } from 'viem/chains'
+import { http, createWalletClient, createPublicClient } from 'viem'
 
 // Your deployer wallet private key.
-const privateKey = "0x123.."; 
-const account = privateKeyToAccount(privateKey);
+const privateKey = '0x123..'
+const account = privateKeyToAccount(privateKey)
 
 export const walletClient = createWalletClient({
   account,
   chain,
-  transport: http()
-});
- 
-export const publicClient = createPublicClient({ 
-  transport: http(), 
-  chain, 
-});
+  transport: http(),
+})
+
+export const publicClient = createPublicClient({
+  transport: http(),
+  chain,
+})
 ```
 
 </TabItem>
@@ -195,8 +185,8 @@ import { sepolia as chain } from "viem/chains";
 import { deploySmartAccountsEnvironment } from "@metamask/smart-accounts-kit/utils";
 
 const environment = await deploySmartAccountsEnvironment(
-  walletClient, 
-  publicClient, 
+  walletClient,
+  publicClient,
   chain,
   // add-start
 + {
@@ -211,29 +201,25 @@ Once the contracts are deployed, you can use them to override the environment.
 ### Override the environment
 
 To override the environment, the toolkit provides an [`overrideDeployedEnvironment`](../reference/delegation/index.md#overridedeployedenvironment) function to resolve
-`SmartAccountsEnvironment` with specified contracts for the given chain and contract version. 
+`SmartAccountsEnvironment` with specified contracts for the given chain and contract version.
 
 ```typescript
 // The config.ts is the same as in the previous example.
-import { walletClient, publicClient } from "./config.ts";
-import { sepolia as chain } from "viem/chains";
-import { SmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
-import { 
+import { walletClient, publicClient } from './config.ts'
+import { sepolia as chain } from 'viem/chains'
+import { SmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
+import {
   overrideDeployedEnvironment,
-  deploySmartAccountsEnvironment 
-} from "@metamask/smart-accounts-kit";
+  deploySmartAccountsEnvironment,
+} from '@metamask/smart-accounts-kit'
 
 const environment: SmartAccountsEnvironment = await deploySmartAccountsEnvironment(
-  walletClient, 
-  publicClient, 
+  walletClient,
+  publicClient,
   chain
-);
+)
 
-overrideDeployedEnvironment(
-  chain.id,
-  "1.3.0",
-  environment,
-);
+overrideDeployedEnvironment(chain.id, '1.3.0', environment)
 ```
 
 If you've already deployed the contracts using a different method, you can create a `SmartAccountsEnvironment` instance with the required contract addresses, and pass it to the function.
@@ -244,7 +230,7 @@ If you've already deployed the contracts using a different method, you can creat
 - import { sepolia as chain } from "viem/chains";
 // remove-end
 import { SmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
-import { 
+import {
   overrideDeployedEnvironment,
   // remove-next-line
 - deploySmartAccountsEnvironment
@@ -252,8 +238,8 @@ import {
 
 // remove-start
 - const environment: SmartAccountsEnvironment = await deploySmartAccountsEnvironment(
--  walletClient, 
--  publicClient, 
+-  walletClient,
+-  publicClient,
 -  chain
 - );
 // remove-end

@@ -3,11 +3,11 @@ description: Learn how to use the function call scope for a delegation.
 keywords: [delegation scope, function call, restrict, delegation]
 ---
 
-import Tabs from "@theme/Tabs"; 
+import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 # Use the function call scope
- 
+
 The function call scope defines the specific methods, contract addresses, and calldata that are allowed for the delegation.
 For example, Alice delegates to Bob the ability to call the `approve` function on the USDC contract, with the approval amount set to `0`.
 
@@ -22,35 +22,35 @@ For example, Alice delegates to Bob the ability to call the `approve` function o
 
 This scope requires `targets`, which specifies the permitted contract addresses, and `selectors`, which specifies the allowed methods.
 
-Internally, this scope uses the [`allowedTargets`](../../../reference/delegation/caveats.md#allowedtargets), [`allowedMethods`](../../../reference/delegation/caveats.md#allowedmethods), and [`valueLte`](../../../reference/delegation/caveats.md#valuelte) caveat enforcers, and 
+Internally, this scope uses the [`allowedTargets`](../../../reference/delegation/caveats.md#allowedtargets), [`allowedMethods`](../../../reference/delegation/caveats.md#allowedmethods), and [`valueLte`](../../../reference/delegation/caveats.md#valuelte) caveat enforcers, and
 optionally uses the [`allowedCalldata`](../../../reference/delegation/caveats.md#allowedcalldata) or [`exactCalldata`](../../../reference/delegation/caveats.md#exactcalldata) caveat enforcers when those parameters are specified.
 See the [function call scope reference](../../../reference/delegation/delegation-scopes.md#function-call-scope) for more details.
 
 The following example sets the delegation scope to allow the delegate to call the `approve` function on the USDC token contract:
 
 ```typescript
-import { createDelegation, ScopeType } from "@metamask/smart-accounts-kit";
+import { createDelegation, ScopeType } from '@metamask/smart-accounts-kit'
 
 // USDC address on Sepolia.
-const USDC_ADDRESS = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
+const USDC_ADDRESS = '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238'
 
 const delegation = createDelegation({
   scope: {
     type: ScopeType.FunctionCall,
     targets: [USDC_ADDRESS],
-    selectors: ["approve(address, uint256)"],
+    selectors: ['approve(address, uint256)'],
   },
   to: delegateAccount,
   from: delegatorAccount,
   environment: delegatorAccount.environment,
-});
+})
 ```
 
 ### Define allowed calldata
 
-You can further restrict the scope by defining the `allowedCalldata`. For example, you can set 
+You can further restrict the scope by defining the `allowedCalldata`. For example, you can set
 `allowedCalldata` so the delegate is only permitted to call the `approve` function on the
-USDC token contract with an allowance value of `0`. This effectively limits the delegate to 
+USDC token contract with an allowance value of `0`. This effectively limits the delegate to
 revoking ERC-20 approvals.
 
 :::important Usage
@@ -61,34 +61,31 @@ You can include or exclude specific parameters to precisely define what parts of
 :::
 
 ```typescript
-import { createDelegation, ScopeType } from "@metamask/smart-accounts-kit";
-import { encodeAbiParameters, erc20Abi } from "viem";
+import { createDelegation, ScopeType } from '@metamask/smart-accounts-kit'
+import { encodeAbiParameters, erc20Abi } from 'viem'
 
 // USDC address on Sepolia.
-const USDC_ADDRESS = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
+const USDC_ADDRESS = '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238'
 
 const delegation = createDelegation({
   scope: {
     type: ScopeType.FunctionCall,
     targets: [USDC_ADDRESS],
-    selectors: ["approve(address, uint256)"],
+    selectors: ['approve(address, uint256)'],
     allowedCalldata: [
       {
         // Limits the allowance amount to be 0.
-        value: encodeAbiParameters(
-          [{ name: 'amount', type: 'uint256' }],
-          [0n],
-        ),
-        // The first 4 bytes are for selector, and next 32 bytes 
+        value: encodeAbiParameters([{ name: 'amount', type: 'uint256' }], [0n]),
+        // The first 4 bytes are for selector, and next 32 bytes
         // are for spender address.
         startIndex: 36,
       },
-    ]
+    ],
   },
   to: delegateAccount,
   from: delegatorAccount,
   environment: delegatorAccount.environment,
-});
+})
 ```
 
 ### Define exact calldata
@@ -99,29 +96,29 @@ contract, with a specific spender address and an allowance value of 0. This effe
 revoking ERC-20 approvals for a specific spender.
 
 ```typescript
-import { createDelegation, ScopeType } from "@metamask/smart-accounts-kit";
-import { encodeFunctionData, erc20Abi } from "viem";
+import { createDelegation, ScopeType } from '@metamask/smart-accounts-kit'
+import { encodeFunctionData, erc20Abi } from 'viem'
 
 // USDC address on Sepolia.
-const USDC_ADDRESS = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
+const USDC_ADDRESS = '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238'
 
 const delegation = createDelegation({
   scope: {
     type: ScopeType.FunctionCall,
     targets: [USDC_ADDRESS],
-    selectors: ["approve(address, uint256)"],
+    selectors: ['approve(address, uint256)'],
     exactCalldata: {
       calldata: encodeFunctionData({
         abi: erc20Abi,
-        args: ["0x0227628f3F023bb0B980b67D528571c95c6DaC1c", 0n],
+        args: ['0x0227628f3F023bb0B980b67D528571c95c6DaC1c', 0n],
         functionName: 'approve',
-      })
-    }
+      }),
+    },
   },
   to: delegateAccount,
   from: delegatorAccount,
   environment: delegatorAccount.environment,
-});
+})
 ```
 
 ### Allow native token transfer
@@ -130,23 +127,23 @@ You can set `valueLte` to allow native token transfer up to a specified amount p
 to take `0.00001` ETH as a fee each time he revokes a token approval on her behalf.
 
 ```ts
-import { createDelegation, ScopeType } from "@metamask/smart-accounts-kit";
-import { parseEther } from "viem";
+import { createDelegation, ScopeType } from '@metamask/smart-accounts-kit'
+import { parseEther } from 'viem'
 
 // USDC address on Sepolia.
-const USDC_ADDRESS = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
+const USDC_ADDRESS = '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238'
 
 const delegation = createDelegation({
   scope: {
     type: ScopeType.FunctionCall,
     targets: [USDC_ADDRESS],
-    selectors: ["approve(address, uint256)"],
-    valueLte: { maxValue: parseEther("0.00001") },
+    selectors: ['approve(address, uint256)'],
+    valueLte: { maxValue: parseEther('0.00001') },
   },
   to: delegateAccount,
   from: delegatorAccount,
   environment: delegatorAccount.environment,
-});
+})
 ```
 
 ## Next steps

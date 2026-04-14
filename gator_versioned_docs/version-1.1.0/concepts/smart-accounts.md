@@ -5,7 +5,7 @@ keywords: [MetaMask, smart accounts, account abstraction, ERC-4337]
 
 # MetaMask Smart Accounts
 
-The Smart Accounts Kit enables you to create and manage *MetaMask Smart Accounts*.
+The Smart Accounts Kit enables you to create and manage _MetaMask Smart Accounts_.
 MetaMask Smart Accounts are [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) smart contract accounts
 that support programmable account behavior and advanced features such as multi-signature approvals,
 automated transaction batching, and custom security policies.
@@ -69,15 +69,14 @@ The MetaMask Smart Accounts flow is as follows:
 1. **Account setup** - A user creates a smart account by deploying a smart contract, and initializing it with
    ownership and security settings.
    The user can customize the smart account in the following ways:
+   - **Account logic** - They can configure custom logic for actions such as multi-signature
+     approvals, spending limits, and automated transaction batching.
 
-    - **Account logic** - They can configure custom logic for actions such as multi-signature
-      approvals, spending limits, and automated transaction batching.
+   - **Security and recovery** - They can configure advanced security features such as two-factor
+     authentication and mechanisms for account recovery involving trusted parties.
 
-    - **Security and recovery** - They can configure advanced security features such as two-factor
-      authentication and mechanisms for account recovery involving trusted parties.
-
-    - **Gas management** - They can configure flexible gas payment options, including alternative
-      tokens or third-party sponsorship.
+   - **Gas management** - They can configure flexible gas payment options, including alternative
+     tokens or third-party sponsorship.
 
 2. **User operation creation** - For actions such as sending transactions, a user operation is created with
    necessary details and signed by the configured signers.

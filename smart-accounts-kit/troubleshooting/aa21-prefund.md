@@ -30,33 +30,33 @@ to get the gas estimates from your <GlossaryTerm term="Bundler">bundler</Glossar
 <TabItem value="v0.7" label="EntryPoint v0.7">
 
 ```typescript
-import { formatEther } from "viem";
+import { formatEther } from 'viem'
 
 const gasEstimate = await bundlerClient.estimateUserOperationGas({
   account: smartAccount,
-  calls: [{ to: "0x...", value: 0n }],
-});
+  calls: [{ to: '0x...', value: 0n }],
+})
 
-const { maxFeePerGas } = await publicClient.estimateFeesPerGas();
+const { maxFeePerGas } = await publicClient.estimateFeesPerGas()
 
 const requiredGas =
   gasEstimate.verificationGasLimit +
   gasEstimate.callGasLimit +
   (gasEstimate.paymasterVerificationGasLimit ?? 0n) +
   (gasEstimate.paymasterPostOpGasLimit ?? 0n) +
-  gasEstimate.preVerificationGas;
+  gasEstimate.preVerificationGas
 
-const requiredPrefund = requiredGas * maxFeePerGas;
+const requiredPrefund = requiredGas * maxFeePerGas
 
 const balance = await publicClient.getBalance({
   address: smartAccount.address,
-});
+})
 
 if (balance < requiredPrefund) {
   console.log(
     `Insufficient balance: account has ${formatEther(balance)} ETH, ` +
-    `but needs ${formatEther(requiredPrefund)} ETH`
-  );
+      `but needs ${formatEther(requiredPrefund)} ETH`
+  )
 }
 ```
 
@@ -64,31 +64,29 @@ if (balance < requiredPrefund) {
 <TabItem value="v0.6" label="EntryPoint v0.6">
 
 ```typescript
-import { formatEther } from "viem";
+import { formatEther } from 'viem'
 
 const gasEstimate = await bundlerClient.estimateUserOperationGas({
   account: smartAccount,
-  calls: [{ to: "0x...", value: 0n }],
-});
+  calls: [{ to: '0x...', value: 0n }],
+})
 
-const { maxFeePerGas } = await publicClient.estimateFeesPerGas();
+const { maxFeePerGas } = await publicClient.estimateFeesPerGas()
 
 const requiredGas =
-  gasEstimate.callGasLimit +
-  gasEstimate.verificationGasLimit +
-  gasEstimate.preVerificationGas;
+  gasEstimate.callGasLimit + gasEstimate.verificationGasLimit + gasEstimate.preVerificationGas
 
-const requiredPrefund = requiredGas * maxFeePerGas;
+const requiredPrefund = requiredGas * maxFeePerGas
 
 const balance = await publicClient.getBalance({
   address: smartAccount.address,
-});
+})
 
 if (balance < requiredPrefund) {
   console.log(
     `Insufficient balance: account has ${formatEther(balance)} ETH, ` +
-    `but needs ${formatEther(requiredPrefund)} ETH`
-  );
+      `but needs ${formatEther(requiredPrefund)} ETH`
+  )
 }
 ```
 

@@ -17,21 +17,20 @@ Builds an array of caveats.
 
 ### Parameters
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| `environment` | `SmartAccountsEnvironment` | Yes | Environment to resolve the smart contracts for the current chain. |
-| `config` | `CaveatBuilderConfig` | No | Configuration for `CoreCaveatBuilder`. |
+| Name          | Type                       | Required | Description                                                       |
+| ------------- | -------------------------- | -------- | ----------------------------------------------------------------- |
+| `environment` | `SmartAccountsEnvironment` | Yes      | Environment to resolve the smart contracts for the current chain. |
+| `config`      | `CaveatBuilderConfig`      | No       | Configuration for `CoreCaveatBuilder`.                            |
 
 ### Example
 
-
 ```ts
-import { createCaveatBuilder } from "@metamask/smart-accounts-kit/utils";
-import { getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
-import { sepolia } from "viem/chains";
+import { createCaveatBuilder } from '@metamask/smart-accounts-kit/utils'
+import { getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
+import { sepolia } from 'viem/chains'
 
-const environment = getSmartAccountsEnvironment(sepolia.id);
-const caveatBuilder = createCaveatBuilder(environment);
+const environment = getSmartAccountsEnvironment(sepolia.id)
+const caveatBuilder = createCaveatBuilder(environment)
 ```
 
 ### Allow empty caveats
@@ -39,15 +38,15 @@ const caveatBuilder = createCaveatBuilder(environment);
 To create an empty caveat collection, set the `CaveatBuilderConfig.allowInsecureUnrestrictedDelegation` to `true`.
 
 ```ts title="example.ts"
-import { createCaveatBuilder } from "@metamask/smart-accounts-kit/utils";
-import { getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
-import { sepolia } from "viem/chains";
+import { createCaveatBuilder } from '@metamask/smart-accounts-kit/utils'
+import { getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
+import { sepolia } from 'viem/chains'
 
-const environment = getSmartAccountsEnvironment(sepolia.id);
+const environment = getSmartAccountsEnvironment(sepolia.id)
 const caveatBuilder = createCaveatBuilder(environment, {
-  // add-next-line 
+  // add-next-line
   allowInsecureUnrestrictedDelegation: true,
-});
+})
 ```
 
 ## `createDelegation`
@@ -56,36 +55,36 @@ Creates a delegation with a specific delegate.
 
 ### Parameters
 
-| Name | Type | Required | Description |
-| ---- | ---- | -------- | ----------- |
-| `from` | `Hex` | Yes | The address that is granting the delegation. |
-| `to` | `Hex` | Yes | The address to which the delegation is being granted. |
-| `scope` | `ScopeConfig` | Yes | The scope of the delegation that defines the initial authority. |
-| `environment` | `SmartAccountsEnvironment` | Yes | The environment used by the toolkit to define contract addresses for interacting with the Delegation Framework contracts. |
-| `caveats` | `Caveats` | No | Caveats that further refine the authority granted by the `scope`. |
-| `parentDelegation` | `Delegation \| Hex` | No | The parent delegation or its corresponding hex to create a delegation chain. |
-| `salt` | `Hex` | No | The salt for generating the delegation hash. This helps prevent hash collisions when creating identical delegations. |
+| Name               | Type                       | Required | Description                                                                                                               |
+| ------------------ | -------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `from`             | `Hex`                      | Yes      | The address that is granting the delegation.                                                                              |
+| `to`               | `Hex`                      | Yes      | The address to which the delegation is being granted.                                                                     |
+| `scope`            | `ScopeConfig`              | Yes      | The scope of the delegation that defines the initial authority.                                                           |
+| `environment`      | `SmartAccountsEnvironment` | Yes      | The environment used by the toolkit to define contract addresses for interacting with the Delegation Framework contracts. |
+| `caveats`          | `Caveats`                  | No       | Caveats that further refine the authority granted by the `scope`.                                                         |
+| `parentDelegation` | `Delegation \| Hex`        | No       | The parent delegation or its corresponding hex to create a delegation chain.                                              |
+| `salt`             | `Hex`                      | No       | The salt for generating the delegation hash. This helps prevent hash collisions when creating identical delegations.      |
 
 ### Example
 
 ```typescript
-import { createDelegation, getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
-import { sepolia } from "viem/chains";
-import { parseEther } from "viem";
+import { createDelegation, getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
+import { sepolia } from 'viem/chains'
+import { parseEther } from 'viem'
 
 const delegation = createDelegation({
   // Address that is granting the delegation
-  from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
+  from: '0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1',
   // Address to which the delegation is being granted
-  to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
+  to: '0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488',
   // Alternatively you can use environment property of MetaMask smart account.
   environment: getSmartAccountsEnvironment(sepolia.id),
   scope: {
-    type: "nativeTokenTransferAmount",
+    type: 'nativeTokenTransferAmount',
     // 0.001 ETH in wei format.
-    maxAmount: parseEther("0.001"),
+    maxAmount: parseEther('0.001'),
   },
-});
+})
 ```
 
 ## `createOpenDelegation`
@@ -94,34 +93,33 @@ Creates an open delegation that can be redeemed by any delegate.
 
 ### Parameters
 
-| Name | Type | Required | Description |
-| ---- | ---- | -------- | ----------- |
-| `from` | `Hex` | Yes | The address that is granting the delegation. |
-| `scope` | `ScopeConfig` | Yes | The scope of the delegation that defines the initial authority. |
-| `environment` | `SmartAccountsEnvironment` | Yes | The environment used by the toolkit to define contract addresses for interacting with the Delegation Framework contracts. |
-| `caveats` | `Caveats` | No | Caveats that further refine the authority granted by the `scope`. |
-| `parentDelegation` | `Delegation \| Hex` | No | The parent delegation or its corresponding hex to create a delegation chain. |
-| `salt` | `Hex` | No | The salt for generating the delegation hash. This helps prevent hash collisions when creating identical delegations. |
-
+| Name               | Type                       | Required | Description                                                                                                               |
+| ------------------ | -------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `from`             | `Hex`                      | Yes      | The address that is granting the delegation.                                                                              |
+| `scope`            | `ScopeConfig`              | Yes      | The scope of the delegation that defines the initial authority.                                                           |
+| `environment`      | `SmartAccountsEnvironment` | Yes      | The environment used by the toolkit to define contract addresses for interacting with the Delegation Framework contracts. |
+| `caveats`          | `Caveats`                  | No       | Caveats that further refine the authority granted by the `scope`.                                                         |
+| `parentDelegation` | `Delegation \| Hex`        | No       | The parent delegation or its corresponding hex to create a delegation chain.                                              |
+| `salt`             | `Hex`                      | No       | The salt for generating the delegation hash. This helps prevent hash collisions when creating identical delegations.      |
 
 ### Example
 
 ```typescript
-import { createOpenDelegation, getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
-import { sepolia } from "viem/chains";
-import { parseEther } from "viem";
+import { createOpenDelegation, getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
+import { sepolia } from 'viem/chains'
+import { parseEther } from 'viem'
 
 const delegation = createOpenDelegation({
   // Address that is granting the delegation
-  from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
+  from: '0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1',
   // Alternatively you can use environment property of MetaMask smart account.
   environment: getSmartAccountsEnvironment(sepolia.id),
   scope: {
-    type: "nativeTokenTransferAmount",
+    type: 'nativeTokenTransferAmount',
     // 0.001 ETH in wei format.
-    maxAmount: parseEther("0.001"),
+    maxAmount: parseEther('0.001'),
   },
-});
+})
 ```
 
 ## `createExecution`
@@ -130,26 +128,26 @@ Creates an `ExecutionStruct` instance.
 
 ### Parameters
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| `target` | `Address` | No | Address of the contract or recipient that the call is directed to. |
-| `value` | `bigint` | No | Value of native tokens to send along with the call in wei. |
-| `callData` | `Hex` | No | Encoded function data or payload to be executed on the target address. |
+| Name       | Type      | Required | Description                                                            |
+| ---------- | --------- | -------- | ---------------------------------------------------------------------- |
+| `target`   | `Address` | No       | Address of the contract or recipient that the call is directed to.     |
+| `value`    | `bigint`  | No       | Value of native tokens to send along with the call in wei.             |
+| `callData` | `Hex`     | No       | Encoded function data or payload to be executed on the target address. |
 
 ### Example
 
 ```ts
-import { createExecution } from "@metamask/smart-accounts-kit";
-import { parseEther } from "viem";
+import { createExecution } from '@metamask/smart-accounts-kit'
+import { parseEther } from 'viem'
 
 // Creates an ExecutionStruct to transfer 0.01 ETH to
 // 0xe3C818389583fDD5cAC32f548140fE26BcEaE907 address.
 const execution = createExecution({
-  target: "0xe3C818389583fDD5cAC32f548140fE26BcEaE907",
+  target: '0xe3C818389583fDD5cAC32f548140fE26BcEaE907',
   // 0.01 ETH in wei
-  value: parseEther("0.01"),
-  callData: "0x",
-});
+  value: parseEther('0.01'),
+  callData: '0x',
+})
 ```
 
 ## `decodeDelegations`
@@ -158,16 +156,16 @@ Decodes an ABI-encoded hex string to an array of delegations.
 
 ### Parameters
 
-| Name | Type | Required | Description |
-| ---- | ---- | -------- | ----------- |
-| `encoded` | `Hex` | Yes |  The ABI encoded hex string to decode. |
+| Name      | Type  | Required | Description                           |
+| --------- | ----- | -------- | ------------------------------------- |
+| `encoded` | `Hex` | Yes      | The ABI encoded hex string to decode. |
 
 ### Example
 
 ```ts
-import { decodeDelegations } from "@metamask/smart-accounts-kit/utils";
+import { decodeDelegations } from '@metamask/smart-accounts-kit/utils'
 
-const delegations = decodeDelegations("0x7f0db33d..c06aeeac");
+const delegations = decodeDelegations('0x7f0db33d..c06aeeac')
 ```
 
 ## `deploySmartAccountsEnvironment`
@@ -176,12 +174,12 @@ Deploys the Delegation Framework contracts to an EVM chain.
 
 ### Parameters
 
-| Name | Type | Required | Description |
-| ---- | ---- | -------- | ----------- |
-| `walletClient` | `WalletClient` | Yes | [Viem Wallet Client](https://viem.sh/docs/clients/wallet#wallet-client) to deploy the contracts. |
-| `publicClient` | `PublicClient` | Yes | [Viem Public Client](https://viem.sh/docs/clients/public) to interact with the given chain. |
-| `chain` | `Chain` | Yes | [Viem Chain](https://viem.sh/docs/chains/introduction) where you wish to deploy the Delegation Framework contracts. |
-| `deployedContracts` | `{ [contract: string]: Hex }` | No | Allows overriding specific contract addresses when calling the function. For example, if certain contracts have already been deployed on the target chain, their addresses can be provided directly to the function. |
+| Name                | Type                          | Required | Description                                                                                                                                                                                                          |
+| ------------------- | ----------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `walletClient`      | `WalletClient`                | Yes      | [Viem Wallet Client](https://viem.sh/docs/clients/wallet#wallet-client) to deploy the contracts.                                                                                                                     |
+| `publicClient`      | `PublicClient`                | Yes      | [Viem Public Client](https://viem.sh/docs/clients/public) to interact with the given chain.                                                                                                                          |
+| `chain`             | `Chain`                       | Yes      | [Viem Chain](https://viem.sh/docs/chains/introduction) where you wish to deploy the Delegation Framework contracts.                                                                                                  |
+| `deployedContracts` | `{ [contract: string]: Hex }` | No       | Allows overriding specific contract addresses when calling the function. For example, if certain contracts have already been deployed on the target chain, their addresses can be provided directly to the function. |
 
 ### Example
 
@@ -189,39 +187,35 @@ Deploys the Delegation Framework contracts to an EVM chain.
 <TabItem value="example.ts">
 
 ```ts
-import { deploySmartAccountsEnvironment } from "@metamask/smart-accounts-kit/utils";
-import { walletClient, publicClient } from "./config.ts";
-import { sepolia as chain } from "viem/chains";
+import { deploySmartAccountsEnvironment } from '@metamask/smart-accounts-kit/utils'
+import { walletClient, publicClient } from './config.ts'
+import { sepolia as chain } from 'viem/chains'
 
-const environment = await deploySmartAccountsEnvironment(
-  walletClient, 
-  publicClient, 
-  chain
-);
+const environment = await deploySmartAccountsEnvironment(walletClient, publicClient, chain)
 ```
 
 </TabItem>
 <TabItem value="config.ts">
 
 ```ts
-import { privateKeyToAccount } from "viem/accounts";
-import { sepolia as chain } from "viem/chains";
-import { http, createWalletClient, createPublicClient } from "viem";
+import { privateKeyToAccount } from 'viem/accounts'
+import { sepolia as chain } from 'viem/chains'
+import { http, createWalletClient, createPublicClient } from 'viem'
 
 // Your deployer wallet private key.
-const privateKey = "0x123.."; 
-const account = privateKeyToAccount(privateKey);
+const privateKey = '0x123..'
+const account = privateKeyToAccount(privateKey)
 
 export const walletClient = createWalletClient({
   account,
   chain,
-  transport: http()
-});
- 
-export const publicClient = createPublicClient({ 
-  transport: http(), 
-  chain, 
-});
+  transport: http(),
+})
+
+export const publicClient = createPublicClient({
+  transport: http(),
+  chain,
+})
 ```
 
 </TabItem>
@@ -233,26 +227,22 @@ Once the contracts are deployed, you can use them to override the delegator
 environment using `overrideDeployedEnvironment`.
 
 ```ts title="example.ts"
-import { walletClient, publicClient } from "./config.ts";
-import { sepolia as chain } from "viem/chains";
-import { SmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
-import { 
+import { walletClient, publicClient } from './config.ts'
+import { sepolia as chain } from 'viem/chains'
+import { SmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
+import {
   overrideDeployedEnvironment,
   deploySmartAccountsEnvironment,
-} from "@metamask/smart-accounts-kit/utils";
+} from '@metamask/smart-accounts-kit/utils'
 
 const environment: SmartAccountsEnvironment = await deploySmartAccountsEnvironment(
-  walletClient, 
-  publicClient, 
+  walletClient,
+  publicClient,
   chain
-);
+)
 
 // add-start
-overrideDeployedEnvironment(
-  chain.id,
-  "1.3.0",
-  environment,
-);
+overrideDeployedEnvironment(chain.id, '1.3.0', environment)
 // add-end
 ```
 
@@ -262,9 +252,9 @@ Encodes the calldata for disabling a delegation.
 
 ### Parameters
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| `delegation` | `Delegation` | Yes | The delegation to be disabled. |
+| Name         | Type         | Required | Description                    |
+| ------------ | ------------ | -------- | ------------------------------ |
+| `delegation` | `Delegation` | Yes      | The delegation to be disabled. |
 
 ### Example
 
@@ -272,32 +262,32 @@ Encodes the calldata for disabling a delegation.
 <TabItem value="example.ts">
 
 ```ts
-import { DelegationManager } from "@metamask/smart-accounts-kit/contracts";
-import { delegation } from "./delegation.ts";
+import { DelegationManager } from '@metamask/smart-accounts-kit/contracts'
+import { delegation } from './delegation.ts'
 
 const disableDelegationData = DelegationManager.encode.disableDelegation({
   delegation,
-});
+})
 ```
 
 </TabItem>
 <TabItem value="delegation.ts">
 
 ```ts
-import { createDelegation } from "@metamask/smart-accounts-kit";
-import { sepolia } from "viem/chains";
-import { parseEther } from "viem";
+import { createDelegation } from '@metamask/smart-accounts-kit'
+import { sepolia } from 'viem/chains'
+import { parseEther } from 'viem'
 
 export const delegation = createDelegation({
-  from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
-  to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
+  from: '0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1',
+  to: '0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488',
   environment: getSmartAccountsEnvironment(sepolia.id),
   scope: {
-    type: "nativeTokenTransferAmount",
+    type: 'nativeTokenTransferAmount',
     // 0.001 ETH in wei format.
-    maxAmount: parseEther("0.001"),
+    maxAmount: parseEther('0.001'),
   },
-});
+})
 ```
 
 </TabItem>
@@ -309,9 +299,9 @@ Encodes an array of delegations to an ABI-encoded hex string.
 
 ### Parameters
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| `delegations` | `Delegation[]` | Yes | The delegation array to be encoded. |
+| Name          | Type           | Required | Description                         |
+| ------------- | -------------- | -------- | ----------------------------------- |
+| `delegations` | `Delegation[]` | Yes      | The delegation array to be encoded. |
 
 ### Example
 
@@ -319,30 +309,30 @@ Encodes an array of delegations to an ABI-encoded hex string.
 <TabItem value="example.ts">
 
 ```ts
-import { encodeDelegations } from "@metamask/smart-accounts-kit/utils";
-import { delegation } from "./delegation.ts";
+import { encodeDelegations } from '@metamask/smart-accounts-kit/utils'
+import { delegation } from './delegation.ts'
 
-const encodedDelegations = encodeDelegations([delegation]);
+const encodedDelegations = encodeDelegations([delegation])
 ```
 
 </TabItem>
 <TabItem value="delegation.ts">
 
 ```ts
-import { createDelegation } from "@metamask/smart-accounts-kit";
-import { sepolia } from "viem/chains";
-import { parseEther } from "viem";
+import { createDelegation } from '@metamask/smart-accounts-kit'
+import { sepolia } from 'viem/chains'
+import { parseEther } from 'viem'
 
 export const delegation = createDelegation({
-  from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
-  to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
+  from: '0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1',
+  to: '0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488',
   environment: getSmartAccountsEnvironment(sepolia.id),
   scope: {
-    type: "nativeTokenTransferAmount",
+    type: 'nativeTokenTransferAmount',
     // 0.001 ETH in wei format.
-    maxAmount: parseEther("0.001"),
+    maxAmount: parseEther('0.001'),
   },
-});
+})
 ```
 
 </TabItem>
@@ -350,13 +340,13 @@ export const delegation = createDelegation({
 
 ## `getDelegationHashOffchain`
 
-Returns the delegation hash. 
+Returns the delegation hash.
 
 ### Parameters
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| `input` | `Delegation` | Yes | The delegation object to hash. |
+| Name    | Type         | Required | Description                    |
+| ------- | ------------ | -------- | ------------------------------ |
+| `input` | `Delegation` | Yes      | The delegation object to hash. |
 
 ### Example
 
@@ -364,40 +354,37 @@ Returns the delegation hash.
 <TabItem value ="example.ts">
 
 ```ts
-import { getDelegationHashOffchain } from "@metamask/smart-accounts-kit/utils";
-import { delegation } from "./config.ts";
+import { getDelegationHashOffchain } from '@metamask/smart-accounts-kit/utils'
+import { delegation } from './config.ts'
 
-const delegationHash = getDelegationHashOffchain(delegation);
+const delegationHash = getDelegationHashOffchain(delegation)
 ```
 
 </TabItem>
 <TabItem value ="config.ts">
 
 ```ts
-import { 
-  getSmartAccountsEnvironment,
-  createDelegation,
-} from "@metamask/smart-accounts-kit";
-import { parseEther } from "viem";
-import { sepolia } from "viem/chains";
+import { getSmartAccountsEnvironment, createDelegation } from '@metamask/smart-accounts-kit'
+import { parseEther } from 'viem'
+import { sepolia } from 'viem/chains'
 
-const environment = getSmartAccountsEnvironment(sepolia.id);
+const environment = getSmartAccountsEnvironment(sepolia.id)
 
 // The address to which the delegation is granted. It can be an EOA address, or
 // smart account address.
-const delegate = "0x2FcB88EC2359fA635566E66415D31dD381CF5585";
+const delegate = '0x2FcB88EC2359fA635566E66415D31dD381CF5585'
 
 export const delegation = createDelegation({
   to: delegate,
   // Address that is granting the delegation.
-  from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
+  from: '0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1',
   environment,
   scope: {
-    type: "nativeTokenTransferAmount",
+    type: 'nativeTokenTransferAmount',
     // 0.001 ETH in wei format.
-    maxAmount: parseEther("0.001"),
+    maxAmount: parseEther('0.001'),
   },
-});
+})
 ```
 
 </TabItem>
@@ -409,16 +396,16 @@ Resolves the `SmartAccountsEnvironment` for a chain.
 
 ### Parameters
 
-| Name | Type | Required | Description |
-| ---- | ---- | -------- | ----------- |
-| `chainId` | `number` | Yes | The chain ID of the network for which the `SmartAccountsEnvironment` should be resolved. |
-| `version` | `SupportedVersion` | No | Specifies the version of the Delegation Framework contracts to use. If omitted, the latest supported version will be used by default. |
+| Name      | Type               | Required | Description                                                                                                                           |
+| --------- | ------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `chainId` | `number`           | Yes      | The chain ID of the network for which the `SmartAccountsEnvironment` should be resolved.                                              |
+| `version` | `SupportedVersion` | No       | Specifies the version of the Delegation Framework contracts to use. If omitted, the latest supported version will be used by default. |
 
 ### Example
 
 ```ts
-import { getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
-import { sepolia } from "viem/chains";
+import { getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
+import { sepolia } from 'viem/chains'
 
 const environment = getSmartAccountsEnvironment(sepolia.id)
 ```
@@ -429,11 +416,11 @@ Overrides or adds the `SmartAccountsEnvironment` for a chain and supported versi
 
 ### Parameters
 
-| Name | Type | Required | Description |
-| ---- | ---- | -------- | ----------- |
-| `chainId` | `number` | Yes | The chain ID of the network for which the `SmartAccountsEnvironment` should be overridden. |
-| `version` | `SupportedVersion` | Yes | The version of the Delegation Framework contracts to override for the specified chain. |
-| `environment` | `SmartAccountsEnvironment` | Yes | The environment containing contract addresses to override for the given chain and version. |
+| Name          | Type                       | Required | Description                                                                                |
+| ------------- | -------------------------- | -------- | ------------------------------------------------------------------------------------------ |
+| `chainId`     | `number`                   | Yes      | The chain ID of the network for which the `SmartAccountsEnvironment` should be overridden. |
+| `version`     | `SupportedVersion`         | Yes      | The version of the Delegation Framework contracts to override for the specified chain.     |
+| `environment` | `SmartAccountsEnvironment` | Yes      | The environment containing contract addresses to override for the given chain and version. |
 
 ### Example
 
@@ -441,30 +428,26 @@ Overrides or adds the `SmartAccountsEnvironment` for a chain and supported versi
 <TabItem value="example.ts">
 
 ```ts
-import { environment } from "./environment.ts";
-import { overrideDeployedEnvironment } from "@metamask/smart-accounts-kit/utils";
-import { sepolia } from "viem/chains";
+import { environment } from './environment.ts'
+import { overrideDeployedEnvironment } from '@metamask/smart-accounts-kit/utils'
+import { sepolia } from 'viem/chains'
 
-overrideDeployedEnvironment(
-  sepolia.id,
-  "1.3.0",
-  environment
-);
+overrideDeployedEnvironment(sepolia.id, '1.3.0', environment)
 ```
 
 </TabItem>
 <TabItem value="environment.ts">
 
 ```ts
-import { SmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
+import { SmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
 
 export const environment: SmartAccountsEnvironment = {
-  SimpleFactory: "0x124..",
+  SimpleFactory: '0x124..',
   // ...
   implementations: {
     // ...
   },
-};
+}
 ```
 
 </TabItem>
@@ -477,26 +460,26 @@ This method supports batch redemption, allowing multiple delegations to be proce
 
 ### Parameters
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| `delegations` | `Delegation[][]` | Yes | A nested collection representing chains of delegations. Each inner collection contains a chain of delegations to be redeemed. |
-| `modes` | `ExecutionMode[]` | Yes | A collection specifying the [execution mode](../../concepts/delegation/index.md#execution-modes) for each corresponding delegation chain. Supported execution modes are `SingleDefault`, `SingleTry`, `BatchDefault`, and `BatchTry`. |
-| `executions` | `ExecutionStruct[][]` | Yes | A nested collection where each inner collection contains a list of `ExecutionStruct` objects associated with a specific delegation chain. |
+| Name          | Type                  | Required | Description                                                                                                                                                                                                                           |
+| ------------- | --------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `delegations` | `Delegation[][]`      | Yes      | A nested collection representing chains of delegations. Each inner collection contains a chain of delegations to be redeemed.                                                                                                         |
+| `modes`       | `ExecutionMode[]`     | Yes      | A collection specifying the [execution mode](../../concepts/delegation/index.md#execution-modes) for each corresponding delegation chain. Supported execution modes are `SingleDefault`, `SingleTry`, `BatchDefault`, and `BatchTry`. |
+| `executions`  | `ExecutionStruct[][]` | Yes      | A nested collection where each inner collection contains a list of `ExecutionStruct` objects associated with a specific delegation chain.                                                                                             |
 
 ### Example
 
 This example assumes you have a delegation signed by the delegator.
 
 ```ts
-import { createExecution, ExecutionMode } from "@metamask/smart-accounts-kit";
-import { DelegationManager } from "@metamask/smart-accounts-kit/contracts";
-import { zeroAddress } from "viem";
+import { createExecution, ExecutionMode } from '@metamask/smart-accounts-kit'
+import { DelegationManager } from '@metamask/smart-accounts-kit/contracts'
+import { zeroAddress } from 'viem'
 
 const data = DelegationManager.encode.redeemDelegations({
-  delegations: [[ signedDelegation ]],
-  modes: [ ExecutionMode.SingleDefault ],
-  executions: [[ execution ]],
-});
+  delegations: [[signedDelegation]],
+  modes: [ExecutionMode.SingleDefault],
+  executions: [[execution]],
+})
 ```
 
 ## `signDelegation`
@@ -505,15 +488,15 @@ Signs the delegation and returns the delegation signature.
 
 ### Parameters
 
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| `privateKey` | `Hex` | Yes | The private key to use for signing the delegation. |
-| `delegation` | `Omit<Delegation, "signature">` | Yes | The unsigned delegation object to sign. |
-| `chainId` | `number` | Yes | The chain ID on which the delegation manager is deployed. |
-| `delegationManager` | `0x${string}` | Yes | The address of the Delegation Manager. |
-| `name` | `string` | No | The name of the domain of the Delegation Manager. The default is `DelegationManager`. |
-| `version` | `string` | No | The version of the domain of the Delegation Manager. The default is `1`. |
-| `allowInsecureUnrestrictedDelegation` | `boolean` | No | Whether to allow insecure unrestricted delegation with no caveats. The default is `false`. |
+| Name                                  | Type                            | Required | Description                                                                                |
+| ------------------------------------- | ------------------------------- | -------- | ------------------------------------------------------------------------------------------ |
+| `privateKey`                          | `Hex`                           | Yes      | The private key to use for signing the delegation.                                         |
+| `delegation`                          | `Omit<Delegation, "signature">` | Yes      | The unsigned delegation object to sign.                                                    |
+| `chainId`                             | `number`                        | Yes      | The chain ID on which the delegation manager is deployed.                                  |
+| `delegationManager`                   | `0x${string}`                   | Yes      | The address of the Delegation Manager.                                                     |
+| `name`                                | `string`                        | No       | The name of the domain of the Delegation Manager. The default is `DelegationManager`.      |
+| `version`                             | `string`                        | No       | The version of the domain of the Delegation Manager. The default is `1`.                   |
+| `allowInsecureUnrestrictedDelegation` | `boolean`                       | No       | Whether to allow insecure unrestricted delegation with no caveats. The default is `false`. |
 
 ### Example
 
@@ -521,9 +504,9 @@ Signs the delegation and returns the delegation signature.
 <TabItem value ="example.ts">
 
 ```ts
-import { signDelegation } from "@metamask/smart-accounts-kit";
-import { privateKey, delegation, delegationManager } from "./config.ts";
-import { sepolia } from "viem/chains";
+import { signDelegation } from '@metamask/smart-accounts-kit'
+import { privateKey, delegation, delegationManager } from './config.ts'
+import { sepolia } from 'viem/chains'
 
 const signature = signDelegation({
   privateKey,
@@ -537,34 +520,31 @@ const signature = signDelegation({
 <TabItem value ="config.ts">
 
 ```ts
-import { 
-  getSmartAccountsEnvironment,
-  createDelegation,
-} from "@metamask/smart-accounts-kit";
-import { createWalletClient, parseEther } from "viem";
-import { privateKeyToAccount } from "viem/accounts";
-import { sepolia } from "viem/chains";
+import { getSmartAccountsEnvironment, createDelegation } from '@metamask/smart-accounts-kit'
+import { createWalletClient, parseEther } from 'viem'
+import { privateKeyToAccount } from 'viem/accounts'
+import { sepolia } from 'viem/chains'
 
-const environment = getSmartAccountsEnvironment(sepolia.id);
-export const delegationManager = environment.DelegationManager;
+const environment = getSmartAccountsEnvironment(sepolia.id)
+export const delegationManager = environment.DelegationManager
 
-export const privateKey = `0x12141..`;
-const account = privateKeyToAccount(privateKey);
+export const privateKey = `0x12141..`
+const account = privateKeyToAccount(privateKey)
 
 // The address to which the delegation is granted. It can be an EOA address, or
 // smart account address.
-const delegate = "0x2FcB88EC2359fA635566E66415D31dD381CF5585";
+const delegate = '0x2FcB88EC2359fA635566E66415D31dD381CF5585'
 
 export const delegation = createDelegation({
   to: delegate,
   from: account.address,
   environment,
   scope: {
-    type: "nativeTokenTransferAmount",
+    type: 'nativeTokenTransferAmount',
     // 0.001 ETH in wei format.
-    maxAmount: parseEther("0.001"),
+    maxAmount: parseEther('0.001'),
   },
-});
+})
 ```
 
 </TabItem>

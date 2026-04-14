@@ -15,10 +15,10 @@ This page provides instructions to install and set up the Smart Accounts Kit, en
 
 - Install [Node.js](https://nodejs.org/en/blog/release/v18.18.0) v18 or later.
 - Install [Yarn](https://yarnpkg.com/),
-    [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
+  [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
 - If you plan to use any smart contracts (for example, to
-    [create a custom caveat enforcer](/tutorials/create-custom-caveat-enforcer)),
-    install [Foundry](https://book.getfoundry.sh/getting-started/installation).
+  [create a custom caveat enforcer](/tutorials/create-custom-caveat-enforcer)),
+  install [Foundry](https://book.getfoundry.sh/getting-started/installation).
 
 ## Steps
 

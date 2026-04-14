@@ -6,7 +6,7 @@ keywords: [scaffold-eth, delegation, smart accounts, template]
 
 # Use MetaMask Smart Accounts with Scaffold-ETH 2
 
-Use the [MetaMask Smart Accounts extension](https://github.com/metamask/gator-extension) for [Scaffold-ETH 2](https://docs.scaffoldeth.io/) to bootstrap a project in 
+Use the [MetaMask Smart Accounts extension](https://github.com/metamask/gator-extension) for [Scaffold-ETH 2](https://docs.scaffoldeth.io/) to bootstrap a project in
 under two minutes. This extension helps you quickly generate the boilerplate code to create an embedded smart account, and complete
 the delegation lifecycle (create, sign, and redeem a delegation).
 
@@ -49,7 +49,7 @@ yarn start
 
 Navigate to the **MetaMask Smart Accounts & Delegation** page in your Scaffold-ETH
 frontend at http://localhost:3000/delegations, and follow the steps to deploy a delegator
-account, create a delegate wallet, create a delegation, and redeem a delegation. 
+account, create a delegate wallet, create a delegation, and redeem a delegation.
 
 You can view the completed transaction on Etherscan.
 

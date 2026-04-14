@@ -49,25 +49,25 @@ Replace `<YOUR-API-KEY>` and `<YOUR-API-KEY-SECRET>` in the Node.js example code
 Save the following script to a file, for example, `index.js`.
 
 ```javascript title="index.js"
-const https = require("https")
+const https = require('https')
 
-const projectId = "<YOUR-API-KEY>"
-const projectSecret = "<YOUR-API-KEY-SECRET>"
+const projectId = '<YOUR-API-KEY>'
+const projectSecret = '<YOUR-API-KEY-SECRET>'
 
 const options = {
-  host: "ipfs.infura.io",
+  host: 'ipfs.infura.io',
   port: 5001,
-  path: "/api/v0/pin/add?arg=QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn",
-  method: "POST",
-  auth: projectId + ":" + projectSecret,
+  path: '/api/v0/pin/add?arg=QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn',
+  method: 'POST',
+  auth: projectId + ':' + projectSecret,
 }
 
-let req = https.request(options, (res) => {
-  let body = ""
-  res.on("data", function (chunk) {
+let req = https.request(options, res => {
+  let body = ''
+  res.on('data', function (chunk) {
     body += chunk
   })
-  res.on("end", function () {
+  res.on('end', function () {
     console.log(body)
   })
 })
@@ -138,25 +138,24 @@ Install the library with `npm install --save kubo-rpc-client`.
 Save the following script to a file, for example, `index.mjs`.
 
 ```javascript title="index.mjs"
-import { create } from "kubo-rpc-client"
+import { create } from 'kubo-rpc-client'
 
-const projectId = "<YOUR-API-KEY>";
-const projectSecret = "<YOUR-API-KEY-SECRET>";
-const auth = 
-  "Basic " + Buffer.from(projectId + ":" + projectSecret).toString("base64");
+const projectId = '<YOUR-API-KEY>'
+const projectSecret = '<YOUR-API-KEY-SECRET>'
+const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64')
 
 const client = create({
-  host: "ipfs.infura.io",
+  host: 'ipfs.infura.io',
   port: 5001,
-  protocol: "https",
+  protocol: 'https',
   headers: {
     authorization: auth,
   },
-});
+})
 
-client.pin.add("QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn").then((res) => {
-  console.log(res);
-});
+client.pin.add('QmeGAVddnBSnKc1DLE7DLV9uuTqo5F7QbaveTjr45JUdQn').then(res => {
+  console.log(res)
+})
 ```
 
 Run the script using `node index.mjs`.

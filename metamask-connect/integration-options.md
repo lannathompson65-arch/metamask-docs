@@ -59,15 +59,15 @@ support both ecosystems while keeping familiar provider interfaces for each.
 
 ## Compare options
 
-|                    | Multichain                                           | Single-ecosystem                                                                       | Multi-ecosystem                         |
-| ------------------ | ---------------------------------------------------- | -------------------------------------------------------------------------------------- | --------------------------------------- |
+|                    | Multichain                                  | Single-ecosystem                                                     | Multi-ecosystem                         |
+| ------------------ | ------------------------------------------- | -------------------------------------------------------------------- | --------------------------------------- |
 | **Package**        | [`connect-multichain`](multichain/index.md) | [`connect-evm`](evm/index.md) or [`connect-solana`](solana/index.md) | Both `connect-evm` and `connect-solana` |
-| **Effort**         | Medium — scope-based API                             | Low — drop-in provider                                                                 | Low — two providers                     |
-| **EVM support**    | Via `wallet_invokeMethod`                            | EIP-1193 provider                                                                      | EIP-1193 provider                       |
-| **Solana support** | Via `wallet_invokeMethod`                            | Wallet Standard                                                                        | Wallet Standard                         |
-| **Cross-chain UX** | Single prompt for all ecosystems                     | Single ecosystem                                                                       | Separate connect per ecosystem          |
-| **Sessions**       | Full control                                         | Automatic                                                                              | Automatic per-client                    |
-| **Best for**       | Multichain-native dapps                              | Existing single-chain dapps                                                            | Dapps supporting EVM and Solana         |
+| **Effort**         | Medium (scope-based API)                    | Low (drop-in provider)                                               | Low (two providers)                     |
+| **EVM support**    | Via `wallet_invokeMethod`                   | EIP-1193 provider                                                    | EIP-1193 provider                       |
+| **Solana support** | Via `wallet_invokeMethod`                   | Wallet Standard                                                      | Wallet Standard                         |
+| **Cross-chain UX** | Single prompt for all ecosystems            | Single ecosystem                                                     | Separate connect per ecosystem          |
+| **Sessions**       | Full control                                | Automatic                                                            | Automatic per-client                    |
+| **Best for**       | Multichain-native dapps                     | Existing single-chain dapps                                          | Dapps supporting EVM and Solana         |
 
 <!-- ## Wallet connector libraries
 
@@ -99,5 +99,5 @@ The migration involves updating your client initialization code and adopting sco
 
 ### Does MetaMask Connect work with wagmi, ethers.js, and viem?
 
-Yes. The EVM client (`@metamask/connect-evm`) provides an EIP-1193 compatible provider that works directly with viem's `custom()` transport, ethers.js `BrowserProvider`, and web3.js `Web3` constructor.
+Yes. The EVM client (`@metamask/connect-evm`) provides an EIP-1193 compatible provider that works directly with viem's `custom` transport, ethers.js `BrowserProvider`, and web3.js `Web3` constructor.
 The Solana client provides a Wallet Standard compatible wallet that works with the Solana Wallet Adapter ecosystem.

@@ -42,7 +42,6 @@ You can only configure implicit login via modal, for JWT-based logins, you need 
 
 For the modal custom authentication, you need to pass the `modalConfig` object to the `Web3AuthOptions` object within the constructor.
 
-
 :::tip
 
 Learn more about the `modalConfig` object in the [Whitelabel](whitelabel.mdx) section.
@@ -182,14 +181,14 @@ export type LoginParamMap = {
 <Tabs>
   <TabItem value="Table">
 
-| Parameter                  | Description                                                                                                                        |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Parameter                  | Description                                                                                                                          |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | `loginHint?`               | Helps pass over the login hint to the auth provider. This is used especially for `email_passwordless` and `sms_passwordless` logins. |
-| `idToken?`                 | Pass over the JWT ID token directly to Web3Auth for JWT authentication.                                                            |
-| `authConnection?`          | The auth provider to use for login (for example, "google", "facebook").                                                                   |
-| `authConnectionId?`        | The ID configured in your Embedded Wallets dashboard for the connection.                                                                   |
-| `groupedAuthConnectionId?` | The grouped Auth Connection ID to be used for login.                                                                               |
-| `extraLoginOptions?`       | Custom OAuth options (for example, login_hint, domain).                                                                             |
+| `idToken?`                 | Pass over the JWT ID token directly to Web3Auth for JWT authentication.                                                              |
+| `authConnection?`          | The auth provider to use for login (for example, "google", "facebook").                                                              |
+| `authConnectionId?`        | The ID configured in your Embedded Wallets dashboard for the connection.                                                             |
+| `groupedAuthConnectionId?` | The grouped Auth Connection ID to be used for login.                                                                                 |
+| `extraLoginOptions?`       | Custom OAuth options (for example, login_hint, domain).                                                                              |
 
   </TabItem>
 
@@ -279,6 +278,7 @@ export type LoginParamMap = {
 </Tabs>
 
 #### Auth connection types
+
 ```ts
 export const AUTH_CONNECTION = {
   GOOGLE: 'google',
@@ -311,9 +311,9 @@ For custom integrations (like Auth0, AWS Cognito), you can provide additional op
 | Parameter               | Description                                                 |
 | ----------------------- | ----------------------------------------------------------- |
 | `isUserIdCaseSensitive` | Whether the user ID field is case sensitive [Default: true] |
-| `domain`                | Auth provider domain (for example, "example.auth0.com")            |
+| `domain`                | Auth provider domain (for example, "example.auth0.com")     |
 | `client_id`             | Client ID from your auth provider                           |
-| `scope`                 | OAuth scopes (for example, "email profile openid")                 |
+| `scope`                 | OAuth scopes (for example, "email profile openid")          |
 | `response_type`         | Response type for OAuth flow                                |
 | `login_hint`            | Pre-fill user identifier                                    |
 

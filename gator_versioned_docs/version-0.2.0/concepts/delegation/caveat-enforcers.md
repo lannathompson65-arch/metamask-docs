@@ -5,17 +5,18 @@ keywords: [caveats, caveat enforcers, delegation]
 
 # Caveat enforcers
 
-The Smart Accounts Kit provides *caveat enforcers*, which are smart contracts that implement rules and restrictions (*caveats*) on delegations.
+The Smart Accounts Kit provides _caveat enforcers_, which are smart contracts that implement rules and restrictions (_caveats_) on delegations.
 They serve as the underlying mechanism that enables conditional execution within the [Delegation Framework](./index.md#delegation-framework).
 
 A caveat enforcer acts as a gate that validates whether a delegation can be used for a particular execution. When a delegate attempts to execute an action on behalf of a delegator, each caveat enforcer specified in the delegation evaluates whether the execution meets its defined criteria.
 
 :::warning Important
+
 - Without caveat enforcers, a delegation has infinite and unbounded authority to make any execution the original account can make.
   We strongly recommend using caveat enforcers.
 - Caveat enforcers safeguard the execution process but do not guarantee a final state post-redemption.
   Always consider the full impact of combined caveat enforcers.
-:::
+  :::
 
 ## Smart contract interface
 
@@ -100,6 +101,7 @@ The interface consists of four key hook functions that are called at different s
 4. **`afterAllHook`**: Called after all actions in a batch redemption process have completed. This enables verification of final conditions after the entire batch has executed.
 
 Each of these hooks receives comprehensive information about the execution context, including:
+
 - The caveat terms specified by the delegator.
 - Optional arguments provided by the redeemer.
 - The execution mode and calldata.
@@ -131,7 +133,7 @@ Each [caveat type](../../reference/delegation/caveats.md) in the `CaveatBuilder`
 corresponds to a specific caveat enforcer contract. For example, when you use:
 
 ```typescript
-caveatBuilder.addCaveat("allowedTargets", ["0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92"]);
+caveatBuilder.addCaveat('allowedTargets', ['0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92'])
 ```
 
 The builder is creating a caveat that references the
@@ -143,7 +145,6 @@ properly encodes the provided addresses as terms for that enforcer.
 When designing delegations with caveats, consider these best practices:
 
 - **Combine caveat enforcers appropriately** - Use multiple caveat enforcers to create comprehensive restrictions.
-   
 - **Consider caveat enforcer order** - When using caveat enforcers that modify external contract states, the order matters.
   For example, using [`NativeTokenPaymentEnforcer`](../../reference/delegation/caveats.md#nativetokenpayment) before
   [`NativeBalanceChangeEnforcer`](../../reference/delegation/caveats.md#nativebalancechange) might cause validation failures.
@@ -166,7 +167,7 @@ For other restriction patterns, you can also [create custom caveat enforcers](/t
 
 When creating chains of delegations via [redelegations](./index.md#delegation-types), it's important to understand how authority flows and can be restricted.
 
-Caveats applied to a chain of delegations are *accumulative*—they stack on top of each other:
+Caveats applied to a chain of delegations are _accumulative_—they stack on top of each other:
 
 - Each delegation in the chain inherits all restrictions from its parent delegation.
 - New caveats can add further restrictions, but can't remove existing ones.

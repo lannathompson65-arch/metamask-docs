@@ -78,9 +78,7 @@ export default function DocItemLayout({ children }) {
     <div className="row">
       {structuredData && (
         <Head>
-          <script type="application/ld+json">
-            {JSON.stringify(structuredData)}
-          </script>
+          <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
         </Head>
       )}
       <div className={clsx('col', !docTOC.hidden && styles.docItemCol)}>

@@ -1,8 +1,20 @@
 ---
-title: "Use Solana Wallet Adapter - MetaMask Connect"
+title: 'Use Solana Wallet Adapter - MetaMask Connect'
 sidebar_label: Use the Wallet Adapter
 description: Configure Solana's Wallet Adapter with MetaMask Connect in a React dapp using WalletProvider, ConnectionProvider, and useWallet hooks.
-keywords: [solana, wallet adapter, wallet standard, connect, react, "@solana/wallet-adapter", WalletProvider, ConnectionProvider, useWallet, react solana]
+keywords:
+  [
+    solana,
+    wallet adapter,
+    wallet standard,
+    connect,
+    react,
+    '@solana/wallet-adapter',
+    WalletProvider,
+    ConnectionProvider,
+    useWallet,
+    react solana,
+  ]
 ---
 
 # Use the Wallet Adapter
@@ -82,7 +94,8 @@ export const SolanaProvider: FC<SolanaProviderProps> = ({ children }) => {
 };
 ```
 
-Calling [`createSolanaClient()`](../reference/methods.md#createsolanaclient) registers MetaMask with the [Wallet Standard](https://github.com/wallet-standard/wallet-standard) registry, so MetaMask appears as a connection option in the wallet modal — even if the user doesn't have MetaMask installed.
+Calling [`createSolanaClient`](../reference/methods.md#createsolanaclient) registers MetaMask with the [Wallet Standard](https://github.com/wallet-standard/wallet-standard) registry.
+This displays MetaMask as a connection option in the wallet modal, even if the user doesn't have MetaMask installed.
 
 ### 3. Add the provider to your root layout
 

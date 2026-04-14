@@ -72,7 +72,7 @@ function TabList({
         },
         className
       )}>
-      {tabValues.map((tabValue) => (
+      {tabValues.map(tabValue => (
         <TabListItem
           key={tabValue.value}
           value={tabValue.value}
@@ -81,7 +81,7 @@ function TabList({
           selectedValue={selectedValue}
           handleTabChange={handleTabChange}
           handleKeydown={handleKeydown}
-          setRef={(tabControl) => tabRefs.push(tabControl)}
+          setRef={tabControl => tabRefs.push(tabControl)}
         />
       ))}
     </ul>

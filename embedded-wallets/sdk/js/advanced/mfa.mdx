@@ -1,5 +1,5 @@
 ---
-title:  Multi-factor authentication
+title: Multi-factor authentication
 sidebar_label: Multi-factor authentication
 description: '@web3auth/modal Multi Factor Authentication | Embedded Wallets'
 ---
@@ -81,20 +81,21 @@ mfaSettings?: MfaSettings;
 
 ### Multi-Factor Authentication factors
 
-| Factor          | Key                   | Description                          |
-| --------------- | --------------------- | ------------------------------------ |
-| `DEVICE`        | "deviceShareFactor"   | Device-based authentication.         |
-| `BACKUP_SHARE`  | "backUpShareFactor"   | Backup share (typically seed phrase).|
-| `SOCIAL_BACKUP` | "socialBackupFactor"  | Social account backup.               |
-| `PASSWORD`      | "passwordFactor"      | Password-based authentication.       |
-| `AUTHENTICATOR` | "authenticatorFactor" | Authenticator app (TOTP).            |
+| Factor          | Key                   | Description                           |
+| --------------- | --------------------- | ------------------------------------- |
+| `DEVICE`        | "deviceShareFactor"   | Device-based authentication.          |
+| `BACKUP_SHARE`  | "backUpShareFactor"   | Backup share (typically seed phrase). |
+| `SOCIAL_BACKUP` | "socialBackupFactor"  | Social account backup.                |
+| `PASSWORD`      | "passwordFactor"      | Password-based authentication.        |
+| `AUTHENTICATOR` | "authenticatorFactor" | Authenticator app (TOTP).             |
 
 ### Multi-Factor Authentication settings properties
-| Property    | Type    | Description                                            |
-| ----------- | ------- | ------------------------------------------------------ |
-| `enable`    | boolean | Whether this factor is enabled.                        |
-| `priority`  | number  | Order in which factors are presented (lower = earlier).|
-| `mandatory` | boolean | Whether this factor is required.                       |
+
+| Property    | Type    | Description                                             |
+| ----------- | ------- | ------------------------------------------------------- |
+| `enable`    | boolean | Whether this factor is enabled.                         |
+| `priority`  | number  | Order in which factors are presented (lower = earlier). |
+| `mandatory` | boolean | Whether this factor is required.                        |
 
 ### Type definitions
 

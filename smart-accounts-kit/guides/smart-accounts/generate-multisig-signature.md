@@ -11,9 +11,9 @@ import GlossaryTerm from '@theme/GlossaryTerm';
 
 The Smart Accounts Kit supports [Multisig smart accounts](../../concepts/smart-accounts.md#multisig-smart-account),
 allowing you to add multiple <GlossaryTerm term="Externally owned account (EOA)">EOA</GlossaryTerm>
-<GlossaryTerm term="Signer">signers</GlossaryTerm> with a configurable execution threshold. When the threshold 
-is greater than 1, you can collect signatures from the required signers 
-and use the [`aggregateSignature`](../../reference/smart-account.md#aggregatesignature) function to combine them 
+<GlossaryTerm term="Signer">signers</GlossaryTerm> with a configurable execution threshold. When the threshold
+is greater than 1, you can collect signatures from the required signers
+and use the [`aggregateSignature`](../../reference/smart-account.md#aggregatesignature) function to combine them
 into a single aggregated signature.
 
 ## Prerequisites
@@ -23,22 +23,22 @@ into a single aggregated signature.
 
 ## Generate a multisig signature
 
-The following example configures a Multisig smart account with two different signers: Alice 
-and Bob. The account has a threshold of 2, meaning that signatures from 
+The following example configures a Multisig smart account with two different signers: Alice
+and Bob. The account has a threshold of 2, meaning that signatures from
 both parties are required for any execution.
 
 <Tabs>
 <TabItem value="example.ts">
 
 ```typescript
-import { 
-  bundlerClient, 
-  aliceSmartAccount, 
+import {
+  bundlerClient,
+  aliceSmartAccount,
   bobSmartAccount,
   aliceAccount,
   bobAccount,
-} from "./config.ts";
-import { aggregateSignature } from "@metamask/smart-accounts-kit";
+} from './config.ts'
+import { aggregateSignature } from '@metamask/smart-accounts-kit'
 
 const userOperation = await bundlerClient.prepareUserOperation({
   account: aliceSmartAccount,
@@ -46,25 +46,28 @@ const userOperation = await bundlerClient.prepareUserOperation({
     {
       target: zeroAddress,
       value: 0n,
-      data: "0x",
-    }
-  ]
-});
+      data: '0x',
+    },
+  ],
+})
 
-const aliceSignature = await aliceSmartAccount.signUserOperation(userOperation);
-const bobSignature = await bobSmartAccount.signUserOperation(userOperation);
+const aliceSignature = await aliceSmartAccount.signUserOperation(userOperation)
+const bobSignature = await bobSmartAccount.signUserOperation(userOperation)
 
 const aggregatedSignature = aggregateSignature({
-  signatures: [{
-    signer: aliceAccount.address,
-    signature: aliceSignature,
-    type: "ECDSA",
-  }, {
-    signer: bobAccount.address,
-    signature: bobSignature,
-    type: "ECDSA",
-  }],
-});
+  signatures: [
+    {
+      signer: aliceAccount.address,
+      signature: aliceSignature,
+      type: 'ECDSA',
+    },
+    {
+      signer: bobAccount.address,
+      signature: bobSignature,
+      type: 'ECDSA',
+    },
+  ],
+})
 ```
 
 </TabItem>
@@ -72,52 +75,47 @@ const aggregatedSignature = aggregateSignature({
 <TabItem value="config.ts">
 
 ```typescript
-import { createPublicClient, http } from "viem";
-import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
-import { createBundlerClient } from "viem/account-abstraction";
-import { sepolia as chain } from "viem/chains";
-import { 
-  Implementation, 
-  toMetaMaskSmartAccount,
-} from "@metamask/smart-accounts-kit";
+import { createPublicClient, http } from 'viem'
+import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts'
+import { createBundlerClient } from 'viem/account-abstraction'
+import { sepolia as chain } from 'viem/chains'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
 
 const publicClient = createPublicClient({
   chain,
-  transport: http()
-});
+  transport: http(),
+})
 
-const alicePrivateKey = generatePrivateKey(); 
-export const aliceAccount = privateKeyToAccount(alicePrivateKey);
+const alicePrivateKey = generatePrivateKey()
+export const aliceAccount = privateKeyToAccount(alicePrivateKey)
 
-const bobPrivateKey = generatePrivateKey();
+const bobPrivateKey = generatePrivateKey()
 export const bobAccount = privateKeyToAccount(bobPrivateKey)
 
-const signers = [ aliceAccount.address, bobAccount.address ];
+const signers = [aliceAccount.address, bobAccount.address]
 const threshold = 2n
 
 export const aliceSmartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.MultiSig,
   deployParams: [signers, threshold],
-  deploySalt: "0x",
-  signer: [ { account: aliceAccount } ],
-});
+  deploySalt: '0x',
+  signer: [{ account: aliceAccount }],
+})
 
 export const bobSmartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.MultiSig,
   deployParams: [signers, threshold],
-  deploySalt: "0x",
-  signer: [ { account: bobAccount } ],
-});
+  deploySalt: '0x',
+  signer: [{ account: bobAccount }],
+})
 
 export const bundlerClient = createBundlerClient({
   client: publicClient,
-  transport: http("https://public.pimlico.io/v2/rpc")
-});
+  transport: http('https://public.pimlico.io/v2/rpc'),
+})
 ```
 
 </TabItem>
 </Tabs>
-
-

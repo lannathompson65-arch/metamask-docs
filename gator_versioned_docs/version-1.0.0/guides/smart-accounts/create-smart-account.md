@@ -29,24 +29,21 @@ See the [`toMetaMaskSmartAccount`](../../reference/smart-account.md#tometamasksm
 <TabItem value="example.ts">
 
 ```typescript
-import { publicClient } from "./client.ts"
-import { walletClient } from "./signer.ts";
-import { 
-  Implementation, 
-  toMetaMaskSmartAccount,
-} from "@metamask/smart-accounts-kit";
+import { publicClient } from './client.ts'
+import { walletClient } from './signer.ts'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
 
 // Some wallets like MetaMask may require you to request access to
 // account addresses using walletClient.requestAddresses() first.
-const [address] = await walletClient.getAddresses(); 
+const [address] = await walletClient.getAddresses()
 
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
   deployParams: [address, [], [], []],
-  deploySalt: "0x",
+  deploySalt: '0x',
   signer: { walletClient },
-});
+})
 ```
 
 </TabItem>
@@ -54,14 +51,14 @@ const smartAccount = await toMetaMaskSmartAccount({
 <TabItem value="client.ts">
 
 ```typescript
-import { http, createPublicClient } from "viem";
-import { sepolia as chain } from "viem/chains";
+import { http, createPublicClient } from 'viem'
+import { sepolia as chain } from 'viem/chains'
 
-const transport = http(); 
-export const publicClient = createPublicClient({ 
-  transport, 
-  chain, 
-});
+const transport = http()
+export const publicClient = createPublicClient({
+  transport,
+  chain,
+})
 ```
 
 </TabItem>
@@ -69,13 +66,13 @@ export const publicClient = createPublicClient({
 <TabItem value="signer.ts">
 
 ```typescript
-import { sepolia as chain } from "viem/chains";
-import { createWalletClient, custom } from "viem";
+import { sepolia as chain } from 'viem/chains'
+import { createWalletClient, custom } from 'viem'
 
 export const walletClient = createWalletClient({
   chain,
   transport: custom(window.ethereum!),
-});
+})
 ```
 
 </TabItem>
@@ -92,24 +89,21 @@ Multisig smart account with a combination of account signers and Wallet Client s
 <TabItem value="example.ts">
 
 ```typescript
-import { publicClient } from "./client.ts";
-import { account, walletClient } from "./signers.ts";
-import { 
-  Implementation, 
-  toMetaMaskSmartAccount,
-} from "@metamask/smart-accounts-kit";
+import { publicClient } from './client.ts'
+import { account, walletClient } from './signers.ts'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
 
-const owners = [ account.address, walletClient.address ];
-const signer = [ { account }, { walletClient } ];
+const owners = [account.address, walletClient.address]
+const signer = [{ account }, { walletClient }]
 const threshold = 2n
 
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.MultiSig,
   deployParams: [owners, threshold],
-  deploySalt: "0x",
+  deploySalt: '0x',
   signer,
-});
+})
 ```
 
 </TabItem>
@@ -117,37 +111,38 @@ const smartAccount = await toMetaMaskSmartAccount({
 <TabItem value="client.ts">
 
 ```typescript
-import { http, createPublicClient } from "viem";
-import { sepolia as chain } from "viem/chains";
+import { http, createPublicClient } from 'viem'
+import { sepolia as chain } from 'viem/chains'
 
-const transport = http(); 
-export const publicClient = createPublicClient({ 
-  transport, 
-  chain, 
-});
+const transport = http()
+export const publicClient = createPublicClient({
+  transport,
+  chain,
+})
 ```
+
 </TabItem>
 
 <TabItem value="signers.ts">
 
 ```typescript
-import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
-import { sepolia as chain } from "viem/chains";
-import { http, createWalletClient } from "viem";
+import { privateKeyToAccount, generatePrivateKey } from 'viem/accounts'
+import { sepolia as chain } from 'viem/chains'
+import { http, createWalletClient } from 'viem'
 
 // This private key will be used to generate the first signer.
-const privateKey = generatePrivateKey(); 
-export const account = privateKeyToAccount(privateKey);
+const privateKey = generatePrivateKey()
+export const account = privateKeyToAccount(privateKey)
 
 // This private key will be used to generate the second signer.
-const walletClientPrivateKey = generatePrivateKey(); 
-const walletClientAccount = privateKeyToAccount(walletClientPrivateKey);
+const walletClientPrivateKey = generatePrivateKey()
+const walletClientAccount = privateKeyToAccount(walletClientPrivateKey)
 
 export const walletClient = createWalletClient({
   account: walletClientAccount,
   chain,
-  transport: http()
-});
+  transport: http(),
+})
 ```
 
 </TabItem>
@@ -177,19 +172,16 @@ See the [Upgrade a MetaMask EOA to a smart account](https://docs.metamask.io/tut
 <TabItem value="example.ts">
 
 ```typescript
-import { publicClient } from "./client.ts";
-import { account } from "./signer.ts";
-import { 
-  Implementation, 
-  toMetaMaskSmartAccount,
-} from "@metamask/smart-accounts-kit";
+import { publicClient } from './client.ts'
+import { account } from './signer.ts'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
 
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Stateless7702,
   address: account.address,
   signer: { account },
-});
+})
 ```
 
 </TabItem>
@@ -197,14 +189,14 @@ const smartAccount = await toMetaMaskSmartAccount({
 <TabItem value="client.ts">
 
 ```typescript
-import { http, createPublicClient } from "viem";
-import { sepolia as chain } from "viem/chains";
+import { http, createPublicClient } from 'viem'
+import { sepolia as chain } from 'viem/chains'
 
-const transport = http(); 
-export const publicClient = createPublicClient({ 
-  transport, 
-  chain, 
-});
+const transport = http()
+export const publicClient = createPublicClient({
+  transport,
+  chain,
+})
 ```
 
 </TabItem>
@@ -212,10 +204,10 @@ export const publicClient = createPublicClient({
 <TabItem value="signer.ts">
 
 ```typescript
-import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
+import { privateKeyToAccount, generatePrivateKey } from 'viem/accounts'
 
-const privateKey = generatePrivateKey(); 
-export const account = privateKeyToAccount(privateKey);
+const privateKey = generatePrivateKey()
+export const account = privateKeyToAccount(privateKey)
 ```
 
 </TabItem>

@@ -1,8 +1,18 @@
 ---
-title: "Sign Data with MetaMask Connect EVM"
+title: 'Sign Data with MetaMask Connect EVM'
 sidebar_label: Sign data
 description: Request cryptographic signatures from users using eth_signTypedData_v4 for structured EIP-712 data or personal_sign for simple messages.
-keywords: [eth_signTypedData_v4, personal_sign, EIP-712, message signing, cryptographic signature, sign data, metamask, ethereum]
+keywords:
+  [
+    eth_signTypedData_v4,
+    personal_sign,
+    EIP-712,
+    message signing,
+    cryptographic signature,
+    sign data,
+    metamask,
+    ethereum,
+  ]
 ---
 
 import Tabs from '@theme/Tabs';

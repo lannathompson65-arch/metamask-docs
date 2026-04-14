@@ -4,7 +4,7 @@ keywords: [delegation scope, ownership transfer, restrict, delegation]
 ---
 
 # Use the ownership transfer scope
- 
+
 The ownership transfer scope restricts a delegation to ownership transfer calls only.
 For example, Alice has deployed a smart contract, and she delegates to Bob the ability to transfer ownership of that contract.
 
@@ -23,19 +23,19 @@ Internally, this scope uses the [`ownershipTransfer`](../../../reference/delegat
 See the [ownership transfer scope reference](../../../reference/delegation/delegation-scopes.md#ownership-transfer-scope) for more details.
 
 ```typescript
-import { createDelegation } from "@metamask/smart-accounts-kit";
+import { createDelegation } from '@metamask/smart-accounts-kit'
 
-const contractAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
+const contractAddress = '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238'
 
 const delegation = createDelegation({
   scope: {
-    type: "ownershipTransfer",
+    type: 'ownershipTransfer',
     contractAddress,
   },
   to: delegateAccount,
   from: delegatorAccount,
   environment: delegatorAccount.environment,
-});
+})
 ```
 
 ## Next steps

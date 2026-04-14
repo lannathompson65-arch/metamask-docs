@@ -12,4 +12,4 @@ To request help from the Infura customer support team, submit a help ticket usin
    Search for your question in the Help Center.
 
 2. If you can't find what you're looking for, in the bottom right corner, select **Support** to
-    submit a ticket.
+   submit a ticket.

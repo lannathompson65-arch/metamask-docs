@@ -4,15 +4,15 @@ toc_max_heading_level: 2
 keywords: [smart accounts kit, delegation, delegator, delegate, delegation framework]
 ---
 
-import Tabs from "@theme/Tabs"; 
+import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 # Delegation
 
-*Delegation* is the ability for a [MetaMask smart account](../smart-accounts.md) to grant permission to another smart account
+_Delegation_ is the ability for a [MetaMask smart account](../smart-accounts.md) to grant permission to another smart account
 or externally owned account (EOA) to perform specific executions on its behalf.
-The account that grants the permission is called the *delegator account*, while the account that receives the permission
-is called the *delegate account*.
+The account that grants the permission is called the _delegator account_, while the account that receives the permission
+is called the _delegate account_.
 
 The Smart Accounts Kit follows the [ERC-7710](https://eips.ethereum.org/EIPS/eip-7710) standard for smart contract delegation.
 In addition, users can use [caveat enforcers](caveat-enforcers.md) to apply rules and restrictions to delegations.
@@ -22,12 +22,12 @@ For example: Alice delegates the ability to spend her USDC to Bob, limiting the 
 
 The delegation lifecycle is as follows:
 
-1. **Create a delegation** - The delegator account creates a delegation, applying *caveats* which specify conditions under which the delegation can be redeemed.
-  The delegator signs the delegation.
+1. **Create a delegation** - The delegator account creates a delegation, applying _caveats_ which specify conditions under which the delegation can be redeemed.
+   The delegator signs the delegation.
 
-3. **Store the delegation** - A dapp can store the delegation, enabling retrieval for future redemption.
+2. **Store the delegation** - A dapp can store the delegation, enabling retrieval for future redemption.
 
-4. **Redeem the delegation** - The delegate (the account being granted the permission) redeems the delegation via the Delegation Manager,
+3. **Redeem the delegation** - The delegate (the account being granted the permission) redeems the delegation via the Delegation Manager,
    which verifies that the delegated authority is valid in order to perform the execution.
 
 See [how to perform executions on a smart account's behalf](../../guides/delegation/execute-on-smart-accounts-behalf.md) to get started with the delegation lifecycle.
@@ -36,7 +36,7 @@ See [how to perform executions on a smart account's behalf](../../guides/delegat
 
 You can create the following delegation types:
 
-- **Root delegation** - A root delegation is when a delegator delegates their own authority away, as opposed to *redelegating* permissions they received from a previous delegation.
+- **Root delegation** - A root delegation is when a delegator delegates their own authority away, as opposed to _redelegating_ permissions they received from a previous delegation.
   In a chain of delegations, the first delegation is the root delegation.
   For example, Alice delegates the ability to spend her USDC to Bob, limiting the amount to 100 USDC.
 
@@ -82,7 +82,6 @@ It consists of the following components:
 
   When you redeem a delegation using [`redeemDelegations`](../../reference/delegation/index.md#redeemdelegations), the Delegation Manager performs the following steps.
   It processes a single step for all redemptions before proceeding to the next one:
-  
   1. Validates the input data by ensuring the lengths of `delegations`, `modes`, and
      `executions` match.
   2. Decodes and validates the delegation, checking that the caller is the delegate
@@ -154,12 +153,12 @@ sequenceDiagram
 When redeeming a delegation using [`redeemDelegations`](../../reference/delegation/index.md#redeemdelegations), you must pass an execution mode for each delegation chain you pass to the method.
 The Smart Accounts Kit supports the following execution modes, based on [ERC-7579](https://erc7579.com/):
 
-| Execution mode | Number of delegation chains passed to `redeemDelegations` | Processing method | Does user operation continue execution if redemption reverts? |
-|--|--|--|--|
-| `SingleDefault` | One      | Sequential  | No  |
-| `SingleTry`     | One      | Sequential  | Yes |
-| `BatchDefault`  | Multiple | Interleaved | No  |
-| `BatchTry`      | Multiple | Interleaved | Yes |
+| Execution mode  | Number of delegation chains passed to `redeemDelegations` | Processing method | Does user operation continue execution if redemption reverts? |
+| --------------- | --------------------------------------------------------- | ----------------- | ------------------------------------------------------------- |
+| `SingleDefault` | One                                                       | Sequential        | No                                                            |
+| `SingleTry`     | One                                                       | Sequential        | Yes                                                           |
+| `BatchDefault`  | Multiple                                                  | Interleaved       | No                                                            |
+| `BatchTry`      | Multiple                                                  | Interleaved       | Yes                                                           |
 
 ### Sequential processing
 

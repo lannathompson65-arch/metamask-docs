@@ -1,8 +1,20 @@
 ---
-title: "JavaScript Quickstart - MetaMask Connect Multichain"
+title: 'JavaScript Quickstart - MetaMask Connect Multichain'
 sidebar_label: JavaScript
 description: Set up MetaMask Connect Multichain in a Vite JavaScript dapp to connect to EVM and Solana ecosystems from a single session using CAIP-25.
-keywords: [multichain, evm, solana, connect, caip-25, scope, vite template, createMultichainClient, multichain setup, EVM Solana dapp]
+keywords:
+  [
+    multichain,
+    evm,
+    solana,
+    connect,
+    caip-25,
+    scope,
+    vite template,
+    createMultichainClient,
+    multichain setup,
+    EVM Solana dapp,
+  ]
 ---
 
 import Tabs from "@theme/Tabs";
@@ -157,20 +169,20 @@ if (ethAccounts.length > 0) {
 ```
 
 The user sees a single approval prompt for all requested chains.
-Use [`invokeMethod()`](../reference/methods.md#invokemethod) to call RPC methods on any chain in the session by specifying a [scope](../concepts/scopes.md).
+Use [`invokeMethod`](../reference/methods.md#invokemethod) to call RPC methods on any chain in the session by specifying a [scope](../concepts/scopes.md).
 
 ## Multichain client methods at a glance
 
-| Method                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| [`connect(scopes, caipAccountIds)`](../reference/methods.md#connect)       | Connects to MetaMask with multichain [scopes](../concepts/scopes.md)                         |
-| [`getSession()`](../reference/methods.md#getsession)                       | Returns the current [session](../concepts/sessions.md) with approved accounts |
-| [`invokeMethod({ scope, request })`](../reference/methods.md#invokemethod) | Calls an RPC method on a specific chain using a [scope](../concepts/scopes.md)               |
-| [`disconnect()`](../reference/methods.md#disconnect)                       | Disconnects all [scopes](../concepts/scopes.md) and ends the session                         |
-| [`disconnect(scopes)`](../reference/methods.md#disconnect)                 | Disconnects specific [scopes](../concepts/scopes.md) without ending the session              |
-| [`on(event, handler)`](../reference/methods.md#on)                         | Registers an event handler                                                                   |
-| [`off(event, handler)`](../reference/methods.md#off)                       | Removes an event handler                                                                     |
-| [`getInfuraRpcUrls({ infuraApiKey })`](../reference/methods.md#getinfurarpcurls) | Generates Infura RPC URLs keyed by CAIP-2 chain ID                                           |
+| Method                                                                           | Description                                                                     |
+| -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| [`connect(scopes, caipAccountIds)`](../reference/methods.md#connect)             | Connects to MetaMask with multichain [scopes](../concepts/scopes.md)            |
+| [`getSession`](../reference/methods.md#getsession)                               | Returns the current [session](../concepts/sessions.md) with approved accounts   |
+| [`invokeMethod({ scope, request })`](../reference/methods.md#invokemethod)       | Calls an RPC method on a specific chain using a [scope](../concepts/scopes.md)  |
+| [`disconnect`](../reference/methods.md#disconnect)                               | Disconnects all [scopes](../concepts/scopes.md) and ends the session            |
+| [`disconnect(scopes)`](../reference/methods.md#disconnect)                       | Disconnects specific [scopes](../concepts/scopes.md) without ending the session |
+| [`on(event, handler)`](../reference/methods.md#on)                               | Registers an event handler                                                      |
+| [`off(event, handler)`](../reference/methods.md#off)                             | Removes an event handler                                                        |
+| [`getInfuraRpcUrls({ infuraApiKey })`](../reference/methods.md#getinfurarpcurls) | Generates Infura RPC URLs keyed by CAIP-2 chain ID                              |
 
 ## Next steps
 

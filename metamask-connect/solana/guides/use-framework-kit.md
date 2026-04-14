@@ -1,8 +1,20 @@
 ---
-title: "Use Framework Kit - MetaMask Connect Solana"
+title: 'Use Framework Kit - MetaMask Connect Solana'
 sidebar_label: Use Framework Kit
 description: Set up Framework Kit with MetaMask Connect Solana in a React dapp for simplified RPC connections, wallet management, and hook-based state.
-keywords: [solana, framework kit, react, hooks, wallet, connect, react hooks, solana hooks, wallet hooks, unified API]
+keywords:
+  [
+    solana,
+    framework kit,
+    react,
+    hooks,
+    wallet,
+    connect,
+    react hooks,
+    solana hooks,
+    wallet hooks,
+    unified API,
+  ]
 ---
 
 # Use Framework Kit

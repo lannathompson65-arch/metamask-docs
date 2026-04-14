@@ -1,5 +1,5 @@
 ---
-title: "MetaMask Connect Supported Platforms and Connection Methods"
+title: 'MetaMask Connect Supported Platforms and Connection Methods'
 sidebar_label: Supported platforms
 description: View supported platforms, browsers, and connection methods for MetaMask Connect, including desktop extensions, mobile QR codes, and native deeplinks.
 keywords:

@@ -2,7 +2,21 @@
 title: React Native Metro Polyfill Issues - MetaMask Connect
 description: Resolve bundler polyfill issues when using MetaMask Connect packages with React Native Metro.
 sidebar_label: React Native Metro polyfill issues
-keywords: [MetaMask, Connect, polyfill, React Native, Metro, Expo, bundler, troubleshooting, Buffer, Event, CustomEvent, crypto]
+keywords:
+  [
+    MetaMask,
+    Connect,
+    polyfill,
+    React Native,
+    Metro,
+    Expo,
+    bundler,
+    troubleshooting,
+    Buffer,
+    Event,
+    CustomEvent,
+    crypto,
+  ]
 ---
 
 import Tabs from "@theme/Tabs";
@@ -40,7 +54,7 @@ Map Node.js built-in modules to React Native-compatible shims or an empty module
 Create an empty module file first:
 
 ```javascript title="src/empty-module.js"
-module.exports = {};
+module.exports = {}
 ```
 
 Then update your Metro config:
@@ -49,15 +63,15 @@ Then update your Metro config:
   <TabItem value="Bare React Native">
 
 ```javascript title="metro.config.js"
-const { getDefaultConfig, mergeConfig } = require("@react-native/metro-config");
-const path = require("path");
+const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config')
+const path = require('path')
 
-const emptyModule = path.resolve(__dirname, "src/empty-module.js");
+const emptyModule = path.resolve(__dirname, 'src/empty-module.js')
 
 const config = {
   resolver: {
     extraNodeModules: {
-      stream: require.resolve("readable-stream"),
+      stream: require.resolve('readable-stream'),
       crypto: emptyModule,
       http: emptyModule,
       https: emptyModule,
@@ -72,23 +86,23 @@ const config = {
       fs: emptyModule,
     },
   },
-};
+}
 
-module.exports = mergeConfig(getDefaultConfig(__dirname), config);
+module.exports = mergeConfig(getDefaultConfig(__dirname), config)
 ```
 
   </TabItem>
   <TabItem value="Expo">
 
 ```javascript title="metro.config.js"
-const { getDefaultConfig } = require("expo/metro-config");
-const path = require("path");
+const { getDefaultConfig } = require('expo/metro-config')
+const path = require('path')
 
-const config = getDefaultConfig(__dirname);
-const emptyModule = path.resolve(__dirname, "src/empty-module.js");
+const config = getDefaultConfig(__dirname)
+const emptyModule = path.resolve(__dirname, 'src/empty-module.js')
 
 config.resolver.extraNodeModules = {
-  stream: require.resolve("readable-stream"),
+  stream: require.resolve('readable-stream'),
   crypto: emptyModule,
   http: emptyModule,
   https: emptyModule,
@@ -101,9 +115,9 @@ config.resolver.extraNodeModules = {
   url: emptyModule,
   path: emptyModule,
   fs: emptyModule,
-};
+}
 
-module.exports = config;
+module.exports = config
 ```
 
   </TabItem>
@@ -114,81 +128,81 @@ module.exports = config;
 Create `polyfills.ts` at the project root (or `src/polyfills.ts`) with all required global shims:
 
 ```typescript title="polyfills.ts"
-import { Buffer } from "buffer";
+import { Buffer } from 'buffer'
 
-global.Buffer = Buffer;
+global.Buffer = Buffer
 
 // Polyfill window — React Native doesn't have a browser window object
-let windowObj: any;
-if (typeof global !== "undefined" && global.window) {
-  windowObj = global.window;
-} else if (typeof window !== "undefined") {
-  windowObj = window;
+let windowObj: any
+if (typeof global !== 'undefined' && global.window) {
+  windowObj = global.window
+} else if (typeof window !== 'undefined') {
+  windowObj = window
 } else {
-  windowObj = {};
+  windowObj = {}
 }
 
 if (!windowObj.location) {
   windowObj.location = {
-    hostname: "mydapp.com",
-    href: "https://mydapp.com",
-  };
+    hostname: 'mydapp.com',
+    href: 'https://mydapp.com',
+  }
 }
-if (typeof windowObj.addEventListener !== "function") {
-  windowObj.addEventListener = () => {};
+if (typeof windowObj.addEventListener !== 'function') {
+  windowObj.addEventListener = () => {}
 }
-if (typeof windowObj.removeEventListener !== "function") {
-  windowObj.removeEventListener = () => {};
+if (typeof windowObj.removeEventListener !== 'function') {
+  windowObj.removeEventListener = () => {}
 }
-if (typeof windowObj.dispatchEvent !== "function") {
-  windowObj.dispatchEvent = () => true;
+if (typeof windowObj.dispatchEvent !== 'function') {
+  windowObj.dispatchEvent = () => true
 }
 
-if (typeof global !== "undefined") {
-  global.window = windowObj;
+if (typeof global !== 'undefined') {
+  global.window = windowObj
 }
 
 // Polyfill Event if missing
-if (typeof global.Event === "undefined") {
+if (typeof global.Event === 'undefined') {
   class EventPolyfill {
-    type: string;
-    bubbles: boolean;
-    cancelable: boolean;
-    defaultPrevented = false;
+    type: string
+    bubbles: boolean
+    cancelable: boolean
+    defaultPrevented = false
     constructor(type: string, options?: EventInit) {
-      this.type = type;
-      this.bubbles = options?.bubbles ?? false;
-      this.cancelable = options?.cancelable ?? false;
+      this.type = type
+      this.bubbles = options?.bubbles ?? false
+      this.cancelable = options?.cancelable ?? false
     }
     preventDefault() {
-      this.defaultPrevented = true;
+      this.defaultPrevented = true
     }
     stopPropagation() {}
     stopImmediatePropagation() {}
   }
-  global.Event = EventPolyfill as any;
-  windowObj.Event = EventPolyfill as any;
+  global.Event = EventPolyfill as any
+  windowObj.Event = EventPolyfill as any
 }
 
 // Polyfill CustomEvent if missing
-if (typeof global.CustomEvent === "undefined") {
+if (typeof global.CustomEvent === 'undefined') {
   const EventClass =
     global.Event ||
     class {
-      type: string;
+      type: string
       constructor(type: string) {
-        this.type = type;
+        this.type = type
       }
-    };
+    }
   class CustomEventPolyfill extends (EventClass as any) {
-    detail: any;
+    detail: any
     constructor(type: string, options?: CustomEventInit) {
-      super(type, options);
-      this.detail = options?.detail ?? null;
+      super(type, options)
+      this.detail = options?.detail ?? null
     }
   }
-  global.CustomEvent = CustomEventPolyfill as any;
-  windowObj.CustomEvent = CustomEventPolyfill as any;
+  global.CustomEvent = CustomEventPolyfill as any
+  windowObj.CustomEvent = CustomEventPolyfill as any
 }
 ```
 
@@ -201,22 +215,22 @@ The import order is **critical**.
   <TabItem value="Bare React Native">
 
 ```javascript title="index.js"
-import "react-native-get-random-values"; // Must be first
-import "./polyfills"; // Must be second
+import 'react-native-get-random-values' // Must be first
+import './polyfills' // Must be second
 
-import { AppRegistry } from "react-native";
-import App from "./App";
-import { name as appName } from "./app.json";
+import { AppRegistry } from 'react-native'
+import App from './App'
+import { name as appName } from './app.json'
 
-AppRegistry.registerComponent(appName, () => App);
+AppRegistry.registerComponent(appName, () => App)
 ```
 
   </TabItem>
   <TabItem value="Expo Router">
 
 ```javascript title="app/_layout.tsx"
-import "react-native-get-random-values"; // Must be first
-import "../polyfills"; // Must be second
+import 'react-native-get-random-values' // Must be first
+import '../polyfills' // Must be second
 
 // ... rest of layout
 ```

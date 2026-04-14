@@ -19,9 +19,7 @@
             "type": "doc",
             "id": "get-started/smart-account-quickstart/index"
           },
-          "items": [
-            "get-started/smart-account-quickstart/eip7702"
-          ]
+          "items": ["get-started/smart-account-quickstart/eip7702"]
         },
         "get-started/use-the-cli",
         {
@@ -121,9 +119,7 @@
             "type": "doc",
             "id": "concepts/delegation/index"
           },
-          "items": [
-            "concepts/delegation/caveat-enforcers"
-          ]
+          "items": ["concepts/delegation/caveat-enforcers"]
         },
         "concepts/advanced-permissions"
       ]
@@ -193,9 +189,7 @@
       "type": "category",
       "label": "Changelog",
       "collapsed": false,
-      "items": [
-        "changelog/0.2.0"
-      ]
+      "items": ["changelog/0.2.0"]
     }
   ]
 }

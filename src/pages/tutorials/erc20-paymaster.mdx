@@ -24,7 +24,7 @@ If you are looking to use sponsored paymaster, you can refer to the [sponsored p
 ## Prerequisites
 
 - Pimlico Account: Since we'll be using the Pimlico paymaster, you'll need to have an API key from Pimlico. You can get a free API key from [Pimlico Dashboard](https://dashboard.pimlico.io/).
-- Embedded Wallets account: If you haven't already, sign up on the [Embedded Wallets dashboard](https://dashboard.web3auth.io/). It's free and gives you access to the base plan. 
+- Embedded Wallets account: If you haven't already, sign up on the [Embedded Wallets dashboard](https://dashboard.web3auth.io/). It's free and gives you access to the base plan.
 
 :::tip
 
@@ -101,7 +101,7 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
 
 ## Step 2: Configure Embedded Wallets
 
-After you configure `AccountAbstractionProvider`, plug it into your Embedded Wallets modal or no-modal instance. If you use an external wallet such as MetaMask, set `useAAWithExternalWallet` in `IWeb3AuthCoreOptions` to control whether Web3Auth uses `AccountAbstractionProvider` or `EthereumPrivateKeyProvider`. 
+After you configure `AccountAbstractionProvider`, plug it into your Embedded Wallets modal or no-modal instance. If you use an external wallet such as MetaMask, set `useAAWithExternalWallet` in `IWeb3AuthCoreOptions` to control whether Web3Auth uses `AccountAbstractionProvider` or `EthereumPrivateKeyProvider`.
 
 :::tip
 
@@ -240,7 +240,8 @@ const receipt = await bundlerClient.waitForUserOperationReceipt({
 
 const transactionHash = receipt.receipt.transactionHash
 ```
-Congratulations, you have successfully sent your first transaction using the Pimlico's ERC-20 paymaster with Embedded Wallets account abstraction provider. 
+
+Congratulations, you have successfully sent your first transaction using the Pimlico's ERC-20 paymaster with Embedded Wallets account abstraction provider.
 
 ## Next steps
 
@@ -251,20 +252,22 @@ Learn more about advance features of the account abstraction provider like:
 <Tabs
   defaultValue="react"
   values={[
-    { label: "React", value: "react" },
-    { label: "JavaScript", value: "js" },
-    { label: "Vue", value: "vue" },
-  ]}
->
-<TabItem value="react">
-[React smart accounts: batch transactions](/embedded-wallets/sdk/react/advanced/smart-accounts#send-batch-transaction)
-</TabItem>
-<TabItem value="js">
-[JS smart accounts: batch transactions](/embedded-wallets/sdk/js/advanced/smart-accounts#send-batch-transaction)
-</TabItem>
-<TabItem value="vue">
-[Vue smart accounts: batch transactions](/embedded-wallets/sdk/vue/advanced/smart-accounts#send-batch-transaction)
-</TabItem>
+    { label: 'React', value: 'react' },
+    { label: 'JavaScript', value: 'js' },
+    { label: 'Vue', value: 'vue' },
+  ]}>
+  <TabItem value="react">
+    [React smart accounts: batch
+    transactions](/embedded-wallets/sdk/react/advanced/smart-accounts#send-batch-transaction)
+  </TabItem>
+  <TabItem value="js">
+    [JS smart accounts: batch
+    transactions](/embedded-wallets/sdk/js/advanced/smart-accounts#send-batch-transaction)
+  </TabItem>
+  <TabItem value="vue">
+    [Vue smart accounts: batch
+    transactions](/embedded-wallets/sdk/vue/advanced/smart-accounts#send-batch-transaction)
+  </TabItem>
 </Tabs>
 
 - Using a sponsored paymaster:
@@ -272,19 +275,20 @@ Learn more about advance features of the account abstraction provider like:
 <Tabs
   defaultValue="react"
   values={[
-    { label: "React", value: "react" },
-    { label: "JavaScript", value: "js" },
-    { label: "Vue", value: "vue" },
-  ]}
->
-<TabItem value="react">
-[React smart accounts: configure bundler and paymaster](/embedded-wallets/sdk/react/advanced/smart-accounts#configure-bundler-and-paymaster)
-</TabItem>
-<TabItem value="js">
-[JS smart accounts: configure bundler and paymaster](/embedded-wallets/sdk/js/advanced/smart-accounts#configure-bundler-and-paymaster)
-</TabItem>
-<TabItem value="vue">
-[Vue smart accounts: configure bundler and paymaster](/embedded-wallets/sdk/vue/advanced/smart-accounts#configure-bundler-and-paymaster)
-</TabItem>
+    { label: 'React', value: 'react' },
+    { label: 'JavaScript', value: 'js' },
+    { label: 'Vue', value: 'vue' },
+  ]}>
+  <TabItem value="react">
+    [React smart accounts: configure bundler and
+    paymaster](/embedded-wallets/sdk/react/advanced/smart-accounts#configure-bundler-and-paymaster)
+  </TabItem>
+  <TabItem value="js">
+    [JS smart accounts: configure bundler and
+    paymaster](/embedded-wallets/sdk/js/advanced/smart-accounts#configure-bundler-and-paymaster)
+  </TabItem>
+  <TabItem value="vue">
+    [Vue smart accounts: configure bundler and
+    paymaster](/embedded-wallets/sdk/vue/advanced/smart-accounts#configure-bundler-and-paymaster)
+  </TabItem>
 </Tabs>
-

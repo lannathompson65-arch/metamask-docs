@@ -37,12 +37,12 @@ mfaLevel?: MfaLevelType;
 
 ### Multi-Factor Authentication level types
 
-| Level       | Value       | Description                                        |
-| ----------- | ----------- | -------------------------------------------------- |
-| `DEFAULT`   | "default"   | MFA screen appears every 10th login.               |
-| `OPTIONAL`  | "optional"  | MFA screen appears every login, but can be skipped.|
-| `MANDATORY` | "mandatory" | MFA setup is required after login.                 |
-| `NONE`      | "none"      | MFA setup is skipped entirely.                     |
+| Level       | Value       | Description                                         |
+| ----------- | ----------- | --------------------------------------------------- |
+| `DEFAULT`   | "default"   | MFA screen appears every 10th login.                |
+| `OPTIONAL`  | "optional"  | MFA screen appears every login, but can be skipped. |
+| `MANDATORY` | "mandatory" | MFA setup is required after login.                  |
+| `NONE`      | "none"      | MFA setup is skipped entirely.                      |
 
 ### Type definition
 
@@ -83,21 +83,21 @@ mfaSettings?: MfaSettings;
 
 ### Multi-Factor Authentication factors
 
-| Factor          | Key                   | Description                          |
-| --------------- | --------------------- | ------------------------------------ |
-| `DEVICE`        | "deviceShareFactor"   | Device-based authentication.         |
-| `BACKUP_SHARE`  | "backUpShareFactor"   | Backup share (typically seed phrase).|
-| `SOCIAL_BACKUP` | "socialBackupFactor"  | Social account backup.               |
-| `PASSWORD`      | "passwordFactor"      | Password-based authentication.       |
-| `AUTHENTICATOR` | "authenticatorFactor" | Authenticator app (TOTP).            |
+| Factor          | Key                   | Description                           |
+| --------------- | --------------------- | ------------------------------------- |
+| `DEVICE`        | "deviceShareFactor"   | Device-based authentication.          |
+| `BACKUP_SHARE`  | "backUpShareFactor"   | Backup share (typically seed phrase). |
+| `SOCIAL_BACKUP` | "socialBackupFactor"  | Social account backup.                |
+| `PASSWORD`      | "passwordFactor"      | Password-based authentication.        |
+| `AUTHENTICATOR` | "authenticatorFactor" | Authenticator app (TOTP).             |
 
 ### Multi-Factor Authentication settings properties
 
-| Property    | Type    | Description                                            |
-| ----------- | ------- | ------------------------------------------------------ |
-| `enable`    | boolean | Whether this factor is enabled.                        |
-| `priority`  | number  | Order in which factors are presented (lower = earlier).|
-| `mandatory` | boolean | Whether this factor is required.                       |
+| Property    | Type    | Description                                             |
+| ----------- | ------- | ------------------------------------------------------- |
+| `enable`    | boolean | Whether this factor is enabled.                         |
+| `priority`  | number  | Order in which factors are presented (lower = earlier). |
+| `mandatory` | boolean | Whether this factor is required.                        |
 
 ### Type definitions
 

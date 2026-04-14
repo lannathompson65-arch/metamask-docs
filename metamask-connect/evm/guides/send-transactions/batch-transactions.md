@@ -1,8 +1,18 @@
 ---
-title: "Batch Transactions with EIP-5792 - MetaMask Connect EVM"
+title: 'Batch Transactions with EIP-5792 - MetaMask Connect EVM'
 sidebar_label: Batch transactions
 description: Send multiple transactions atomically using wallet_sendCalls (EIP-5792), check capabilities, and track batch status in MetaMask.
-keywords: [EIP-5792, atomic batch, wallet_sendCalls, wallet_getCapabilities, wallet_getCallsStatus, bundle transactions, batch transactions, metamask]
+keywords:
+  [
+    EIP-5792,
+    atomic batch,
+    wallet_sendCalls,
+    wallet_getCapabilities,
+    wallet_getCallsStatus,
+    bundle transactions,
+    batch transactions,
+    metamask,
+  ]
 ---
 
 import Tabs from '@theme/Tabs';

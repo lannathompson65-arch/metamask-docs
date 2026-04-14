@@ -1,8 +1,18 @@
 ---
-title: "Display ERC-20 Tokens and NFTs in MetaMask"
+title: 'Display ERC-20 Tokens and NFTs in MetaMask'
 sidebar_label: Display tokens
 description: Prompt users to register custom ERC-20 tokens and NFTs in MetaMask using the wallet_watchAsset RPC method for better token visibility.
-keywords: [wallet_watchAsset, ERC-20 token, NFT display, ERC-721, token suggestion, custom token, metamask, display tokens]
+keywords:
+  [
+    wallet_watchAsset,
+    ERC-20 token,
+    NFT display,
+    ERC-721,
+    token suggestion,
+    custom token,
+    metamask,
+    display tokens,
+  ]
 ---
 
 # Display tokens
@@ -173,8 +183,8 @@ try {
 
 ### Display multiple NFTs
 
-To prompt users to add multiple NFTs, use `sendAsync()` instead of
-`request()` to call `wallet_watchAsset`.
+To prompt users to add multiple NFTs, use `sendAsync` instead of
+`request` to call `wallet_watchAsset`.
 For example:
 
 ```javascript

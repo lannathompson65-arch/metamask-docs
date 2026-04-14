@@ -4,7 +4,7 @@ sidebar_label: Execute on a smart account's behalf
 keywords: [execution, smart account, create, redeem, delegation, delegator, delegate]
 ---
 
-import Tabs from "@theme/Tabs"; 
+import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import GlossaryTerm from '@theme/GlossaryTerm';
 
@@ -27,8 +27,8 @@ Set up a Public Client using Viem's [`createPublicClient`](https://viem.sh/docs/
 You will configure Alice's account (the <GlossaryTerm term="Delegator account">delegator</GlossaryTerm>) and the Bundler Client with the Public Client, which you can use to query the signer's account state and interact with smart contracts.
 
 ```typescript
-import { createPublicClient, http } from "viem"
-import { sepolia as chain } from "viem/chains"
+import { createPublicClient, http } from 'viem'
+import { sepolia as chain } from 'viem/chains'
 
 const publicClient = createPublicClient({
   chain,
@@ -42,11 +42,11 @@ Set up a Bundler Client using Viem's [`createBundlerClient`](https://viem.sh/acc
 You can use the <GlossaryTerm term="Bundler">bundler</GlossaryTerm> service to estimate gas for <GlossaryTerm term="User operation">user operations</GlossaryTerm> and submit transactions to the network.
 
 ```typescript
-import { createBundlerClient } from "viem/account-abstraction"
+import { createBundlerClient } from 'viem/account-abstraction'
 
 const bundlerClient = createBundlerClient({
   client: publicClient,
-  transport: http("https://your-bundler-rpc.com"),
+  transport: http('https://your-bundler-rpc.com'),
 })
 ```
 
@@ -59,16 +59,16 @@ This example configures a Hybrid smart account,
 which is a flexible smart account implementation that supports both an <GlossaryTerm term="Externally owned account (EOA)">EOA</GlossaryTerm> owner and any number of <GlossaryTerm term="Passkey">passkey</GlossaryTerm> (WebAuthn) signers:
 
 ```typescript
-import { Implementation, toMetaMaskSmartAccount } from "@metamask/smart-accounts-kit"
-import { privateKeyToAccount } from "viem/accounts"
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
+import { privateKeyToAccount } from 'viem/accounts'
 
-const delegatorAccount = privateKeyToAccount("0x...")
+const delegatorAccount = privateKeyToAccount('0x...')
 
 const delegatorSmartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
   deployParams: [delegatorAccount.address, [], [], []],
-  deploySalt: "0x",
+  deploySalt: '0x',
   signer: { account: delegatorAccount },
 })
 ```
@@ -85,16 +85,16 @@ Create an account to represent Bob, the <GlossaryTerm term="Delegate account">de
 <TabItem value="Smart account">
 
 ```typescript
-import { Implementation, toMetaMaskSmartAccount } from "@metamask/smart-accounts-kit"
-import { privateKeyToAccount } from "viem/accounts"
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
+import { privateKeyToAccount } from 'viem/accounts'
 
-const delegateAccount = privateKeyToAccount("0x...")
+const delegateAccount = privateKeyToAccount('0x...')
 
 const delegateSmartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid, // Hybrid smart account
   deployParams: [delegateAccount.address, [], [], []],
-  deploySalt: "0x",
+  deploySalt: '0x',
   signer: { account: delegateAccount },
 })
 ```
@@ -103,11 +103,11 @@ const delegateSmartAccount = await toMetaMaskSmartAccount({
 <TabItem value="EOA">
 
 ```typescript
-import { privateKeyToAccount } from "viem/accounts";
-import { sepolia as chain } from "viem/chains";
-import { createWalletClient, http } from "viem";
+import { privateKeyToAccount } from 'viem/accounts'
+import { sepolia as chain } from 'viem/chains'
+import { createWalletClient, http } from 'viem'
 
-const delegateAccount = privateKeyToAccount("0x...");
+const delegateAccount = privateKeyToAccount('0x...')
 
 export const delegateWalletClient = createWalletClient({
   account: delegateAccount,
@@ -122,12 +122,12 @@ export const delegateWalletClient = createWalletClient({
 ### 5. Create a delegation
 
 Create a [root delegation](../../concepts/delegation/overview.md#root-delegation) from Alice to Bob.
-With a root delegation, Alice is delegating her own authority away, as opposed to *redelegating* permissions she received from a previous delegation.
+With a root delegation, Alice is delegating her own authority away, as opposed to _redelegating_ permissions she received from a previous delegation.
 
-Use the toolkit's [`createDelegation`](../../reference/delegation/index.md#createdelegation) method to create a root delegation. When creating 
-delegation, you need to configure the scope of the delegation to define the initial authority. 
+Use the toolkit's [`createDelegation`](../../reference/delegation/index.md#createdelegation) method to create a root delegation. When creating
+delegation, you need to configure the scope of the delegation to define the initial authority.
 
-This example uses the [`erc20TransferAmount`](use-delegation-scopes/spending-limit.md#erc-20-transfer-scope) scope, allowing Alice to delegate to Bob the ability to spend her USDC, with a 
+This example uses the [`erc20TransferAmount`](use-delegation-scopes/spending-limit.md#erc-20-transfer-scope) scope, allowing Alice to delegate to Bob the ability to spend her USDC, with a
 specified limit on the total amount.
 
 :::warning Important
@@ -150,7 +150,7 @@ const delegation = createDelegation({
   scope: {
     type: ScopeType.Erc20TransferAmount,
     tokenAddress,
-    // 10 USDC 
+    // 10 USDC
     maxAmount: parseUnits("10", 6),
   },
 })
@@ -184,15 +184,15 @@ Bob can redeem the delegation by submitting a <GlossaryTerm term="User operation
 <TabItem value="Redeem with a smart account">
 
 ```typescript
-import { createExecution, ExecutionMode } from "@metamask/smart-accounts-kit"
-import { DelegationManager } from "@metamask/smart-accounts-kit/contracts"
-import { zeroAddress } from "viem"
-import { callData } from "./config.ts"
+import { createExecution, ExecutionMode } from '@metamask/smart-accounts-kit'
+import { DelegationManager } from '@metamask/smart-accounts-kit/contracts'
+import { zeroAddress } from 'viem'
+import { callData } from './config.ts'
 
 const delegations = [signedDelegation]
 
 // USDC address on Ethereum Sepolia.
-const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
+const tokenAddress = '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238'
 
 const executions = [createExecution({ target: tokenAddress, callData })]
 
@@ -219,23 +219,27 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 <TabItem value="Redeem with an EOA">
 
 ```typescript
-import { createExecution, getSmartAccountsEnvironment, ExecutionMode } from "@metamask/smart-accounts-kit"
-import { DelegationManager } from "@metamask/smart-accounts-kit/contracts"
-import { zeroAddress } from "viem"
-import { callData } from "./config.ts"
+import {
+  createExecution,
+  getSmartAccountsEnvironment,
+  ExecutionMode,
+} from '@metamask/smart-accounts-kit'
+import { DelegationManager } from '@metamask/smart-accounts-kit/contracts'
+import { zeroAddress } from 'viem'
+import { callData } from './config.ts'
 
 const delegations = [signedDelegation]
 
 // USDC address on Ethereum Sepolia.
-const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
+const tokenAddress = '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238'
 
 const executions = [createExecution({ target: tokenAddress, callData })]
 
 const redeemDelegationCalldata = DelegationManager.encode.redeemDelegations({
   delegations: [delegations],
   modes: [ExecutionMode.SingleDefault],
-  executions: [executions]
-});
+  executions: [executions],
+})
 
 const transactionHash = await delegateWalletClient.sendTransaction({
   to: getSmartAccountsEnvironment(chain.id).DelegationManager,
@@ -249,12 +253,12 @@ const transactionHash = await delegateWalletClient.sendTransaction({
 <TabItem value="config.ts">
 
 ```typescript
-import { encodeFunctionData, erc20Abi, parseUnits } from "viem"
+import { encodeFunctionData, erc20Abi, parseUnits } from 'viem'
 
 // calldata to transfer 1 USDC to delegate address.
 export const callData = encodeFunctionData({
   abi: erc20Abi,
-  args: [ delegateSmartAccount.address, parseUnits("1", 6) ],
+  args: [delegateSmartAccount.address, parseUnits('1', 6)],
   functionName: 'transfer',
 })
 ```

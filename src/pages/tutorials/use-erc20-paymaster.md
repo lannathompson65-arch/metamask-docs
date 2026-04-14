@@ -16,8 +16,8 @@ This tutorial uses Pimlico's paymaster, but you can use any paymaster of your ch
 
 ## About paymasters
 
-A paymaster is an important component of the [account abstraction (ERC-4337)](/smart-accounts-kit/concepts/smart-accounts) standard, responsible for abstracting gas fees for end users. 
-There are different types of paymasters, such as gasless paymasters and ERC-20 paymasters. 
+A paymaster is an important component of the [account abstraction (ERC-4337)](/smart-accounts-kit/concepts/smart-accounts) standard, responsible for abstracting gas fees for end users.
+There are different types of paymasters, such as gasless paymasters and ERC-20 paymasters.
 While a gasless paymaster covers the transaction on behalf of the user, an ERC-20 paymaster allows users to pay gas fees using a supported ERC-20 token.
 This removes the need for users to hold native tokens, allowing them to perform onchain actions using only stablecoins.
 
@@ -25,7 +25,7 @@ This removes the need for users to hold native tokens, allowing them to perform 
 
 - Install [Node.js](https://nodejs.org/en/blog/release/v18.18.0) v18 or later.
 - Install [Yarn](https://yarnpkg.com/),
-    [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
+  [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
 - [Create a Pimlico API key](https://docs.pimlico.io/guides/create-api-key#create-api-key).
 
 ## Steps
@@ -40,17 +40,17 @@ npm install @metamask/smart-accounts-kit
 
 ### 2. Set up a Public Client
 
-Set up a Public Client using Viem's [`createPublicClient`](https://viem.sh/docs/clients/public) function. 
+Set up a Public Client using Viem's [`createPublicClient`](https://viem.sh/docs/clients/public) function.
 You will configure a <GlossaryTerm term="MetaMask smart account">smart account</GlossaryTerm> and Bundler Client with the Public Client, which you can use to query the <GlossaryTerm term="Signer">signer</GlossaryTerm>'s account state and interact with the blockchain network.
 
 ```typescript
-import { createPublicClient, http } from "viem";
-import { sepolia as chain } from "viem/chains";
+import { createPublicClient, http } from 'viem'
+import { sepolia as chain } from 'viem/chains'
 
 const publicClient = createPublicClient({
   chain,
   transport: http(),
-});
+})
 ```
 
 ### 3. Set up a Paymaster Client
@@ -61,11 +61,11 @@ using Viem's [`createPaymasterClient`](https://viem.sh/account-abstraction/clien
 Replace `<YOUR-API-KEY>` with your Pimlico API key:
 
 ```typescript
-import { createPaymasterClient } from "viem/account-abstraction";
+import { createPaymasterClient } from 'viem/account-abstraction'
 
 const paymasterClient = createPaymasterClient({
-  transport: http("https://api.pimlico.io/v2/11155111/rpc?apikey=<YOUR-API-KEY>"),
-});
+  transport: http('https://api.pimlico.io/v2/11155111/rpc?apikey=<YOUR-API-KEY>'),
+})
 ```
 
 ### 4. Set up a Bundler Client
@@ -77,18 +77,18 @@ To use the ERC-20 paymaster, configure the `paymasterContext` with the ERC-20 to
 For this tutorial, specify the Sepolia USDC token address.
 
 ```typescript
-import { createBundlerClient } from "viem/account-abstraction";
+import { createBundlerClient } from 'viem/account-abstraction'
 
 // USDC address on Ethereum Sepolia.
-const token = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
+const token = '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238'
 
 const bundlerClient = createBundlerClient({
   client: publicClient,
-  transport: http("https://your-bundler-rpc.com"),
+  transport: http('https://your-bundler-rpc.com'),
   paymasterContext: {
     token,
-  }
-});
+  },
+})
 ```
 
 ### 5. Create and fund a smart account
@@ -97,18 +97,18 @@ Create a [Hybrid smart account](/smart-accounts-kit/guides/smart-accounts/create
 A Hybrid smart account is a flexible smart account implementation that supports both an <GlossaryTerm term="Externally owned account (EOA)">EOA</GlossaryTerm> owner and any number of <GlossaryTerm term="Passkey">passkey</GlossaryTerm> (WebAuthn) signers.
 
 ```typescript
-import { Implementation, toMetaMaskSmartAccount } from "@metamask/smart-accounts-kit";
-import { privateKeyToAccount } from "viem/accounts";
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
+import { privateKeyToAccount } from 'viem/accounts'
 
-const account = privateKeyToAccount("0x...");
+const account = privateKeyToAccount('0x...')
 
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
   deployParams: [account.address, [], [], []],
-  deploySalt: "0x",
+  deploySalt: '0x',
   signer: { account },
-});
+})
 ```
 
 Fund the smart account with some Sepolia USDC to pay gas fees.

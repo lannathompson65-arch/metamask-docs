@@ -11,11 +11,11 @@ import TabItem from "@theme/TabItem";
 # Create a redelegation
 
 Redelegation is a core feature that sets delegations apart from other permission sharing frameworks.
-It allows a delegate to create a delegation chain, passing on the same or reduced level of authority 
+It allows a delegate to create a delegation chain, passing on the same or reduced level of authority
 from the root delegator.
 
 For example, if Alice grants Bob permission to spend 10 USDC on her behalf, Bob can further grant Carol
-permission to spend up to 5 USDC on Alice's behalf-that is, Bob can redelegate. This creates a delegation 
+permission to spend up to 5 USDC on Alice's behalf-that is, Bob can redelegate. This creates a delegation
 chain where the root permissions are reshared with additional parties.
 
 ## Prerequisites
@@ -27,23 +27,23 @@ chain where the root permissions are reshared with additional parties.
 
 Create a [root delegation](../../concepts/delegation/index.md#delegation-types) from Alice to Bob.
 
-This example uses the [`erc20TransferAmount`](use-delegation-scopes/spending-limit.md#erc-20-transfer-scope) scope, allowing 
-Alice to delegate to Bob the ability to spend 10 USDC on her behalf. 
+This example uses the [`erc20TransferAmount`](use-delegation-scopes/spending-limit.md#erc-20-transfer-scope) scope, allowing
+Alice to delegate to Bob the ability to spend 10 USDC on her behalf.
 
 <Tabs>
 <TabItem value="delegation.ts">
 
 ```typescript
-import { aliceSmartAccount, bobSmartAccount } from "./config.ts";
+import { aliceSmartAccount, bobSmartAccount } from './config.ts'
 import { createDelegation } from '@metamask/smart-accounts-kit'
 import { parseUnits } from 'viem'
 
 const delegation = createDelegation({
   scope: {
-    type: "erc20TransferAmount",
-    tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
+    type: 'erc20TransferAmount',
+    tokenAddress: '0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92',
     // USDC has 6 decimal places.
-    maxAmount: parseUnits("10", 6),
+    maxAmount: parseUnits('10', 6),
   },
   to: bobSmartAccount.address,
   from: aliceSmartAccount.address,
@@ -57,24 +57,24 @@ const signedDelegation = aliceSmartAccount.signDelegation({ delegation })
 <TabItem value="config.ts">
 
 ```typescript
-import { Implementation, toMetaMaskSmartAccount } from "@metamask/smart-accounts-kit"
-import { privateKeyToAccount } from "viem/accounts"
-import { createPublicClient, http } from "viem"
-import { sepolia as chain } from "viem/chains"
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
+import { privateKeyToAccount } from 'viem/accounts'
+import { createPublicClient, http } from 'viem'
+import { sepolia as chain } from 'viem/chains'
 
 const publicClient = createPublicClient({
   chain,
   transport: http(),
 })
 
-const aliceAccount = privateKeyToAccount("0x...")
-const bobAccount = privateKeyToAccount("0x...")
+const aliceAccount = privateKeyToAccount('0x...')
+const bobAccount = privateKeyToAccount('0x...')
 
 export const aliceSmartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
   deployParams: [aliceAccount.address, [], [], []],
-  deploySalt: "0x",
+  deploySalt: '0x',
   signer: { account: aliceAccount },
 })
 
@@ -82,7 +82,7 @@ export const bobSmartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
   deployParams: [bobAccount.address, [], [], []],
-  deploySalt: "0x",
+  deploySalt: '0x',
   signer: { account: bobAccount },
 })
 ```
@@ -92,26 +92,26 @@ export const bobSmartAccount = await toMetaMaskSmartAccount({
 
 ## Create a redelegation
 
-Create a [redelegation](../../concepts/delegation/index.md#delegation-types) from Bob to Carol. When creating a redelegation, you can only narrow the scope of the original authority, not expand it. 
+Create a [redelegation](../../concepts/delegation/index.md#delegation-types) from Bob to Carol. When creating a redelegation, you can only narrow the scope of the original authority, not expand it.
 
 To create a redelegation, provide the signed delegation as the `parentDelegation` argument when calling [createDelegation](../../reference/delegation/index.md#createdelegation).
-This example uses the [`erc20TransferAmount`](use-delegation-scopes/spending-limit.md#erc-20-transfer-scope) scope, allowing 
+This example uses the [`erc20TransferAmount`](use-delegation-scopes/spending-limit.md#erc-20-transfer-scope) scope, allowing
 Bob to delegate to Carol the ability to spend 5 USDC on Alice's behalf.
 
 <Tabs>
 <TabItem value="redelegation.ts">
 
 ```typescript
-import { bobSmartAccount, carolSmartAccount } from "./config.ts"
+import { bobSmartAccount, carolSmartAccount } from './config.ts'
 import { createDelegation } from '@metamask/smart-accounts-kit'
 import { parseUnits } from 'viem'
 
 const redelegation = createDelegation({
   scope: {
-    type: "erc20TransferAmount",
-    tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
+    type: 'erc20TransferAmount',
+    tokenAddress: '0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92',
     // USDC has 6 decimal places.
-    maxAmount: parseUnits("5", 6),
+    maxAmount: parseUnits('5', 6),
   },
   to: carolSmartAccount.address,
   from: bobSmartAccount.address,
@@ -129,13 +129,13 @@ const signedRedelegation = bobSmartAccount.signDelegation({ delegation: redelega
 ```typescript
 // Update the existing config to create a smart account for Carol.
 
-const carolAccount = privateKeyToAccount("0x...")
+const carolAccount = privateKeyToAccount('0x...')
 
 export const carolSmartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
   deployParams: [carolAccount.address, [], [], []],
-  deploySalt: "0x",
+  deploySalt: '0x',
   signer: { account: carolAccount },
 })
 ```
