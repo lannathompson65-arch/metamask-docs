@@ -93,7 +93,7 @@
     "sass": "^1.93.0"
   },
   "devDependencies": {
-    "@docusaurus/eslint-plugin": "3.9.2",
+    "@docusaurus/eslint-plugin": "3.10.0",
     "@docusaurus/module-type-aliases": "3.9.2",
     "@docusaurus/tsconfig": "3.9.2",
     "@docusaurus/types": "3.9.2",
