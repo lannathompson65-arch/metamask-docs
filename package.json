@@ -37,7 +37,7 @@
     "@docusaurus/plugin-client-redirects": "3.9.2",
     "@docusaurus/plugin-content-docs": "3.9.2",
     "@docusaurus/plugin-content-pages": "3.9.2",
-    "@docusaurus/plugin-google-gtag": "3.9.2",
+    "@docusaurus/plugin-google-gtag": "3.10.0",
     "@docusaurus/plugin-google-tag-manager": "3.9.2",
     "@docusaurus/preset-classic": "3.9.2",
     "@docusaurus/remark-plugin-npm2yarn": "3.9.2",
