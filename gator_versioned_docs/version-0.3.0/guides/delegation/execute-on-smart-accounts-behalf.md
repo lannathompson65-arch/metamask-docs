@@ -145,7 +145,7 @@ const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
 const delegation = createDelegation({
   to: delegateSmartAccount.address, // This example uses a delegate smart account
   from: delegatorSmartAccount.address,
-  environment: delegatorSmartAccount.environment
+  environment: delegatorSmartAccount.environment,
   scope: {
     type: "erc20TransferAmount",
     tokenAddress,

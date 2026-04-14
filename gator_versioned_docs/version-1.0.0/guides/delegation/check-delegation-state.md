@@ -69,7 +69,7 @@ This example uses the [`getErc20PeriodTransferEnforcerAvailableAmount`](../../re
 <TabItem value="example.ts">
 
 ```typescript
-import { delegation } './config.ts'
+import { delegation } from './config.ts'
 
 // Returns the available amount for current period.
 const { availableAmount } = await caveatEnforcerClient.getErc20PeriodTransferEnforcerAvailableAmount({
