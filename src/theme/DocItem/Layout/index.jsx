@@ -13,7 +13,6 @@ import DocItemContent from '@theme/DocItem/Content'
 import DocBreadcrumbs from '@theme/DocBreadcrumbs'
 import CopyPageButton from '@site/src/components/CopyPageButton'
 import DocH1CopyPageWrapper from '@site/src/components/DocH1CopyPageWrapper'
-import FeedbackWidget from '@site/src/components/FeedbackWidget'
 import styles from './styles.module.css'
 
 const SITE_URL = 'https://docs.metamask.io'
@@ -91,8 +90,7 @@ export default function DocItemLayout({ children }) {
             <DocH1CopyPageWrapper />
             <CopyPageButton />
             <DocItemContent>{children}</DocItemContent>
-            <FeedbackWidget key={metadata.permalink} />
-            <DocItemFooter />
+            <DocItemFooter feedbackKey={metadata.permalink} />
           </article>
           <DocItemPaginator />
         </div>

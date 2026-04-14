@@ -1029,7 +1029,7 @@ export default function IntegrationBuilderPage(props) {
           <NavigationOverlay onClose={handleCloseOverlay} onSelect={handleNavigationSelect} />
         )}
       </div>
-      <div className="container" style={{ padding: '0 24px 32px' }}>
+      <div className="container" style={{ padding: '48px 24px 32px' }}>
         <FeedbackWidget />
       </div>
     </Layout>

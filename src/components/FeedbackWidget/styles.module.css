@@ -1,69 +1,80 @@
 .widget {
-  margin-top: 32px;
-  padding: 24px 0;
-  border-top: 1px solid var(--ifm-color-emphasis-200);
+  padding: 0;
 }
 
 .prompt {
-  font-size: 1rem;
+  font-size: 1.6rem;
   font-weight: 500;
+  line-height: 150%;
   color: var(--ifm-color-content);
-  margin: 0 0 12px;
+  margin: 0 0 16px;
 }
 
 .thanks {
-  font-size: 0.875rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 150%;
   color: var(--ifm-color-content-secondary);
   margin: 0;
 }
 
 .buttons {
   display: flex;
-  gap: 8px;
+  gap: 12px;
 }
 
 .ratingBtn {
-  font-family: inherit;
-  font-size: 0.875rem;
+  all: unset;
+  box-sizing: border-box;
+  display: inline-block;
+  font-family: var(--ifm-font-family-base);
+  font-size: 1rem;
   font-weight: 500;
-  padding: 6px 16px;
-  border-radius: 6px;
+  padding: 10px 28px;
+  border-radius: 8px;
   border: 1px solid var(--ifm-color-emphasis-300);
-  background: transparent;
+  background: var(--ifm-background-surface-color);
   color: var(--ifm-color-content-secondary);
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s, color 0.15s;
+  user-select: none;
 }
 
-.ratingBtn:hover:not(:disabled) {
+.ratingBtn:hover {
   background: var(--ifm-color-emphasis-100);
   border-color: var(--ifm-color-emphasis-500);
+  color: var(--ifm-color-content);
 }
 
 .commentSection {
-  margin-top: 16px;
+  margin-top: 20px;
 }
 
 .label {
   display: block;
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: var(--ifm-color-content-secondary);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  cursor: default;
 }
 
 .textarea {
+  all: unset;
+  box-sizing: border-box;
   display: block;
   width: 100%;
-  max-width: 480px;
-  padding: 10px 12px;
-  font-size: 0.875rem;
+  max-width: 560px;
+  padding: 14px 16px;
+  font-size: 1rem;
   color: var(--ifm-color-content);
   background: var(--ifm-background-surface-color);
   border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 6px;
-  font-family: inherit;
+  border-radius: 8px;
+  font-family: var(--ifm-font-family-base);
   resize: vertical;
-  line-height: 1.5;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 
 .textarea::placeholder {
@@ -77,21 +88,24 @@
 
 .actions {
   display: flex;
-  gap: 8px;
-  margin-top: 12px;
+  gap: 12px;
+  margin-top: 16px;
 }
 
 .submitBtn {
-  font-family: inherit;
-  font-size: 0.875rem;
+  all: unset;
+  box-sizing: border-box;
+  display: inline-block;
+  font-family: var(--ifm-font-family-base);
+  font-size: 1rem;
   font-weight: 500;
-  padding: 6px 20px;
-  border-radius: 6px;
-  border: none;
+  padding: 10px 28px;
+  border-radius: 8px;
   background: var(--ifm-color-primary);
   color: #fff;
   cursor: pointer;
   transition: opacity 0.15s;
+  user-select: none;
 }
 
 .submitBtn:hover:not(:disabled) {
@@ -104,7 +118,7 @@
 }
 
 .error {
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: var(--ifm-color-emphasis-600);
   margin: 0;
 }

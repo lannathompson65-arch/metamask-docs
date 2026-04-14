@@ -138,22 +138,44 @@
   .bookmarkButton {
     display: none;
   }
+
+  .bottomMenu {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .socialCol {
+    width: 100%;
+    justify-content: flex-start;
+  }
 }
 
 .bottomMenu {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
-  padding: 20px;
-  padding-left: 0;
-  padding-right: 0;
+  padding: 24px 0;
   border-top: 1px solid var(--w3a-border-light-color);
   border-bottom: 1px solid var(--w3a-border-light-color);
   margin-top: 20px;
   margin-bottom: 20px;
-  gap: 10px;
+  gap: 24px;
+}
+
+.feedbackCol {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-right: 40px;
+}
+
+.socialCol {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
 }
 
 .topMenu {
@@ -214,7 +236,8 @@
   }
 
   .bottomMenu {
-    flex-direction: column;
+    flex-direction: row;
+    align-items: flex-start;
   }
 }
 
