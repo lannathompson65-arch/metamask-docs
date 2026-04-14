@@ -136,5 +136,10 @@
   },
   "engines": {
     "node": "20.x"
+  },
+  "overrides": {
+    "@vercel/node": {
+      "path-to-regexp": "6.3.0"
+    }
   }
 }
