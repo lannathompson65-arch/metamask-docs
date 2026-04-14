@@ -134,6 +134,8 @@ Batch the approve call with other onchain actions you want to perform using the 
 Pass the `paymasterClient` from [Step 3](#3-set-up-a-paymaster-client) to the `paymaster` property.
 
 ```typescript
+import { parseAbi, parseEther } from 'viem'
+
 // Appropriate fee per gas must be determined for the bundler being used.
 const maxFeePerGas = 1n;
 const maxPriorityFeePerGas = 1n;
@@ -150,10 +152,10 @@ const userOperationHash = await bundlerClient.sendUserOperation({
     {
       // USDC token address
       to: token,
-      abi: parseAbi(["function approve(address,uint)"]),
+      abi: parseAbi(['function approve(address,uint)']),
       functionName: "approve",
       args: [pimlicoPaymasterAddress, approvalAmount],
-    }
+    },
     // Batch the approve call with other onchain actions.
     {
       to: "0x1234567890123456789012345678901234567890",
