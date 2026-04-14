@@ -3,3 +3,5 @@
 
 # Default owner for all other files
 * @MetaMask/dashboard @MetaMask/tech-writers @MetaMask/delegation-devrel @MetaMask/embedded-wallets-devrel @MetaMask/sdk-devrel
+This snippet is the default ownership rule in the .github/CODEOWNERS file for the repository. Since it's the only rule provided in the file content, it establishes that all files in the metamask-docs repository are owned by these five teams by default.
+
