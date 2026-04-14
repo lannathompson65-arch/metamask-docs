@@ -37,7 +37,7 @@ export default function FeedbackWidget(): React.ReactNode {
     fireAnalyticsEvent(rating, reason.trim());
 
     try {
-      const res = await fetch("/api/feedback", {
+      const res = await fetch("/api/docs-feedback", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

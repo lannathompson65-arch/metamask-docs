@@ -62,62 +62,6 @@ async function appendToSheet(row: string[]) {
   });
 }
 
-async function createGitHubIssue(
-  pageUrl: string,
-  reason: string,
-): Promise<string | null> {
-  const repo = process.env.GITHUB_REPO!;
-  const res = await fetch(`https://api.github.com/repos/${repo}/issues`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-      Accept: "application/vnd.github+json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      title: `Docs feedback: ${pageUrl}`,
-      body: `**Page:** ${pageUrl}\n\n**Feedback:**\n${reason}`,
-      labels: ["user-feedback"],
-    }),
-  });
-
-  if (!res.ok) {
-    console.error(
-      "GitHub issue creation failed:",
-      res.status,
-      await res.text(),
-    );
-    return null;
-  }
-
-  const data = await res.json();
-  return data.html_url;
-}
-
-async function notifySlack(
-  pageUrl: string,
-  reason: string,
-  issueUrl: string | null,
-) {
-  const webhookUrl = process.env.SLACK_WEBHOOK_URL;
-  if (!webhookUrl) return;
-
-  let text = `:warning: Negative docs feedback on *${pageUrl}*\n>${reason.replace(/\n/g, "\n>")}`;
-  if (issueUrl) {
-    text += `\n<${issueUrl}|View GitHub issue>`;
-  }
-
-  const res = await fetch(webhookUrl, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ text }),
-  });
-
-  if (!res.ok) {
-    console.error("Slack notification failed:", res.status, await res.text());
-  }
-}
-
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
@@ -160,21 +104,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     ]);
   } catch (err) {
     console.error("Google Sheets append failed:", err);
-  }
-
-  if (rating === "no" && cleanReason) {
-    let issueUrl: string | null = null;
-    try {
-      issueUrl = await createGitHubIssue(pageUrl, cleanReason);
-    } catch (err) {
-      console.error("GitHub issue failed:", err);
-    }
-
-    try {
-      await notifySlack(pageUrl, cleanReason, issueUrl);
-    } catch (err) {
-      console.error("Slack notification failed:", err);
-    }
   }
 
   return res.status(200).json({ ok: true });
