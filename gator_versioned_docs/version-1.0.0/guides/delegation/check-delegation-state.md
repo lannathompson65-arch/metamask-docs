@@ -72,9 +72,10 @@ This example uses the [`getErc20PeriodTransferEnforcerAvailableAmount`](../../re
 import { delegation } from './config.ts'
 
 // Returns the available amount for current period.
-const { availableAmount } = await caveatEnforcerClient.getErc20PeriodTransferEnforcerAvailableAmount({
-  delegation,
-})
+const { availableAmount } =
+  await caveatEnforcerClient.getErc20PeriodTransferEnforcerAvailableAmount({
+    delegation,
+  })
 ```
 
 </TabItem>

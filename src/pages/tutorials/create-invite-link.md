@@ -191,7 +191,7 @@ A root delegation is the first delegation in a chain of delegations, and an open
 In this example, the inviter creates an invitation that can be redeemed by any invitee, allowing the invitee to spend up to 0.001 ETH.
 
 ```ts
-import { createOpenDelegation } from '@metamask/smart-accounts-kit';
+import { createOpenDelegation } from '@metamask/smart-accounts-kit'
 
 const delegation = createOpenDelegation({
   from: smartAccount.address,
@@ -201,7 +201,7 @@ const delegation = createOpenDelegation({
     // 0.001 ETH in wei format.
     maxAmount: 1000000000000000n,
   },
-});
+})
 ```
 
 #### 4.4. Sign the delegation
