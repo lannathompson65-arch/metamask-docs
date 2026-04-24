@@ -140,9 +140,9 @@ This example uses a [Hybrid smart account](/smart-accounts-kit/guides/smart-acco
 
 ```tsx
 import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
-import { useAccount, usePublicClient, useWalletClient } from 'wagmi'
+import { useConnection, usePublicClient, useWalletClient } from 'wagmi'
 
-const { address } = useAccount()
+const { address } = useConnection()
 const publicClient = usePublicClient()
 const { data: walletClient } = useWalletClient()
 
@@ -191,17 +191,17 @@ A root delegation is the first delegation in a chain of delegations, and an open
 In this example, the inviter creates an invitation that can be redeemed by any invitee, allowing the invitee to spend up to 0.001 ETH.
 
 ```ts
-import { createOpenDelegation } from '@metamask/smart-accounts-kit';
+import { createOpenDelegation } from '@metamask/smart-accounts-kit'
 
 const delegation = createOpenDelegation({
   from: smartAccount.address,
-  environment: smartAccount.environment;
+  environment: smartAccount.environment,
   scope: {
     type: 'nativeTokenTransferAmount',
     // 0.001 ETH in wei format.
     maxAmount: 1000000000000000n,
   },
-});
+})
 ```
 
 #### 4.4. Sign the delegation
@@ -278,7 +278,7 @@ import { DelegationManager } from '@metamask/smart-accounts-kit/contracts'
 
 const delegations = [decodedDelegation]
 
-const executions = [createExecution(smartAccount.address, 1000000000000000n)]
+const executions = [createExecution({ target: smartAccount.address, value: 1000000000000000n })]
 
 const redeemDelegationCalldata = DelegationManager.encode.redeemDelegations({
   delegations: [delegations],

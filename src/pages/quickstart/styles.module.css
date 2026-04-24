@@ -15,6 +15,23 @@
   text-decoration-color: var(--ifm-link-hover-color);
 }
 
+/* registerApp.mdx — primary CTA: black label on green in dark mode; primary green on hover (match .stepBody a underline) */
+[data-theme='dark'] .stepBody :global(a.w3aDashboardButton.button--primary) {
+  color: #000 !important;
+  text-decoration: underline;
+  text-decoration-color: #000;
+  text-decoration-thickness: 0.1rem;
+  text-underline-offset: 0.4rem;
+}
+
+[data-theme='dark'] .stepBody :global(a.w3aDashboardButton.button--primary:hover) {
+  color: var(--ifm-color-primary) !important;
+  text-decoration: underline;
+  text-decoration-color: var(--ifm-color-primary);
+  text-decoration-thickness: 0.1rem;
+  text-underline-offset: 0.4rem;
+}
+
 .container {
   width: 100%;
   height: 100%;

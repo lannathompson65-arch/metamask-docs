@@ -78,7 +78,7 @@ export const SolanaProvider: FC<SolanaProviderProps> = ({ children }) => {
   useEffect(() => {
     createSolanaClient({
       dapp: {
-        name: 'My Solana DApp',
+        name: 'My Solana Dapp',
         url: window.location.origin,
       },
     });
@@ -94,8 +94,20 @@ export const SolanaProvider: FC<SolanaProviderProps> = ({ children }) => {
 };
 ```
 
-Calling [`createSolanaClient`](../reference/methods.md#createsolanaclient) registers MetaMask with the [Wallet Standard](https://github.com/wallet-standard/wallet-standard) registry.
-This displays MetaMask as a connection option in the wallet modal, even if the user doesn't have MetaMask installed.
+Calling [`createSolanaClient`](../reference/methods.md#createsolanaclient) registers MetaMask with
+the [Wallet Standard](https://github.com/wallet-standard/wallet-standard) registry.
+This displays MetaMask as a connection option in the wallet modal, even if the user doesn't have
+MetaMask installed.
+
+:::tip Timing
+The `useEffect` pattern above works because `createSolanaClient` typically resolves before the user
+opens the wallet modal.
+If MetaMask does not appear in the wallet list, ensure `createSolanaClient` has resolved before the
+`WalletProvider` renders.
+One approach is to await the client in your app's entry point before calling `createRoot().render()`.
+See [Troubleshooting: MetaMask wallet not appearing](../../troubleshooting/index.md#metamask-wallet-not-appearing-in-solana-wallet-adapter)
+for details.
+:::
 
 ### 3. Add the provider to your root layout
 
@@ -137,6 +149,14 @@ export const ConnectWallet = () => {
 
 The button automatically displays a wallet selection modal that includes MetaMask.
 
+:::caution Chrome Android
+There is a known issue with `@solana/wallet-adapter-react` on Chrome Android when used with the
+Wallet Standard provider from `@metamask/connect-solana`.
+Test Solana Wallet Adapter flows on desktop Chrome and the MetaMask browser extension before
+targeting mobile.
+See [Troubleshooting](../../troubleshooting/index.md#chrome-android) for details.
+:::
+
 ## Next steps
 
-See how to send a [legacy transaction](send-legacy-transaction.md) and a [versioned transaction](send-versioned-transaction.md).
+See how to send a [legacy transaction](send-transactions/legacy.md) and a [versioned transaction](send-transactions/versioned.md).

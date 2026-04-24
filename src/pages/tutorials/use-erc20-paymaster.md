@@ -134,14 +134,16 @@ Batch the approve call with other onchain actions you want to perform using the 
 Pass the `paymasterClient` from [Step 3](#3-set-up-a-paymaster-client) to the `paymaster` property.
 
 ```typescript
-// Appropriate fee per gas must be determined for the bundler being used.
-const maxFeePerGas = 1n;
-const maxPriorityFeePerGas = 1n;
+import { parseAbi, parseEther } from 'viem'
 
-const pimlicoPaymasterAddress = "0x777777777777AeC03fd955926DbF81597e66834C";
+// Appropriate fee per gas must be determined for the bundler being used.
+const maxFeePerGas = 1n
+const maxPriorityFeePerGas = 1n
+
+const pimlicoPaymasterAddress = '0x777777777777AeC03fd955926DbF81597e66834C'
 
 // 10 USDC in wei format. Since USDC has 6 decimals, the wei value is 10 * 10^6.
-const approvalAmount = 10000000n;
+const approvalAmount = 10000000n
 
 const userOperationHash = await bundlerClient.sendUserOperation({
   account: smartAccount,
@@ -150,20 +152,20 @@ const userOperationHash = await bundlerClient.sendUserOperation({
     {
       // USDC token address
       to: token,
-      abi: parseAbi(["function approve(address,uint)"]),
-      functionName: "approve",
+      abi: parseAbi(['function approve(address,uint)']),
+      functionName: 'approve',
       args: [pimlicoPaymasterAddress, approvalAmount],
-    }
+    },
     // Batch the approve call with other onchain actions.
     {
-      to: "0x1234567890123456789012345678901234567890",
-      value: parseEther("1"),
+      to: '0x1234567890123456789012345678901234567890',
+      value: parseEther('1'),
     },
   ],
   maxFeePerGas,
   maxPriorityFeePerGas,
   paymaster: paymasterClient,
-});
+})
 ```
 
 ## Next steps
