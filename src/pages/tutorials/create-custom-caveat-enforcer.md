@@ -136,10 +136,12 @@ const currentTime = Math.floor(Date.now() / 1000)
 // Add an hour to the currentTime
 const validTimestamp = currentTime + 3600
 
-const caveats = caveatBuilder.addCaveat('nativeTokenTransferAmount', parseEther('0.01')).addCaveat({
-  enforcer: afterTimestampEnforcer,
-  terms: toHex(validTimestamp),
-})
+const caveats = caveatBuilder
+  .addCaveat('nativeTokenTransferAmount', { maxAmount: parseEther('0.01') })
+  .addCaveat({
+    enforcer: afterTimestampEnforcer,
+    terms: toHex(validTimestamp),
+  })
 
 const delegation: Delegation = {
   delegate: 'DELEGATE_ADDRESS',
@@ -156,6 +158,7 @@ const delegation: Delegation = {
 
 ```typescript
 import { createPublicClient, http } from 'viem'
+import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts'
 import { sepolia as chain } from 'viem/chains'
 import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
 

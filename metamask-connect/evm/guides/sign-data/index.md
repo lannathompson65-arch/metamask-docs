@@ -15,8 +15,8 @@ keywords:
   ]
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 # Sign data
 
@@ -38,7 +38,7 @@ See [MIP-3](https://github.com/MetaMask/metamask-improvement-proposals/blob/main
 :::note
 MetaMask supports signing transactions using Trezor and Ledger hardware wallets.
 These wallets only support signing data using `personal_sign`.
-If you can't log in to a dapp when using a Ledger or Trezor, the dapp might be requesting you to
+If you can't sign in to a dapp when using a Ledger or Trezor, the dapp might be requesting you to
 sign data using an unsupported method, in which case we recommend using your standard MetaMask account.
 :::
 
@@ -195,7 +195,7 @@ import { createWalletClient, custom } from 'viem'
 import { mainnet } from 'viem/chains'
 
 const evmClient = await createEVMClient({
-  dapp: { name: 'My DApp', url: window.location.href },
+  dapp: { name: 'My Dapp', url: window.location.href },
   api: {
     supportedNetworks: {
       '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
@@ -284,7 +284,7 @@ import { ethers } from 'ethers'
 import { BrowserProvider, parseUnits } from 'ethers'
 
 const evmClient = await createEVMClient({
-  dapp: { name: 'My DApp', url: window.location.href },
+  dapp: { name: 'My Dapp', url: window.location.href },
   api: {
     supportedNetworks: {
       '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
@@ -377,7 +377,7 @@ import { createEVMClient } from '@metamask/connect-evm'
 import { Web3 } from 'web3'
 
 const evmClient = await createEVMClient({
-  dapp: { name: 'My DApp', url: window.location.href },
+  dapp: { name: 'My Dapp', url: window.location.href },
   api: {
     supportedNetworks: {
       '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
@@ -474,7 +474,7 @@ It's often used for signature challenges that are authenticated on a web server,
 
 <p align="center">
 
-![MetaMask personal_sign message signing confirmation dialog](../../_assets/personal_sign.png)
+![MetaMask `personal_sign` message signing confirmation dialog](../../_assets/personal_sign.png)
 
 </p>
 
@@ -545,7 +545,7 @@ import { createWalletClient, custom } from 'viem'
 import { mainnet } from 'viem/chains'
 
 const evmClient = await createEVMClient({
-  dapp: { name: 'My DApp', url: window.location.href },
+  dapp: { name: 'My Dapp', url: window.location.href },
   api: {
     supportedNetworks: {
       '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
@@ -574,7 +574,7 @@ import { createEVMClient } from '@metamask/connect-evm'
 import { ethers } from 'ethers'
 
 const evmClient = await createEVMClient({
-  dapp: { name: 'My DApp', url: window.location.href },
+  dapp: { name: 'My Dapp', url: window.location.href },
   api: {
     supportedNetworks: {
       '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
@@ -599,7 +599,7 @@ import { createEVMClient } from '@metamask/connect-evm'
 import { Web3 } from 'web3'
 
 const evmClient = await createEVMClient({
-  dapp: { name: 'My DApp', url: window.location.href },
+  dapp: { name: 'My Dapp', url: window.location.href },
   api: {
     supportedNetworks: {
       '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',

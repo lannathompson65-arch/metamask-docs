@@ -162,8 +162,8 @@ const caveatBuilder = createCaveatBuilder(bobSmartAccount.environment)
 const caveats = caveatBuilder.addCaveat(CaveatType.LimitedCalls, { limit: 1 })
 
 const redelegation: Delegation = {
-  delegate: bobSmartAccount.address,
-  delegator: carolSmartAccount.address,
+  delegate: carolSmartAccount.address,
+  delegator: bobSmartAccount.address,
   authority: hashDelegation(rootDelegation),
   caveats: caveats.build(),
   salt: '0x',
