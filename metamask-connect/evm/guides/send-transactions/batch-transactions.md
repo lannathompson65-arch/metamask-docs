@@ -48,10 +48,14 @@ The key benefits of atomic batch transactions include:
 - **Faster completion times** - Only a single atomic transaction is confirmed onchain, instead of multiple individual transactions.
 - **Reduced gas fees** - When multiple transactions are executed atomically, users only need to pay a single gas fee.
 
-Send batch transactions using [third-party libraries](#use-third-party-libraries)
-or [directly in your dapp](#send-batch-transactions-1).
+This page describes how to send batch transactions directly in your dapp.
+You can also send batch transactions using [third-party libraries](#use-third-party-libraries).
 
-## Send batch transactions
+## Prerequisites
+
+Follow the [JavaScript quickstart](../../quickstart/javascript.md) or [Wagmi quickstart](../../quickstart/wagmi.md) to install, initialize, and connect the EVM client.
+
+## Steps
 
 ### 1. Query whether atomic batch is supported
 
